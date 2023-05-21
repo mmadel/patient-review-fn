@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IconModule } from '@coreui/icons-angular';
+import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +34,7 @@ import {
 
 
 } from '@coreui/angular-pro';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
   DefaultFooterComponent,
@@ -70,7 +71,14 @@ const APP_CONTAINERS = [
     FormsModule,
     DateRangePickerModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy,
+    },
+    IconSetService,
+    Title,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
