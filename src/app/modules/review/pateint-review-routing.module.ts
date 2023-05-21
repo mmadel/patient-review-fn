@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PatientReviewComponent } from './components/patient.review/patient-review.component';
+import { PatientSubmitionComponent } from './components/patient.submition/patient-submition.component';
 
 const routes: Routes = [{
   path: '',
@@ -9,14 +11,14 @@ const routes: Routes = [{
   children: [
     {
       path: 'review',
-      component: ,
+      component: PatientReviewComponent,
       data: {
         title: 'Patient Review',
       },
     },
     {
       path: 'submit',
-      component: ,
+      component: PatientSubmitionComponent,
       data: {
         title: 'Submition',
       },
