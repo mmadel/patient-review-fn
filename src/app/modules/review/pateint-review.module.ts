@@ -13,16 +13,23 @@ import {
 
 import {
   PatientReviewComponent,
-  PatientSubmitionComponent
-} from './index'
+  PatientSubmitionComponent,
+  GoodReviewComponent,
+  ImproveReviewComponent
+} from './index';
+
 
 const APP_REVIEw_COMPONENTS = [
   PatientReviewComponent,
-  PatientSubmitionComponent
+  PatientSubmitionComponent,
+  GoodReviewComponent,
+  ImproveReviewComponent
 ]
 @NgModule({
   declarations: [
-    APP_REVIEw_COMPONENTS
+    APP_REVIEw_COMPONENTS,
+    GoodReviewComponent,
+    ImproveReviewComponent
   ],
   imports: [
     CommonModule,
