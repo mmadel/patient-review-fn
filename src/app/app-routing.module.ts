@@ -11,7 +11,7 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'review',
+        path: '',
         loadChildren: () =>
           import('./modules/review/pateint-review.module').then((m) => m.PateintReviewModule)
       },
