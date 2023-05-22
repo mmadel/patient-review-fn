@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PatientFeedBack } from '../../model/patient.feedback';
 
 @Component({
   selector: 'app-improve-review',
@@ -6,13 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./improve-review.component.css']
 })
 export class ImproveReviewComponent implements OnInit {
-  toggle = false;
+  patientFeedBack: Map<string, boolean> = new Map<string, boolean>;
   constructor() { }
 
   ngOnInit(): void {
+    this.patientFeedBack.set('customer_service', false);
+    this.patientFeedBack.set('price', false);
+    this.patientFeedBack.set('product_selection', false);
+    this.patientFeedBack.set('queue_time', false);
+    this.patientFeedBack.set('staff_availability', false);
+    this.patientFeedBack.set('something_else', false);
   }
-  enableDisableRule(job: any) {
-    this.toggle = !this.toggle;
+  enableDisableRule(event: any) {
+    var feedBackName: string = event.target.name;
+    var feedBackValue: boolean | undefined = this.patientFeedBack.get(feedBackName);
+    this.patientFeedBack.set(feedBackName, !feedBackValue)
   }
-
 }

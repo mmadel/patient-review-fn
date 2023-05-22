@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { PatientFeedBack } from '../../model/patient.feedback';
 
 @Component({
   selector: 'app-good-review',
@@ -8,30 +6,21 @@ import { PatientFeedBack } from '../../model/patient.feedback';
   styleUrls: ['./good-review.component.css']
 })
 export class GoodReviewComponent implements OnInit {
-  customerServiceToggle = false;
-  priceToggle = false;
-  productSelectionToggle = false;
-  queueTimeToggle = false;
-  staffAvailabilityToggle = false;
-  somethingElseToggle = false;
 
-  enableDisableRule(event: any) {
-    var name = event.target.name;
-    if (name === 'customer_service')
-      this.customerServiceToggle = !this.customerServiceToggle;
-    if (name === 'price')
-      this.priceToggle = !this.priceToggle;
-    if (name === 'queue_time')
-      this.queueTimeToggle = !this.queueTimeToggle;
-    if (name === 'staff_availability')
-      this.staffAvailabilityToggle = !this.staffAvailabilityToggle;
-    if (name === 'something_else')
-      this.somethingElseToggle = !this.somethingElseToggle;
-  }
+  patientFeedBack: Map<string, boolean> = new Map<string, boolean>;
   constructor() { }
 
   ngOnInit(): void {
-
+    this.patientFeedBack.set('customer_service', false);
+    this.patientFeedBack.set('price', false);
+    this.patientFeedBack.set('product_selection', false);
+    this.patientFeedBack.set('queue_time', false);
+    this.patientFeedBack.set('staff_availability', false);
+    this.patientFeedBack.set('something_else', false);
   }
-
+  enableDisableRule(event: any) {
+    var feedBackName: string = event.target.name;
+    var feedBackValue: boolean | undefined = this.patientFeedBack.get(feedBackName);
+    this.patientFeedBack.set(feedBackName, !feedBackValue)
+  }
 }
