@@ -17,7 +17,8 @@ import {
   PatientSubmitionComponent,
   GoodReviewComponent,
   ImproveReviewComponent,
-  MainReviewComponent
+  MainReviewComponent,
+  SubmitReviewComponent
 } from './index';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -27,7 +28,7 @@ import {
   , faPhoneVolume as faPhoneVolume
   , faCreditCard as faCreditCard
   , faTimeline as faTimeline
-  ,faChildReaching as faChildReaching
+  , faChildReaching as faChildReaching
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faGithubAlt as faGithubAlt,
@@ -35,14 +36,14 @@ import {
   faAdn as faAdn
 } from '@fortawesome/free-brands-svg-icons';
 
-
 const APP_REVIEw_COMPONENTS = [
   PatientReviewComponent,
   PatientSubmitionComponent,
   GoodReviewComponent,
   ImproveReviewComponent,
   MainReviewComponent,
-  MainReviewComponent
+  MainReviewComponent,
+  SubmitReviewComponent
 ]
 @NgModule({
   declarations: [
@@ -68,6 +69,6 @@ const APP_REVIEw_COMPONENTS = [
 })
 export class PateintReviewModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(fasStar, faGithubAlt, faPhoneVolume, faCreditCard, faProductHunt, faTimeline,faChildReaching,faAdn);
+    library.addIcons(fasStar, faGithubAlt, faPhoneVolume, faCreditCard, faProductHunt, faTimeline, faChildReaching, faAdn);
   }
 }
