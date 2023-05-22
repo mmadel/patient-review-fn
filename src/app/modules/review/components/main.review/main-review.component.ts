@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FeedBack } from '../../model/feedback';
 import { CounterService } from '../../services/counter.service';
 
 @Component({
@@ -7,7 +8,13 @@ import { CounterService } from '../../services/counter.service';
   styleUrls: ['./main-review.component.css']
 })
 export class MainReviewComponent implements OnInit {
-
+  feedBack: FeedBack = {
+    id: null,
+    feedbackValue: '',
+    clinicId: 0,
+    items: [],
+    optionalFeedback: null
+  }
   constructor(private counterService: CounterService) { }
 
   ngOnInit(): void {
@@ -18,6 +25,9 @@ export class MainReviewComponent implements OnInit {
       this.counterService.reviewCounter$.next(2);
     if (name === 'Meh' || name === 'Frown')
       this.counterService.reviewCounter$.next(3);
+
+    this.feedBack.feedbackValue = name;
+    localStorage.setItem("feedback", JSON.stringify(this.feedBack))
   }
 
 }

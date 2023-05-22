@@ -1,4 +1,4 @@
 export interface FeedbackItem {
     name: string;
-    itemValue: boolean;
+    itemValue: boolean | undefined;
 }

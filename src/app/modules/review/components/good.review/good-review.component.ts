@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FeedBack } from '../../model/feedback';
 import { CounterService } from '../../services/counter.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { CounterService } from '../../services/counter.service';
 export class GoodReviewComponent implements OnInit {
 
   patientFeedBack: Map<string, boolean> = new Map<string, boolean>;
-  constructor(private counterService:CounterService) { }
+  constructor(private counterService: CounterService) { }
 
   ngOnInit(): void {
     this.patientFeedBack.set('customer_service', false);
@@ -23,8 +24,18 @@ export class GoodReviewComponent implements OnInit {
     var feedBackName: string = event.target.name;
     var feedBackValue: boolean | undefined = this.patientFeedBack.get(feedBackName);
     this.patientFeedBack.set(feedBackName, !feedBackValue)
+
+
   }
-  submit(){
+  submit() {
+    var feedBack: FeedBack = JSON.parse(localStorage.getItem("feedback") || '{}');
+    this.patientFeedBack.forEach((value: boolean, key: string) => {
+      feedBack.items.push({
+        name: key,
+        itemValue: !value
+      })
+    });
+    localStorage.setItem('feedback', JSON.stringify(feedBack))
     this.counterService.reviewCounter$.next(4);
   }
 }
