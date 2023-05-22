@@ -12,13 +12,14 @@
     <c-card-body>
         <div class="d-grid gap-3 d-md-flex justify-content-md-center mb-3">
             <button cCol="6" style="min-height: 5em;" cButton color="light" shape="rounded-pill"
-                (click)="enableDisableRule($event)" [ngClass]="{'dark' : toggle}" size="lg">
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' : customerServiceToggle}" size="lg"
+                name="customer_service">
                 <span class="fw-normal fs-1">Customer Service</span>
             </button>
 
 
-            <button cCol="6" style="min-height: 5em;"cButton color="light" shape="rounded-pill" (click)="enableDisableRule($event)"
-                [ngClass]="{'dark' : toggle}" size="lg">
+            <button cCol="6" style="min-height: 5em;" cButton color="light" shape="rounded-pill"
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' : priceToggle}" size="lg" name="price">
 
                 <span class="fw-normal fs-1">Price</span>
             </button>
@@ -28,14 +29,15 @@
 <c-card>
     <c-card-body>
         <div class="d-grid gap-3 d-md-flex justify-content-md-center mb-3">
-            <button cCol="6" cButton style="min-height: 5em;" color="light" shape="rounded-pill" (click)="enableDisableRule($event)"
-                [ngClass]="{'dark' : toggle}" size="lg">
+            <button cCol="6" cButton style="min-height: 5em;" color="light" shape="rounded-pill"
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' : productSelectionToggle}" size="lg"
+                name="product_selection">
                 <span class="fw-normal fs-1">Product selection</span>
             </button>
 
 
-            <button cCol="6" cButton style="min-height: 5em;" color="light" shape="rounded-pill" (click)="enableDisableRule($event)"
-                [ngClass]="{'dark' : toggle}" size="lg">
+            <button cCol="6" cButton style="min-height: 5em;" color="light" shape="rounded-pill"
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' : queueTimeToggle}" size="lg" name="queue_time">
                 <span class="fw-normal fs-1">Queue time</span>
             </button>
         </div>
@@ -44,14 +46,16 @@
 <c-card>
     <c-card-body>
         <div class="d-grid gap-3 d-md-flex justify-content-md-center">
-            <button cCol="6" cButton style="min-height: 5em;" color="light" shape="rounded-pill" (click)="enableDisableRule($event)"
-                [ngClass]="{'dark' : toggle}" size="lg">
+            <button cCol="6" cButton style="min-height: 5em;" color="light" shape="rounded-pill"
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' : staffAvailabilityToggle}" size="lg"
+                name="staff_availability">
                 <span class="fw-normal fs-1">Staff availability</span>
             </button>
 
 
-            <button cCol="6" cButton style="min-height: 5em;" color="light" shape="rounded-pill" (click)="enableDisableRule($event)"
-                [ngClass]="{'dark' : toggle}" size="lg">
+            <button cCol="6" cButton style="min-height: 5em;" color="light" shape="rounded-pill"
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' : somethingElseToggle}" size="lg"
+                name="something_else">
                 <span class="fw-normal fs-1">Something else</span>
             </button>
         </div>
