@@ -7,7 +7,7 @@ import { CounterService } from '../../services/counter.service';
   styleUrls: ['./patient-review.component.css']
 })
 export class PatientReviewComponent implements OnInit {
-  counter: number = 1;
+  counter: number = 0;
   progressValue: number = 0;
   cards: { id: number, name: string }[] = [
     { "id": 1, "name": "Main Review" },
@@ -17,21 +17,28 @@ export class PatientReviewComponent implements OnInit {
   constructor(private counterService: CounterService) { }
 
   ngOnInit(): void {
+
     this.counterService.reviewCounter$.subscribe((reviewCounter: number) => {
       this.counter = reviewCounter;
+      console.log(this.counter)
+      if (reviewCounter > 1)
+        this.proceedToNextStep();
     });
   }
   next() {
-    this.proceedToNextStep();
   }
   proceedToNextStep() {
-    this.calculatePercentage(this.counter, 'next')
-    this.counter++;
+    this.calculatePercentage('next');
     this.scrollUp();
   }
-  calculatePercentage(index: number, action: string) {
+  calculatePercentage(action: string) {
+    var index: number = 0;
     if (action === 'back')
       index--;
+    if (this.counter === 2 || this.counter === 3)
+      index = 2;
+    if (this.counter === 4)
+      index = 3
     this.progressValue = Math.round(((index / this.cards.length) / 100) * 10000);
   }
   scrollUp() {
