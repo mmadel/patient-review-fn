@@ -1,3 +1,4 @@
+export * from './components/main.review/main-review.component'
 export * from './components/patient.review/patient-review.component'
 export * from './components/good.review/good-review.component'
 export * from './components/improve.review/improve-review.component'

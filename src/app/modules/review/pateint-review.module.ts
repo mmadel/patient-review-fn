@@ -9,27 +9,30 @@ import {
   SharedModule,
   UtilitiesModule,
   ButtonGroupModule,
+  ProgressModule
 } from '@coreui/angular-pro';
 
 import {
   PatientReviewComponent,
   PatientSubmitionComponent,
   GoodReviewComponent,
-  ImproveReviewComponent
+  ImproveReviewComponent,
+  MainReviewComponent
 } from './index';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 const APP_REVIEw_COMPONENTS = [
   PatientReviewComponent,
   PatientSubmitionComponent,
   GoodReviewComponent,
-  ImproveReviewComponent
+  ImproveReviewComponent,
+  MainReviewComponent,
+  MainReviewComponent
 ]
 @NgModule({
   declarations: [
     APP_REVIEw_COMPONENTS,
-    GoodReviewComponent,
-    ImproveReviewComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +45,9 @@ const APP_REVIEw_COMPONENTS = [
     SharedModule,
     UtilitiesModule,
     ButtonGroupModule,
-    IconModule
+    IconModule,
+    ReactiveFormsModule,
+    ProgressModule
   ]
 })
 export class PateintReviewModule { }

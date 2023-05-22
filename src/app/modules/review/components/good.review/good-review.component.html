@@ -1,1 +1,59 @@
-<p>good-review works!</p>
+<c-card>
+    <c-card-body>
+        <h5 cCardTitle>
+            <h1 class="text-center display-1">What was good</h1>
+        </h5>
+        <div class="col-sm-6">
+
+        </div>
+    </c-card-body>
+</c-card>
+<c-card>
+    <c-card-body>
+        <div class="d-grid gap-3 d-md-flex justify-content-md-center mb-3">
+            <button cCol="6" style="min-height: 5em;" cButton color="light" shape="rounded-pill"
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' : toggle}" size="lg">
+                <span class="fw-normal fs-1">Customer Service</span>
+            </button>
+
+
+            <button cCol="6" style="min-height: 5em;"cButton color="light" shape="rounded-pill" (click)="enableDisableRule($event)"
+                [ngClass]="{'dark' : toggle}" size="lg">
+
+                <span class="fw-normal fs-1">Price</span>
+            </button>
+        </div>
+    </c-card-body>
+</c-card>
+<c-card>
+    <c-card-body>
+        <div class="d-grid gap-3 d-md-flex justify-content-md-center mb-3">
+            <button cCol="6" cButton style="min-height: 5em;" color="light" shape="rounded-pill" (click)="enableDisableRule($event)"
+                [ngClass]="{'dark' : toggle}" size="lg">
+                <span class="fw-normal fs-3">Product selection</span>
+            </button>
+
+
+            <button cCol="6" cButton style="min-height: 5em;" color="light" shape="rounded-pill" (click)="enableDisableRule($event)"
+                [ngClass]="{'dark' : toggle}" size="lg">
+                <span class="fw-normal fs-3">Queue time</span>
+            </button>
+        </div>
+    </c-card-body>
+</c-card>
+<c-card>
+    <c-card-body>
+        <div class="d-grid gap-3 d-md-flex justify-content-md-center">
+            <button cCol="6" cButton style="min-height: 5em;" color="light" shape="rounded-pill" (click)="enableDisableRule($event)"
+                [ngClass]="{'dark' : toggle}" size="lg">
+                <span class="fw-normal fs-3">Staff availability</span>
+            </button>
+
+
+            <button cCol="6" cButton style="min-height: 5em;" color="light" shape="rounded-pill" (click)="enableDisableRule($event)"
+                [ngClass]="{'dark' : toggle}" size="lg">
+                <span class="fw-normal fs-3">Something else</span>
+            </button>
+        </div>
+    </c-card-body>
+</c-card>

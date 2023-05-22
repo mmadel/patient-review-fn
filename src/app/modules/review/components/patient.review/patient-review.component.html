@@ -1,23 +1,8 @@
-<c-card>
-    <c-card-body>
-        <h5 cCardTitle>
-            <h1 class="text-center display-1">Please rate our service today</h1>
-        </h5>
-        <div class="text-center">
-            <a [routerLink]="['/good']" class="btn btn-link">
-                <svg cIcon name="cilMoodVeryGood" size="9xl" class="text-success"></svg>
-            </a>
+<c-progress class="mb-3" [height]="30">
+    <c-progress-bar color="info" [animated]="true" [value]="progressValue"
+        variant="striped">{{progressValue}}%</c-progress-bar>
+</c-progress>
 
-            <a [routerLink]="['/good']" class="btn btn-link">
-                <svg cIcon name="cilHappy" size="9xl" class="text-info"></svg>
-            </a>
-            <a [routerLink]="['/improve']" class="btn btn-link">
-                <svg cIcon name="cilMeh" size="9xl" class="text-warning"></svg>
-            </a>
-
-            <a [routerLink]="['/improve']" class="btn btn-link">
-                <svg cIcon name="cilFrown" size="9xl" class="text-danger"></svg>
-            </a>
-        </div>
-    </c-card-body>
-</c-card>
+<app-main-review *ngIf="counter === 1"></app-main-review>
+<app-good-review *ngIf="counter === 2"></app-good-review>
+<app-improve-review *ngIf="counter === 3"></app-improve-review>
