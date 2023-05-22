@@ -120,7 +120,8 @@ import {
   cilMoodVeryGood,
   cilHappy,
   cilMeh,
-  cilFrown
+  cilFrown,
+  cilSmile
 
 } from '@coreui/icons';
 
@@ -247,7 +248,8 @@ export const iconSubset = {
   cilMoodVeryGood,
   cilHappy,
   cilMeh,
-  cilFrown
+  cilFrown,
+  cilSmile
 };
 
 export enum IconSubset {

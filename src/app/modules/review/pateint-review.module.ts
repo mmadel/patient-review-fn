@@ -20,7 +20,7 @@ import {
   MainReviewComponent,
   SubmitReviewComponent
 } from './index';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import {
@@ -63,7 +63,8 @@ const APP_REVIEw_COMPONENTS = [
     IconModule,
     ReactiveFormsModule,
     ProgressModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule  
 
   ]
 })

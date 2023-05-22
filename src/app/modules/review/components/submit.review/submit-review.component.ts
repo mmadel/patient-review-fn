@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-submit-review',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./submit-review.component.css']
 })
 export class SubmitReviewComponent implements OnInit {
-
+  isSubmitFeedback: boolean = false;
+  hasFeebback: boolean = false;
+  @ViewChild('userCreateForm')
+  userCreateForm!: NgForm;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onClickLeaveFeebback() {
+    this.hasFeebback = true;
+  }
+  create() {
+    this.isSubmitFeedback = true;
+  }
 }
