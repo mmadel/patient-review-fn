@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PatientFeedBack } from '../../model/patient.feedback';
 import { CounterService } from '../../services/counter.service';
 
 @Component({
