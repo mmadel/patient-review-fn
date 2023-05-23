@@ -7,19 +7,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./submit-review.component.css']
 })
 export class SubmitReviewComponent implements OnInit {
-  isSubmitFeedback: boolean = false;
-  hasFeebback: boolean = false;
-  @ViewChild('userCreateForm')
-  userCreateForm!: NgForm;
   constructor() { }
-
   ngOnInit(): void {
-  }
-
-  onClickLeaveFeebback() {
-    this.hasFeebback = true;
-  }
-  create() {
-    this.isSubmitFeedback = true;
   }
 }

@@ -10,6 +10,7 @@ import { CounterService } from '../../services/counter.service';
 export class GoodReviewComponent implements OnInit {
 
   patientFeedBack: Map<string, boolean> = new Map<string, boolean>;
+  isSubmitFeedback: boolean = false;
   constructor(private counterService: CounterService) { }
 
   ngOnInit(): void {
@@ -37,5 +38,8 @@ export class GoodReviewComponent implements OnInit {
     });
     localStorage.setItem('feedback', JSON.stringify(feedBack))
     this.counterService.reviewCounter$.next(4);
+  }
+  onClickLeaveFeebback() {
+    this.isSubmitFeedback = true;
   }
 }

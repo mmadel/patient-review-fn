@@ -1,34 +1,8 @@
-<c-card class="mb-3">
-    <c-card-header>
+<c-card >
+    <c-card-body>
         <h1 class="text-center display-1">
-            Thank you!
-            <svg *ngIf="isSubmitFeedback" cIcon name="cilSmile" size="3xl"></svg>
-        </h1>
-    </c-card-header>
-    <c-card-body *ngIf="!isSubmitFeedback">
-        <h3 class="text-center mb-3">Would you like to add anything?</h3>
-        <div class="d-grid gap-3 d-md-flex justify-content-md-center mb-3">
-            <button cCol="3" cButton color="primary" size="lg" shape="rounded-pill" (click)="onClickLeaveFeebback()"
-                variant="outline">
-                <span class="fw-bold" style="font-size:small">
-                    Leave Open Feedback
-                </span>
-            </button>
-        </div>
-
-        <form *ngIf="hasFeebback" cFormFloating #userCreateForm="ngForm" (ngSubmit)="create()">
-            <div class="mb-3">
-                <input cFormControl id="feddback_pname" placeholder="Your name" />
-            </div>
-            <div class="mb-3">
-                <textarea cFormControl id="feddback_value" rows="10" placeholder="Your Feedback"></textarea>
-            </div>
-            <div class="d-grid gap-3 d-md-flex justify-content-md-center mb-3">
-                <button cButton type="submit" variant="outline">
-                    submit
-                </button>
-            </div>
-        </form>
-
+        Thank you!
+        <svg cIcon name="cilSmile" size="4xl"></svg>
+    </h1>
     </c-card-body>
 </c-card>
