@@ -1,0 +1,116 @@
+<ngx-spinner></ngx-spinner>
+<c-card class="mb-3">
+    <c-card-header>
+        <h1 *ngIf="feeling" class="text-center display-1">What was good?</h1>
+        <h1 *ngIf="!feeling" class="text-center display-1">What could be improved?</h1>
+    </c-card-header>
+</c-card>
+<c-card>
+    <c-card-body>
+        <div class="d-grid gap-3 d-md-flex justify-content-md-center mb-3">
+            <button cCol="6" style="min-height: 5em;" cButton color="" shape="rounded-pill"
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' :  patientFeedBack.get('customer_service')}"
+                size="lg" name="customer_service">
+
+                <span class="fw-normal fs-1">
+                    Customer Service
+                </span>
+                <fa-icon [icon]="['fas','phone-volume']" size="2x"></fa-icon>
+            </button>
+
+            <button cCol="6" style="min-height: 5em;" cButton color="" shape="rounded-pill"
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' :  patientFeedBack.get('price')}" size="lg"
+                name="price">
+                <span class="fw-normal fs-1">
+                    Price
+                </span>
+                <fa-icon [icon]="['fas','credit-card']" size="2x"></fa-icon>
+            </button>
+        </div>
+    </c-card-body>
+</c-card>
+<c-card>
+    <c-card-body>
+        <div class="d-grid gap-3 d-md-flex justify-content-md-center mb-3">
+            <button cCol="6" cButton style="min-height: 5em;" color="" shape="rounded-pill"
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' : patientFeedBack.get('product_selection')}"
+                size="lg" name="product_selection">
+                <span class="fw-normal fs-1">
+                    Product selection
+                </span>
+                <fa-icon [icon]="['fab','product-hunt']" size="2x"></fa-icon>
+            </button>
+
+
+            <button cCol="6" cButton style="min-height: 5em;" color="" shape="rounded-pill"
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' : patientFeedBack.get('queue_time')}" size="lg"
+                name="queue_time">
+                <span class="fw-normal fs-1">
+                    Queue time
+                </span>
+                <fa-icon [icon]="['fas','timeline']" size="2x"></fa-icon>
+            </button>
+        </div>
+    </c-card-body>
+</c-card>
+<c-card class="mb-3">
+    <c-card-body>
+        <div class="d-grid gap-3 d-md-flex justify-content-md-center">
+            <button cCol="6" cButton style="min-height: 5em;" color="" shape="rounded-pill"
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' : patientFeedBack.get('staff_availability')}"
+                size="lg" name="staff_availability">
+                <span class="fw-normal fs-1">
+                    Staff availability
+                </span>
+                <fa-icon [icon]="['fas','child-reaching']" size="2x"></fa-icon>
+            </button>
+
+
+            <button cCol="6" cButton style="min-height: 5em;" color="" shape="rounded-pill"
+                (click)="enableDisableRule($event)" [ngClass]="{'dark' : patientFeedBack.get('something_else')}"
+                size="lg" name="something_else">
+                <span class="fw-normal fs-1">
+                    Other
+                </span>
+                <fa-icon [icon]="['fab','adn']" size="2x"></fa-icon>
+            </button>
+        </div>
+    </c-card-body>
+</c-card>
+<div cCol="auto" class="d-grid gap-3 d-md-flex justify-content-md-center mb-3">
+    <button *ngIf="!isSubmitFeedback" cButton style="min-height: 5em;" color="dark" size="lg" variant="outline"
+        shape="rounded-pill" (click)="submit()">
+        <span class="fw-bold fs-1">
+            Submit
+        </span>
+    </button>
+    <button cButton style="min-height: 5em;" color="dark" size="lg" variant="outline" shape="rounded-pill"
+        (click)="onClickLeaveFeebback()">
+        <span class="fw-bold fs-1">
+            Leave Open Feedback
+        </span>
+    </button>
+</div>
+
+<c-card-body *ngIf="isSubmitFeedback">
+    <form cFormFloating #userCreateForm="ngForm">
+        <div class="mb-3">
+            <input cFormControl id="feddback_pname" placeholder="Your name" *ngIf="feedBack.optionalFeedback !== null"
+                name="pname" [(ngModel)]="feedBack.optionalFeedback.patientName" #pname="ngModel" />
+        </div>
+        <div class="mb-3">
+            <textarea cFormControl id="feddback_value" rows="10" placeholder="Your Feedback"
+                *ngIf="feedBack.optionalFeedback !== null" [(ngModel)]="feedBack.optionalFeedback.feedback"
+                name="pfreeFeedback" #pfreeFeedback="ngModel"></textarea>
+        </div>
+        <div class="d-grid gap-3 d-md-flex justify-content-md-center mb-3">
+            <button cCol="auto" cButton style="min-height: 5em;" color="dark" size="lg" variant="outline"
+                shape="rounded-pill" (click)="submit()">
+                <span class="fw-bold fs-1">
+                    Submit
+                </span>
+            </button>
+        </div>
+    </form>
+
+</c-card-body>

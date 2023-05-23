@@ -1,3 +1,5 @@
 export * from './components/patient.review/patient-review.component'
-export * from './components/patient.submition/patient-submition.component'
+export * from './components/feedback/feedback.component'
+export * from './components/feedback.items/feedback-items.component'
+export * from './components/submit.review/submit-review.component'
 export * from './pateint-review.module'

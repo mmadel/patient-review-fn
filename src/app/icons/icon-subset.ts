@@ -116,7 +116,13 @@ import {
   cibZulip,
   cibInternetExplorer,
   cilTv,
-  cilCloudUpload, cilAccountLogout
+  cilCloudUpload, cilAccountLogout,
+  cilMoodVeryGood,
+  cilHappy,
+  cilMeh,
+  cilFrown,
+  cilSmile
+
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -238,7 +244,12 @@ export const iconSubset = {
   cibInternetExplorer,
   cilTv,
   cilCloudUpload,
-  cilAccountLogout
+  cilAccountLogout,
+  cilMoodVeryGood,
+  cilHappy,
+  cilMeh,
+  cilFrown,
+  cilSmile
 };
 
 export enum IconSubset {

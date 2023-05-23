@@ -1,15 +1,9 @@
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IconModule } from '@coreui/icons-angular';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import {
-  DefaultLayoutComponent,
-  DefaultHeaderComponent,
-  DefaultFooterComponent,
-} from './core/reviewlayout';
 import {
   AvatarModule,
   BadgeModule,
@@ -29,11 +23,14 @@ import {
   SharedModule,
   SidebarModule,
   TabsModule,
-  UtilitiesModule,
-
-
-
+  UtilitiesModule
 } from '@coreui/angular-pro';
+import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import {
+  DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent
+} from './core/reviewlayout';
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
   DefaultFooterComponent,
@@ -46,6 +43,7 @@ const APP_CONTAINERS = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,AvatarModule,
     BadgeModule,
     BreadcrumbModule,
@@ -68,9 +66,17 @@ const APP_CONTAINERS = [
     IconModule,
     BrowserAnimationsModule,
     FormsModule,
-    DateRangePickerModule
+    DateRangePickerModule,
+    
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy,
+    },
+    IconSetService,
+    Title,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
