@@ -14,7 +14,6 @@ import {
 
 import {
   PatientReviewComponent,
-  PatientSubmitionComponent,
   GoodReviewComponent,
   ImproveReviewComponent,
   MainReviewComponent,
@@ -38,7 +37,6 @@ import {
 
 const APP_REVIEw_COMPONENTS = [
   PatientReviewComponent,
-  PatientSubmitionComponent,
   GoodReviewComponent,
   ImproveReviewComponent,
   MainReviewComponent,
