@@ -5,7 +5,7 @@ import { PatientReviewComponent } from './components/patient.review/patient-revi
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'review',
+    redirectTo: 'feedbak',
     pathMatch: 'full',
   },
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   children: [
     {
-      path: 'review',
+      path: 'feedbak',
       component: PatientReviewComponent,
       data: {
         title: 'Patient Review',
