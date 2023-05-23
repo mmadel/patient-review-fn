@@ -10,9 +10,8 @@ export class PatientReviewComponent implements OnInit {
   counter: number = 0;
   progressValue: number = 0;
   cards: { id: number, name: string }[] = [
-    { "id": 1, "name": "Main Review" },
-    { "id": 2, "name": "Good Review" },
-    { "id": 3, "name": "Improve Review" }
+    { "id": 1, "name": "Feedback Review" },
+    { "id": 2, "name": "Feedback Item Review" },
   ];
   constructor(private counterService: CounterService) { }
 
@@ -35,10 +34,10 @@ export class PatientReviewComponent implements OnInit {
     var index: number = 0;
     if (action === 'back')
       index--;
-    if (this.counter === 2 || this.counter === 3)
-      index = 2;
-    if (this.counter === 4)
-      index = 3
+    if (this.counter === 2)
+      index = 1;
+    if (this.counter === 3)
+      index = 2
     this.progressValue = Math.round(((index / this.cards.length) / 100) * 10000);
   }
   scrollUp() {

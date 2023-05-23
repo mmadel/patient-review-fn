@@ -3,7 +3,6 @@
         variant="striped">{{progressValue}}%</c-progress-bar>
 </c-progress>
 
-<app-main-review *ngIf="counter === 1"></app-main-review>
-<app-good-review *ngIf="counter === 2"></app-good-review>
-<app-improve-review *ngIf="counter === 3"></app-improve-review>
-<app-submit-review *ngIf="counter === 4"></app-submit-review>
+<app-feedback-review *ngIf="counter === 1"></app-feedback-review>
+<app-feedback-items *ngIf="counter === 2"></app-feedback-items>
+<app-submit-review *ngIf="counter === 3"></app-submit-review>

@@ -1,4 +1,5 @@
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, Title } from '@angular/platform-browser';
@@ -42,6 +43,7 @@ const APP_CONTAINERS = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,AvatarModule,
     BadgeModule,
     BreadcrumbModule,

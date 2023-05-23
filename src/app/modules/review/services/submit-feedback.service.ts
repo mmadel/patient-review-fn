@@ -6,10 +6,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SubmitFeedbackService {
-  private userUrl = environment.baseURL + 'patient/submit'
+  private userUrl = environment.baseURL + 'patient/create'
   constructor(private httpClient: HttpClient) { }
 
-  public submit(feedBack: FeedBack){
+  public submit(feedBack: FeedBack) {
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.post(`${this.userUrl}`, JSON.stringify(feedBack), { 'headers': headers, observe: 'response' })
   }

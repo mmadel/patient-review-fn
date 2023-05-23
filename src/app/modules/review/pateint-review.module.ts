@@ -14,9 +14,8 @@ import {
 
 import {
   PatientReviewComponent,
-  GoodReviewComponent,
-  ImproveReviewComponent,
-  MainReviewComponent,
+  FeedbackComponent,
+  FeedbackItemsComponent,
   SubmitReviewComponent
 } from './index';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,18 +33,18 @@ import {
   faProductHunt as faProductHunt,
   faAdn as faAdn
 } from '@fortawesome/free-brands-svg-icons';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const APP_REVIEw_COMPONENTS = [
   PatientReviewComponent,
-  GoodReviewComponent,
-  ImproveReviewComponent,
-  MainReviewComponent,
-  MainReviewComponent,
+  FeedbackComponent,
+  FeedbackItemsComponent,
   SubmitReviewComponent
 ]
 @NgModule({
   declarations: [
     APP_REVIEw_COMPONENTS,
+    FeedbackItemsComponent,
   ],
   imports: [
     CommonModule,
@@ -62,7 +61,8 @@ const APP_REVIEw_COMPONENTS = [
     ReactiveFormsModule,
     ProgressModule,
     FontAwesomeModule,
-    FormsModule  
+    FormsModule ,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
 
   ]
 })
