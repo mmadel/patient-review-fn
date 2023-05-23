@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminLayoutComponentComponent } from './core';
 import { DefaultLayoutComponent } from './core/reviewlayout/default-layout.component';
 
 const routes: Routes = [
@@ -16,7 +17,21 @@ const routes: Routes = [
           import('./modules/review/pateint-review.module').then((m) => m.PateintReviewModule)
       },
     ]
-  }
+  },
+  {
+    path: 'admin',
+    component: AdminLayoutComponentComponent,
+    data: {
+      title: ''
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./modules/admin/patient-admin.module').then((m) => m.PatientAdminModule)
+      }
+    ]
+  },
 ];
 
 @NgModule({

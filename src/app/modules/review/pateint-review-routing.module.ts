@@ -4,11 +4,6 @@ import { PatientReviewComponent } from './components/patient.review/patient-revi
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'feedbak',
-    pathMatch: 'full',
-  },
-  {
   path: '',
   data: {
     title: 'PatientReview',
