@@ -42,6 +42,7 @@ export class FeedbackItemsComponent implements OnInit {
     this.submitFeedbackService.submit(this.feedBack).subscribe((response: any) => {
       this.spinner.hide();
       this.counterService.reviewCounter$.next(3);
+      localStorage.removeItem('feedback');
     });
   }
   onClickLeaveFeebback() {

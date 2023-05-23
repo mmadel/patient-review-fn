@@ -2,7 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientReviewComponent } from './components/patient.review/patient-review.component';
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'review',
+    pathMatch: 'full',
+  },
+  {
   path: '',
   data: {
     title: 'PatientReview',
