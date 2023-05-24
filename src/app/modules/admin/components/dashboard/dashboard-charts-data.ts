@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/utils/src';
+import * as moment from 'moment';
 export interface IChartProps {
   data?: any;
   labels?: any;
@@ -33,7 +34,7 @@ export class DashboardChartsData {
 
     // mainChart
     // mainChart
-    this.mainChart['elements'] = period === 'Month' ? 12 : 27;
+    this.mainChart['elements'] = period === 'Month' ? 31 : 31;
     this.mainChart['Data1'] = [];
     this.mainChart['Data2'] = [];
     this.mainChart['Data3'] = [];
@@ -46,7 +47,7 @@ export class DashboardChartsData {
     }
 
     let labels: string[] = [];
-    if (period === 'Month') {
+    if (period === 'Year') {
       labels = [
         'January',
         'February',
@@ -61,18 +62,15 @@ export class DashboardChartsData {
         'November',
         'December'
       ];
-    } else {
-      /* tslint:disable:max-line-length */
-      const week = [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-      ];
-      labels = week.concat(week, week, week);
+      labels = this.getMonths();
+    }
+    if (period === 'Month') {
+
+      labels = this.getDays();
+    }
+    if (period === 'Day') {
+      labels = this.getHours();
+
     }
 
     const colors = [
@@ -124,7 +122,7 @@ export class DashboardChartsData {
       },
       tooltip: {
         callbacks: {
-          labelColor: function(context: any) {
+          labelColor: function (context: any) {
             return {
               backgroundColor: context.dataset.borderColor
             };
@@ -159,7 +157,7 @@ export class DashboardChartsData {
           radius: 0,
           hitRadius: 10,
           hoverRadius: 4,
-          hoverBorderWidth: 3
+          hoverBorderWidth: 0
         }
       }
     };
@@ -171,5 +169,27 @@ export class DashboardChartsData {
       labels
     };
   }
+  getHours() {
+    const items: string[] = [];
+    for (var i = 0; i < 24; i++) {
+      var ff = moment({ hour: i }).format('h A');
+      items.push(ff)
+    }
+    return items;
+  }
+  getDays() {
+    var daysInMonth = moment().daysInMonth();
+    var arrDays = [];
 
+    while (daysInMonth) {
+      var current = moment(new Date()).date(daysInMonth).format('dddd')
+      arrDays.push(current);
+      daysInMonth--;
+    }
+    arrDays.reverse();
+    return arrDays;
+  }
+  getMonths() {
+    return Array.apply(0, Array(12)).map(function (_, i) { return moment().month(i).format('MMMM') });
+  }
 }
