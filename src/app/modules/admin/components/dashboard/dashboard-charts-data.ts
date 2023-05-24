@@ -190,6 +190,6 @@ export class DashboardChartsData {
     return arrDays;
   }
   getMonths() {
-    return Array.apply(0, Array(12)).map(function (_, i) { return moment().month(i).format('MMMM') });
+    return Array.apply(0, Array(12)).map(function (_, i) { return moment(new Date()).month(i).format('MMMM') });
   }
 }
