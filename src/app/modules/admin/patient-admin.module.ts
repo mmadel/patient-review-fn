@@ -32,9 +32,13 @@ import {
 
 } from '@coreui/angular-pro';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { DashboardFeedbackComponent } from './components/dashboard/dashboard-feedback.component';
+import { ChartjsModule } from '@coreui/angular-chartjs';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
-  declarations: [],
+  declarations: [
+    DashboardFeedbackComponent
+  ],
   imports: [
     CommonModule,
     PatientAdminRoutingModule,
@@ -46,6 +50,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     GridModule,
     SharedModule,
     SmartTableModule,
+    ReactiveFormsModule,
     TableModule,
     FormModule,
     DatePickerModule,
@@ -64,6 +69,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MultiSelectModule,
     WidgetModule,
     ProgressModule,
+    ChartjsModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
