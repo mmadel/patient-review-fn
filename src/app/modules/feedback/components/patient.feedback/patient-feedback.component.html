@@ -1,87 +1,103 @@
-<c-card class="mb-5">
-    <c-card-header>
-        <h1 class="text-center display-4">
-            Hospitality Service
-            <fa-icon [icon]="['fas','circle-h']" size="sm"></fa-icon>
+<span *ngIf="!isSubmitted">
+    <c-card class="mb-5">
+        <c-card-header>
+            <h1 class="text-center display-4">
+                Hospitality Service
+                <fa-icon [icon]="['fas','circle-h']" size="sm"></fa-icon>
+            </h1>
+        </c-card-header>
+        <c-card-body>
+            <div class="text-center">
+                <a class="btn btn-link" name="hospitality-VeryGood"
+                    [ngClass]="{'border-success' : hospitalityToggle.VGood}" (click)="selectFeedback($event)">
+                    <svg cIcon name="cilMoodVeryGood" size="6xl" class="text-success"></svg>
+                </a>
+
+                <a class="btn btn-link" name="hospitality-Happy" [ngClass]="{'border-primary' : hospitalityToggle.Good}"
+                    (click)="selectFeedback($event)">
+                    <svg cIcon name="cilHappy" size="6xl" class="text-info"></svg>
+                </a>
+                <a class="btn btn-link" name="hospitality-Meh" [ngClass]="{'border-warning' : hospitalityToggle.Sad}"
+                    (click)="selectFeedback($event)">
+                    <svg cIcon name="cilMeh" size="6xl" class="text-warning"></svg>
+                </a>
+
+                <a class="btn btn-link" name="hospitality-Frown" [ngClass]="{'border-danger' : hospitalityToggle.VSad}"
+                    (click)="selectFeedback($event)">
+                    <svg cIcon name="cilFrown" size="6xl" class="text-danger"></svg>
+                </a>
+            </div>
+        </c-card-body>
+    </c-card>
+
+    <c-card class="mb-5">
+        <c-card-header>
+            <h1 class="text-center display-4">
+                Clinical Service
+                <fa-icon [icon]="['fas','hospital-user']" size="sm"></fa-icon>
+            </h1>
+        </c-card-header>
+        <c-card-body>
+            <div class="text-center">
+                <a class="btn btn-link" name="clinical-VeryGood" [ngClass]="{'border-success' : clinicalToggle.VGood}"
+                    (click)="selectFeedback($event)">
+                    <svg cIcon name="cilMoodVeryGood" size="6xl" class="text-success"></svg>
+                </a>
+
+                <a class="btn btn-link" name="clinical-Happy" [ngClass]="{'border-primary' : clinicalToggle.Good}"
+                    (click)="selectFeedback($event)">
+                    <svg cIcon name="cilHappy" size="6xl" class="text-info"></svg>
+                </a>
+                <a class="btn btn-link" name="clinical-Meh" [ngClass]="{'border-warning' : clinicalToggle.Sad}"
+                    (click)="selectFeedback($event)">
+                    <svg cIcon name="cilMeh" size="6xl" class="text-warning"></svg>
+                </a>
+
+                <a class="btn btn-link" name="clinical-Frown" [ngClass]="{'border-danger' : clinicalToggle.VSad}"
+                    (click)="selectFeedback($event)">
+                    <svg cIcon name="cilFrown" size="6xl" class="text-danger"></svg>
+                </a>
+            </div>
+        </c-card-body>
+    </c-card>
+    <c-card class="mb-5">
+        <c-card-header>
+            <h1 class="display-6">
+                Please enter your name
+            </h1>
+        </c-card-header>
+        <c-card-body>
+            <div class="text-center">
+                <c-input-group class="mb-3">
+                    <span cInputGroupText id="basic-addon1">
+                        <svg cIcon name="cibSuperuser" size="3xl"></svg>
+                    </span>
+                    <input aria-describedby="basic-addon1" [(ngModel)]="model.patientName" cFormControl
+                        placeholder="Patient Name" />
+                </c-input-group>
+            </div>
+        </c-card-body>
+    </c-card>
+
+
+    <div class="d-grid gap-2 col-4 mx-auto">
+        <button cButton variant="outline" size="sm" shape="rounded-pill" (click)="submit()">
+            <span class="fs-3">
+                Submit
+            </span>
+        </button>
+    </div>
+</span>
+<span *ngIf="isSubmitted">
+    <c-card >
+        <c-card-body>
+            <h1 class="text-center display-1">
+            Thank you!
+            <svg cIcon name="cilSmile" size="4xl"></svg>
         </h1>
-    </c-card-header>
-    <c-card-body>
-        <div class="text-center">
-            <a class="btn btn-link" name="hospitality-VeryGood" [ngClass]="{'border-success' : hospitalityToggle.vgood}"
-                (click)="selectFeedback($event)">
-                <svg cIcon name="cilMoodVeryGood" size="6xl" class="text-success"></svg>
-            </a>
-
-            <a class="btn btn-link" name="hospitality-Happy" [ngClass]="{'border-primary' : hospitalityToggle.good}"
-                (click)="selectFeedback($event)">
-                <svg cIcon name="cilHappy" size="6xl" class="text-info"></svg>
-            </a>
-            <a class="btn btn-link" name="hospitality-Meh" [ngClass]="{'border-warning' : hospitalityToggle.sad}"
-                (click)="selectFeedback($event)">
-                <svg cIcon name="cilMeh" size="6xl" class="text-warning"></svg>
-            </a>
-
-            <a class="btn btn-link" name="hospitality-Frown" [ngClass]="{'border-danger' : hospitalityToggle.vsad}"
-                (click)="selectFeedback($event)">
-                <svg cIcon name="cilFrown" size="6xl" class="text-danger"></svg>
-            </a>
-        </div>
-    </c-card-body>
-</c-card>
-
-<c-card class="mb-5">
-    <c-card-header>
-        <h1 class="text-center display-4">
-            Clinical Service
-            <fa-icon [icon]="['fas','hospital-user']" size="sm"></fa-icon>
-        </h1>
-    </c-card-header>
-    <c-card-body>
-        <div class="text-center">
-            <a class="btn btn-link" name="clinical-VeryGood" [ngClass]="{'border-success' : clinicalToggle.vgood}"
-                (click)="selectFeedback($event)">
-                <svg cIcon name="cilMoodVeryGood" size="6xl" class="text-success"></svg>
-            </a>
-
-            <a class="btn btn-link" name="clinical-Happy" [ngClass]="{'border-primary' : clinicalToggle.good}"
-                (click)="selectFeedback($event)">
-                <svg cIcon name="cilHappy" size="6xl" class="text-info"></svg>
-            </a>
-            <a class="btn btn-link" name="clinical-Meh" [ngClass]="{'border-warning' : clinicalToggle.sad}"
-                (click)="selectFeedback($event)">
-                <svg cIcon name="cilMeh" size="6xl" class="text-warning"></svg>
-            </a>
-
-            <a class="btn btn-link" name="clinical-Frown" [ngClass]="{'border-danger' : clinicalToggle.vsad}"
-                (click)="selectFeedback($event)">
-                <svg cIcon name="cilFrown" size="6xl" class="text-danger"></svg>
-            </a>
-        </div>
-    </c-card-body>
-</c-card>
-<c-card class="mb-5">
-    <c-card-header>
-        <h1 class="display-6">
-            Please enter your name
-        </h1>
-    </c-card-header>
-    <c-card-body>
-        <div class="text-center">
-            <c-input-group class="mb-3">
-                <span cInputGroupText id="basic-addon1">
-                    <svg cIcon name="cibSuperuser" size="3xl"></svg>
-                </span>
-                <input aria-describedby="basic-addon1" aria-label="Username" cFormControl placeholder="Patient Name" />
-            </c-input-group>
-        </div>
-    </c-card-body>
-</c-card>
-
-
-<div class="d-grid gap-2 col-4 mx-auto">
-    <button cButton variant="outline" size="sm" shape="rounded-pill" >
-        <span class="fs-3">
-            Submit
-        </span>
-    </button>
-</div>
+        </c-card-body>
+        <c-card-footer>
+            <button cButton (click)="back()" class="btn-link">Back to Home</button>
+        </c-card-footer>
+    </c-card>
+</span>
