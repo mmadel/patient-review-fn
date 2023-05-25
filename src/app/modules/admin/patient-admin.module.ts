@@ -32,12 +32,23 @@ import {
 
 } from '@coreui/angular-pro';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { DashboardFeedbackComponent } from './components/dashboard/dashboard-feedback.component';
 import { ChartjsModule } from '@coreui/angular-chartjs';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import {
+  DashboardFeedbackComponent,
+  HospitalityDashboardComponent,
+  ClinicalDashboardComponent
+} from './components'
+
+const APP_ADMIN_COMPONENT = [
+  DashboardFeedbackComponent,
+  HospitalityDashboardComponent,
+  ClinicalDashboardComponent
+]
 @NgModule({
   declarations: [
-    DashboardFeedbackComponent
+    APP_ADMIN_COMPONENT
   ],
   imports: [
     CommonModule,
