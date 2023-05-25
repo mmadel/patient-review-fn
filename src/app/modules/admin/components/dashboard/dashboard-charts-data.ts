@@ -182,7 +182,7 @@ export class DashboardChartsData {
     var arrDays = [];
 
     while (daysInMonth) {
-      var current = moment(new Date()).date(daysInMonth).format('dddd')
+      var current = moment(new Date()).date(daysInMonth).format('DD')
       arrDays.push(current);
       daysInMonth--;
     }

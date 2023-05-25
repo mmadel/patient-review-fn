@@ -1,72 +1,8 @@
-<c-card class="mb-4">
-  <c-card-body>
-    <c-row>
-      <c-col sm="5">
-        <h4 class="card-title mb-0" id="traffic">
-          Traffic
-        </h4>
-        <div class="small text-medium-emphasis">January - December 2021</div>
-      </c-col>
-      <c-col class="d-none d-md-block" sm="7">
-        <button cButton class="float-end" color="primary">
-          <svg cIcon name="cilCloudDownload"></svg>
-        </button>
-        <form [formGroup]="trafficRadioGroup">
-          <c-button-group class="float-end me-3" role="group">
-            <input class="btn-check" formControlName="trafficRadio" type="radio" value="Day" />
-            <label (click)="setTrafficPeriod('Day')" cButton cFormCheckLabel color="secondary"
-              variant="outline">Day</label>
-
-            <input class="btn-check" formControlName="trafficRadio" type="radio" value="Month" />
-            <label (click)="setTrafficPeriod('Month')" cButton cFormCheckLabel color="secondary"
-              variant="outline">Month</label>
-
-            <input class="btn-check" formControlName="trafficRadio" type="radio" value="Year" />
-            <label (click)="setTrafficPeriod('Year')" cButton cFormCheckLabel color="secondary"
-              variant="outline">Year</label>
-          </c-button-group>
-        </form>
-      </c-col>
-    </c-row>
-    <c-chart [data]="mainChart.data" [height]="300" [ngStyle]="{'marginTop.px': 40}" [options]="mainChart.options"
-      [type]="mainChart.type">
-      Main chart
-    </c-chart>
-  </c-card-body>
-  <c-card-footer>
-    <c-row class="text-center" [md]="5" [xs]="1">
-      <c-col class="mb-sm-2 mb-0">
-        <div class="text-medium-emphasis">Visits</div>
-        <strong>{{feedbackNumbers.total}} Patients</strong>
-      </c-col>
-      <c-col class="mb-sm-2 mb-0">
-        <div class="text-medium-emphasis">Very Good Feeling</div>
-        <strong>{{feedbackNumbers.vgoodFeedbackTotal}} ({{feedbackNumbers.vgoodFeedbackPercentage}}%)</strong>
-        <c-progress class="mt-2" thin>
-          <c-progress-bar color="success-gradient" [value]="feedbackNumbers.vgoodFeedbackPercentage"></c-progress-bar>
-        </c-progress>
-      </c-col>
-      <c-col class="mb-sm-2 mb-0">
-        <div class="text-medium-emphasis">Good Feeling</div>
-        <strong>{{feedbackNumbers.goodFeedbackTotal}} ({{feedbackNumbers.goodFeedbackPercentage}}%)</strong>
-        <c-progress class="mt-2" thin>
-          <c-progress-bar [value]="feedbackNumbers.goodFeedbackPercentage"></c-progress-bar>
-        </c-progress>
-      </c-col>
-      <c-col class="mb-sm-2 mb-0">
-        <div class="text-medium-emphasis">Very Bad Feeling</div>
-        <strong>{{feedbackNumbers.vsadFeedbackTotal}} ({{feedbackNumbers.vsadFeedbackPercentage}}%)</strong>
-        <c-progress class="mt-2" thin>
-          <c-progress-bar color="danger-gradient" [value]="feedbackNumbers.vsadFeedbackPercentage"></c-progress-bar>
-        </c-progress>
-      </c-col>
-      <c-col class="mb-sm-2 mb-0">
-        <div class="text-medium-emphasis">Bad Feeling</div>
-        <strong>{{feedbackNumbers.sadFeedbackTotal}} ({{feedbackNumbers.sadFeedbackPercentage}}%)</strong>
-        <c-progress class="mt-2" thin>
-          <c-progress-bar color="warning-gradient" [value]="feedbackNumbers.sadFeedbackPercentage"></c-progress-bar>
-        </c-progress>
-      </c-col>
-    </c-row>
-  </c-card-footer>
-</c-card>
+<c-row>
+    <c-col>
+        <app-hospitality-dashboard></app-hospitality-dashboard>
+    </c-col>
+    <c-col>
+        <app-clinical-dashboard></app-clinical-dashboard>
+    </c-col>
+</c-row>
