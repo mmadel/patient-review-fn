@@ -32,6 +32,20 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'feedback',
+    component: DefaultLayoutComponent,
+    data: {
+      title: ''
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./modules/feedback/feedback-routing.module').then((m) => m.FeedbackRoutingModule)
+      }
+    ]
+  },
 ];
 
 @NgModule({
