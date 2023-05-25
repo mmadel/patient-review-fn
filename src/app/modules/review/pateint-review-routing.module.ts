@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   children: [
     {
-      path: 'feedbak',
+      path: 'feedback',
       component: PatientReviewComponent,
       data: {
         title: 'Patient Review',

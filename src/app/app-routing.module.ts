@@ -5,7 +5,7 @@ import { DefaultLayoutComponent } from './core/reviewlayout/default-layout.compo
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'review',
     component: DefaultLayoutComponent,
     data: {
       title: 'Review'
