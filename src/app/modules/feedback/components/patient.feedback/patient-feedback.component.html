@@ -7,18 +7,22 @@
     </c-card-header>
     <c-card-body>
         <div class="text-center">
-            <a class="btn btn-link" (click)="next($event)" name="VeryGood">
+            <a class="btn btn-link" name="hospitality-VeryGood" [ngClass]="{'border-success' : hospitalityToggle.vgood}"
+                (click)="selectFeedback($event)">
                 <svg cIcon name="cilMoodVeryGood" size="6xl" class="text-success"></svg>
             </a>
 
-            <a class="btn btn-link" (click)="next($event)" name="Happy">
+            <a class="btn btn-link" name="hospitality-Happy" [ngClass]="{'border-primary' : hospitalityToggle.good}"
+                (click)="selectFeedback($event)">
                 <svg cIcon name="cilHappy" size="6xl" class="text-info"></svg>
             </a>
-            <a class="btn btn-link" (click)="next($event)" name="Meh">
+            <a class="btn btn-link" name="hospitality-Meh" [ngClass]="{'border-warning' : hospitalityToggle.sad}"
+                (click)="selectFeedback($event)">
                 <svg cIcon name="cilMeh" size="6xl" class="text-warning"></svg>
             </a>
 
-            <a class="btn btn-link" (click)="next($event)" name="Frown">
+            <a class="btn btn-link" name="hospitality-Frown" [ngClass]="{'border-danger' : hospitalityToggle.vsad}"
+                (click)="selectFeedback($event)">
                 <svg cIcon name="cilFrown" size="6xl" class="text-danger"></svg>
             </a>
         </div>
@@ -34,18 +38,22 @@
     </c-card-header>
     <c-card-body>
         <div class="text-center">
-            <a class="btn btn-link" (click)="next($event)" name="VeryGood">
+            <a class="btn btn-link" name="clinical-VeryGood" [ngClass]="{'border-success' : clinicalToggle.vgood}"
+                (click)="selectFeedback($event)">
                 <svg cIcon name="cilMoodVeryGood" size="6xl" class="text-success"></svg>
             </a>
 
-            <a class="btn btn-link" (click)="next($event)" name="Happy">
+            <a class="btn btn-link" name="clinical-Happy" [ngClass]="{'border-primary' : clinicalToggle.good}"
+                (click)="selectFeedback($event)">
                 <svg cIcon name="cilHappy" size="6xl" class="text-info"></svg>
             </a>
-            <a class="btn btn-link" (click)="next($event)" name="Meh">
+            <a class="btn btn-link" name="clinical-Meh" [ngClass]="{'border-warning' : clinicalToggle.sad}"
+                (click)="selectFeedback($event)">
                 <svg cIcon name="cilMeh" size="6xl" class="text-warning"></svg>
             </a>
 
-            <a class="btn btn-link" (click)="next($event)" name="Frown">
+            <a class="btn btn-link" name="clinical-Frown" [ngClass]="{'border-danger' : clinicalToggle.vsad}"
+                (click)="selectFeedback($event)">
                 <svg cIcon name="cilFrown" size="6xl" class="text-danger"></svg>
             </a>
         </div>
@@ -53,7 +61,7 @@
 </c-card>
 <c-card class="mb-5">
     <c-card-header>
-        <h1 class="text-center display-4">
+        <h1 class="display-6">
             Please enter your name
         </h1>
     </c-card-header>
@@ -71,8 +79,8 @@
 
 
 <div class="d-grid gap-2 col-6 mx-auto">
-    <button cButton variant="outline" size="lg" shape="rounded-pill" >
-        <span class="fw-bold fs-1">
+    <button cButton variant="outline" size="lg" shape="rounded-pill">
+        <span class="fs-1">
             Submit
         </span>
     </button>
