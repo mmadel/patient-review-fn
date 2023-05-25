@@ -26,12 +26,15 @@ import {
   ButtonGroupModule,
   ProgressModule
 } from '@coreui/angular-pro';
-const APP_COMPONENTS = [
 
+import { PatientFeedbackComponent }
+  from './index'
+const APP_COMPONENTS = [
+  PatientFeedbackComponent
 ]
 @NgModule({
   declarations: [
-    
+    APP_COMPONENTS
   ],
   imports: [
     CommonModule,
