@@ -28,6 +28,8 @@ import {
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AdminFooterComponentComponent, AdminHeaderComponentComponent } from './core';
+import { AdminLayoutComponentComponent } from './core/adminlayout/admin-layout-component.component';
 import {
   DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent
 } from './core/reviewlayout';
@@ -36,15 +38,21 @@ const APP_CONTAINERS = [
   DefaultFooterComponent,
   DefaultLayoutComponent
 ];
+const APP_ADMIN_CONTAINERS = [
+  AdminLayoutComponentComponent,
+  AdminFooterComponentComponent,
+  AdminHeaderComponentComponent
+]
 @NgModule({
   declarations: [
     AppComponent,
-    ...APP_CONTAINERS
+    ...APP_CONTAINERS,
+    ...APP_ADMIN_CONTAINERS,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,AvatarModule,
+    AppRoutingModule, AvatarModule,
     BadgeModule,
     BreadcrumbModule,
     ButtonGroupModule,
@@ -67,7 +75,7 @@ const APP_CONTAINERS = [
     BrowserAnimationsModule,
     FormsModule,
     DateRangePickerModule,
-    
+
   ],
   providers: [
     {
