@@ -1,1 +1,79 @@
-<p>patient-feedback works!</p>
+<c-card class="mb-5">
+    <c-card-header>
+        <h1 class="text-center display-4">
+            Hospitality Service
+            <fa-icon [icon]="['fas','circle-h']" size="sm"></fa-icon>
+        </h1>
+    </c-card-header>
+    <c-card-body>
+        <div class="text-center">
+            <a class="btn btn-link" (click)="next($event)" name="VeryGood">
+                <svg cIcon name="cilMoodVeryGood" size="6xl" class="text-success"></svg>
+            </a>
+
+            <a class="btn btn-link" (click)="next($event)" name="Happy">
+                <svg cIcon name="cilHappy" size="6xl" class="text-info"></svg>
+            </a>
+            <a class="btn btn-link" (click)="next($event)" name="Meh">
+                <svg cIcon name="cilMeh" size="6xl" class="text-warning"></svg>
+            </a>
+
+            <a class="btn btn-link" (click)="next($event)" name="Frown">
+                <svg cIcon name="cilFrown" size="6xl" class="text-danger"></svg>
+            </a>
+        </div>
+    </c-card-body>
+</c-card>
+
+<c-card class="mb-5">
+    <c-card-header>
+        <h1 class="text-center display-4">
+            Clinical Service
+            <fa-icon [icon]="['fas','hospital-user']" size="sm"></fa-icon>
+        </h1>
+    </c-card-header>
+    <c-card-body>
+        <div class="text-center">
+            <a class="btn btn-link" (click)="next($event)" name="VeryGood">
+                <svg cIcon name="cilMoodVeryGood" size="6xl" class="text-success"></svg>
+            </a>
+
+            <a class="btn btn-link" (click)="next($event)" name="Happy">
+                <svg cIcon name="cilHappy" size="6xl" class="text-info"></svg>
+            </a>
+            <a class="btn btn-link" (click)="next($event)" name="Meh">
+                <svg cIcon name="cilMeh" size="6xl" class="text-warning"></svg>
+            </a>
+
+            <a class="btn btn-link" (click)="next($event)" name="Frown">
+                <svg cIcon name="cilFrown" size="6xl" class="text-danger"></svg>
+            </a>
+        </div>
+    </c-card-body>
+</c-card>
+<c-card class="mb-5">
+    <c-card-header>
+        <h1 class="text-center display-4">
+            Please enter your name
+        </h1>
+    </c-card-header>
+    <c-card-body>
+        <div class="text-center">
+            <c-input-group class="mb-3">
+                <span cInputGroupText id="basic-addon1">
+                    <svg cIcon name="cibSuperuser" size="3xl"></svg>
+                </span>
+                <input aria-describedby="basic-addon1" aria-label="Username" cFormControl placeholder="Patient Name" />
+            </c-input-group>
+        </div>
+    </c-card-body>
+</c-card>
+
+
+<div class="d-grid gap-2 col-6 mx-auto">
+    <button cButton variant="outline" size="lg" shape="rounded-pill" >
+        <span class="fw-bold fs-1">
+            Submit
+        </span>
+    </button>
+</div>

@@ -11,5 +11,11 @@ export class PatientFeedbackComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  next(event: any) {
+
+  }
+  submit(){
+    
+  }
 
 }

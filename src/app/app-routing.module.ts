@@ -42,7 +42,7 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-          import('./modules/feedback/feedback-routing.module').then((m) => m.FeedbackRoutingModule)
+          import('./modules/feedback/feedback.module').then((m) => m.FeedbackModule)
       }
     ]
   },
