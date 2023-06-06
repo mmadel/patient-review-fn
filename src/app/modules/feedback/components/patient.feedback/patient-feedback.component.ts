@@ -13,7 +13,10 @@ export class PatientFeedbackComponent implements OnInit {
   isSubmitted: boolean = false;
   model: PatientFeedback = {
     clinicId: 0,
-    items: [],
+    feedbackQuestions: {
+      hospitalityFeedback: '',
+      clinicalFeedback: ''
+    },
     patientName: '',
   }
   hospitalityToggle: any = {
@@ -31,7 +34,7 @@ export class PatientFeedbackComponent implements OnInit {
 
   constructor(private feedbackService: FeedbackService,
     private spinner: NgxSpinnerService,
-    private router:Router) { }
+    private router: Router) { }
 
   ngOnInit(): void {
     this.isSubmitted = false;
@@ -44,12 +47,12 @@ export class PatientFeedbackComponent implements OnInit {
       this.spinner.hide();
     })
   }
-  back(){
-    this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{
-      this.router.navigate(['/feedback/submit']).then(()=>{
-      console.log(`After navigation I am on:${this.router.url}`)
+  back() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/feedback/submit']).then(() => {
+        console.log(`After navigation I am on:${this.router.url}`)
       })
-      })
+    })
   }
   public selectFeedback(event: any) {
     var controlName: string[] = event.target.name.split("-", 2);
@@ -92,14 +95,11 @@ export class PatientFeedbackComponent implements OnInit {
       }
     });
     console.log(hospitalityValue)
-    this.model.items.push({
-      feedbackQuestion: "Hospitality",
-      feedbackFeeling: hospitalityValue
-    });
-    this.model.items.push({
-      feedbackQuestion: "Clinical",
-      feedbackFeeling: clinicalValue
-    });
+    this.model.feedbackQuestions={
+      hospitalityFeedback :hospitalityValue,
+      clinicalFeedback:clinicalValue
+
+    }
   }
 }
 
