@@ -66,7 +66,9 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
     this.emitFilterDate(this.startDate, this.endDate)
   }
   emitFilterDate(startDate: number, endDate: number) {
+    console.log('emitFilterDate');
     var validDate = this.validateDateCriteria(startDate, endDate)
+    console.log('validDate ' + validDate);
     if (validDate) {
       var dates: number[] = [startDate, endDate]
       this.clinicService.filterDate$.next(dates)

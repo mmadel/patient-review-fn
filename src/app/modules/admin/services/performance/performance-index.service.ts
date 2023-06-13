@@ -10,8 +10,8 @@ export class PerformanceIndexService {
   private userUrl = environment.baseURL + 'performance/index/'
   constructor(private http: HttpClient) { }
 
-  get(clinicId: number, startDate: number, endDate: number) {
-    return this.http.get<PerformanceIndexContainer>(`${this.userUrl}` + '/get/startDate/' + startDate + '/endDate/' + endDate + '/clinicId/' + clinicId, { observe: 'response' })
+  get(clinicId: number|null, startDate: number|null, endDate: number|null) {
+    return this.http.get<PerformanceIndexContainer>(`${this.userUrl}` + 'get/startDate/' + startDate + '/endDate/' + endDate + '/clinicId/' + clinicId, { observe: 'response' })
   }
 
 }
