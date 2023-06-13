@@ -18,8 +18,8 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
   public themeSwitch = new UntypedFormGroup({
     themeSwitchRadio: new UntypedFormControl('light'),
   });
-  startDate: number | undefined;
-  endDate: number | undefined;
+  startDate: number;
+  endDate: number;
   public customRanges = {
     Today: [new Date(), new Date()],
     Yesterday: [
@@ -47,7 +47,7 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
       0
     ]
   };
-  constructor(private classToggler: ClassToggleService ,private clinicService:ClinicService) {
+  constructor(private classToggler: ClassToggleService, private clinicService: ClinicService) {
     super();
   }
 
@@ -65,5 +65,32 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
   endDateChange(event: any) {
     console.log('endDateChange');
     this.endDate = event ? moment(new Date(event)).endOf('day').valueOf() : 0;
+    this.emitFilterDate(this.startDate, this.endDate)
+  }
+  emitFilterDate(startDate: number, endDate: number) {
+    console.log('emitFilterDate');
+    var validDate = this.validateDateCriteria(startDate, endDate)
+    if (validDate) {
+      var dates: number[] = [startDate, endDate]
+      this.clinicService.filterDate$.next(dates)
+    }
+  }
+  validateDateCriteria(startDate: number, endDate: number): boolean {
+    if (startDate > endDate) {
+      console.log('this.dashBoardDateCriteria.startDate ' + startDate);
+      console.log('this.dashBoardDateCriteria.endDate ' + endDate);
+      console.log('this.dashBoardDateCriteria.startDate > this.dashBoardDateCriteria.endDate');
+      return false;
+    }
+
+    if (isNaN(startDate)) {
+      console.log('isNaN(this.dashBoardDateCriteria.startDate)');
+      return false;
+    }
+    if (isNaN(endDate)) {
+      console.log('isNaN(this.dashBoardDateCriteria.endDate)');
+      return false;
+    }
+    return true;
   }
 }

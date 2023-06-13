@@ -6,5 +6,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ClinicService {
   public selectedClinic$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
+  public filterDate$: BehaviorSubject<number[] | null> = new BehaviorSubject<number[] | null>(null);
   constructor() { }
 }
