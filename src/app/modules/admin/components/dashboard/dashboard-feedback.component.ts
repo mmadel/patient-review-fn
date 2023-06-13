@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import * as moment from 'moment';
+import { filter, tap } from 'rxjs';
 import { FeedbackNumbers } from '../../models/feedback.numbers';
+import { ClinicService } from '../../services/clinic/clinic.service';
 import { DashboardFeedbackService } from '../../services/dashboard-feedback.service';
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
 @Component({
@@ -10,13 +12,15 @@ import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
   styleUrls: ['./dashboard-feedback.component.scss']
 })
 export class DashboardFeedbackComponent implements OnInit {
-  constructor() { }
+  constructor(private clinicService: ClinicService) { }
 
   ngOnInit(): void {
-
-  }
-  initCharts(): void {
-
+    this.clinicService.selectedClinic$
+    .pipe(
+      filter((result) => result !== null),
+    ).subscribe(clinicId=>{
+      console.log('emitted clinic-id ' +clinicId);
+    })
   }
 
 }
