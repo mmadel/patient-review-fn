@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { catchError, combineLatest, filter, of, switchMap, tap } from 'rxjs';
 import { ClinicService } from '../../services/clinic/clinic.service';
 import { PerformanceIndexService } from '../../services/performance/performance-index.service';
@@ -20,8 +21,8 @@ export class DashboardFeedbackComponent implements OnInit, OnDestroy {
         tap(result => console.log(result)),
         switchMap(result => {
           const obs$ = this.performanceIndexService.get(result[0] === null ? 1 : result[0]
-            , result[1] === null ? 1685566800000 : result[1][0]
-            , result[1] === null ? 1688158799000 : result[1][1])
+            , result[1] === null ? moment(new Date(moment().startOf('month').format('YYYY-MM-DD'))).startOf('day').valueOf() : result[1][0]
+            , result[1] === null ? moment(new Date(moment().endOf('month').format('YYYY-MM-DD'))).endOf('day').valueOf() : result[1][1])
           return obs$.pipe(
             catchError(err => of(err))
           );

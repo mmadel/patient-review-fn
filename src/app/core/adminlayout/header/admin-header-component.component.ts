@@ -50,7 +50,19 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
   constructor(private classToggler: ClassToggleService, private clinicService: ClinicService) {
     super();
   }
-
+  ngOnInit(): void {
+    //TODO : get username from local-storage
+      //this.userName = this.localService.getData('userName');
+    //TODO : 
+      //this.userName = this.userName.charAt(0).toUpperCase()
+    //TODO : get clinics of loggedin user and emit to selectedClinic$ first clinic in list 
+      /*this.clinicService.getByUserId(Number(this.localService.getData('userId') || {})).subscribe(response => {
+        response.body?.forEach(element => {
+          this.clinics.push(element);
+        });
+        this.clinicService.selectedClinic$.next(this.clinics[0].id)
+      })*/
+  }
   setTheme(value: string): void {
     this.themeSwitch.setValue({ themeSwitchRadio: value });
     this.classToggler.toggle('body', 'dark-theme');
