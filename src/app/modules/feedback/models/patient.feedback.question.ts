@@ -1,4 +1,4 @@
 export interface PateintFeedbackQuestion {
-    feedbackQuestion: string;
-    feedbackFeeling: string;
+    hospitalityFeedback: string;
+    clinicalFeedback: string;
 }
