@@ -1,4 +1,5 @@
 import { PerformanceIndexContainer } from "../../../models/performance.index/performance.index.container";
+import { PerformanceColorSelector } from "../service.color/performance.color.selector";
 import { PerformanceData } from "./performance.data";
 import { ServicePerformanceData } from "./service.performance.data";
 
@@ -10,7 +11,9 @@ export class PerformanceDataCreator {
             if (key === 'hospitalityContainer') {
                 var hospitalityServicePerformanceData: ServicePerformanceData[] = new Array();
                 for (const [hospitalityKey, hospitalityValue] of Object.entries(value)) {
-                    hospitalityServicePerformanceData.push(this.constructHospitalityPerformanceData(hospitalityKey, hospitalityValue));
+                    var hospitalityPerformanceData: ServicePerformanceData = this.construcServicePerformanceData(hospitalityKey, hospitalityValue);
+                    hospitalityPerformanceData.color = PerformanceColorSelector.select('hospitality', hospitalityPerformanceData.performanceName, hospitalityPerformanceData.performanceValue);
+                    hospitalityServicePerformanceData.push(hospitalityPerformanceData);
                 }
                 performanceData.push({
                     hospitalityService: hospitalityServicePerformanceData
@@ -19,7 +22,9 @@ export class PerformanceDataCreator {
             if (key === 'clinicalContainer') {
                 var clinicalServicePerformanceData: ServicePerformanceData[] = new Array();
                 for (const [hospitalityKey, hospitalityValue] of Object.entries(value)) {
-                    clinicalServicePerformanceData.push(this.constructHospitalityPerformanceData(hospitalityKey, hospitalityValue));
+                    var clinicalPerformanceData: ServicePerformanceData = this.construcServicePerformanceData(hospitalityKey, hospitalityValue);
+                    clinicalPerformanceData.color = PerformanceColorSelector.select('clinical', clinicalPerformanceData.performanceName, clinicalPerformanceData.performanceValue);
+                    clinicalServicePerformanceData.push(clinicalPerformanceData);
                 }
                 performanceData.push({
                     clinicalService: clinicalServicePerformanceData
@@ -29,7 +34,7 @@ export class PerformanceDataCreator {
         return performanceData;
     }
 
-    private static constructHospitalityPerformanceData(name: string, value: any): ServicePerformanceData {
+    private static construcServicePerformanceData(name: string, value: any): ServicePerformanceData {
         var performanceCounters: ServicePerformanceData = {
             performanceName: "",
             performanceLabel: "",

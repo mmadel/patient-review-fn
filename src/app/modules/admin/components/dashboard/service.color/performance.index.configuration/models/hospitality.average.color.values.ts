@@ -1,6 +1,6 @@
 import { ColorRange } from "./color.range.values";
 
-export const HospitalityServiceColorRange : ColorRange={
+export const HospitalityAverageColorRange: ColorRange={
     successMin: 0,
     successMax: 0,
     primaryMin: 0,
