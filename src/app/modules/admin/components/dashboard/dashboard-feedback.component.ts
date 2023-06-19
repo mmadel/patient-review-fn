@@ -81,9 +81,4 @@ export class DashboardFeedbackComponent implements OnInit, OnDestroy {
       });
   }
 
-  private initPerformanceIndex(performanceChartResponse: PerformanceChartResponse) {
-
-
-  }
-
 }
