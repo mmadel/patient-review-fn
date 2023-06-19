@@ -20,6 +20,6 @@ export class PerformanceIndexService {
       + '/startDate/' + startDate
       + '/endDate/' + endDate
       + '/clinicId/' + clinicId
-      + '/chartTimeUnit/' + unit, { observe: 'response' })
+      + '/chartTimeUnit/' + unit)
   }
 }
