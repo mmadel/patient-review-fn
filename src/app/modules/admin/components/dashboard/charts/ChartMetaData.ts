@@ -1,7 +1,7 @@
 import { getStyle, hexToRgba } from '@coreui/utils/src';
 import { TimeUtil } from 'src/app/modules/admin/utils/time.uti';
 export class ChartMetaData {
-    public static chartOptions() {
+    public static chartOptions(yMax:number) {
         const plugins = {
             legend: {
                 display: true
@@ -27,11 +27,7 @@ export class ChartMetaData {
                 },
                 y: {
                     beginAtZero: true,
-                    max: 250,
-                    ticks: {
-                        maxTicksLimit: 5,
-                        stepSize: Math.ceil(250 / 5)
-                    }
+                    max: yMax,
                 }
             },
             elements: {

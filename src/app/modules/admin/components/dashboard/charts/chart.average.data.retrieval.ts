@@ -21,7 +21,7 @@ export class ChartAverageDataRetrieval {
             }
         ];
         this.mainChart.type = 'line';
-        this.mainChart.options = ChartMetaData.chartOptions();
+        this.mainChart.options = ChartMetaData.chartOptions(4);
         this.mainChart.data = {
             datasets,
             labels

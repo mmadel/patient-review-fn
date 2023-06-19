@@ -28,7 +28,7 @@ export class ChartPerformanceDataRetrieval {
             }
         ];
         this.mainChart.type = 'line';
-        this.mainChart.options = ChartMetaData.chartOptions();
+        this.mainChart.options = ChartMetaData.chartOptions(100);
         this.mainChart.data = {
             datasets,
             labels
