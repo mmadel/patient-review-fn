@@ -5,9 +5,9 @@ import { catchError, combineLatest, of, switchMap } from 'rxjs';
 import { PerformanceChartResponse } from '../../models/performance.chart.response';
 import { ClinicService } from '../../services/clinic/clinic.service';
 import { PerformanceIndexService } from '../../services/performance/performance-index.service';
-import { ClinicalChartsData } from './chart/clinical-charts-data';
-import { HospitalityChartsData } from './chart/hospitality-charts-data';
-import { IChartProps } from './chart/IChartProps';
+import { ClinicalChartsData } from './charts/clinical-charts-data';
+import { HospitalityChartsData } from './charts/hospitality-charts-data';
+import { IChartProps } from './charts/IChartProps';
 import { PerformanceDataCreator } from './service.data/performance.data.creator';
 import { ServicePerformanceData } from './service.data/service.performance.data';
 @Component({
