@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { ChartAverageDataRetrieval } from '../../chart.average.data.retrieval';
 import { ChartPerformanceDataRetrieval } from '../../chart.performance.data.retrieval';
 import { IChartProps } from '../../charts.models/IChartProps';
 
@@ -9,7 +10,8 @@ import { IChartProps } from '../../charts.models/IChartProps';
   styleUrls: ['./chart-hospitality.component.css']
 })
 export class ChartHospitalityComponent {
-  public hospitalityMainChart: IChartProps = {};
+  public performanceDataMainChart: IChartProps = {};
+  public averageDataMainChart: IChartProps = {};
   @Input() loading: boolean;
   public trafficRadioGroup = new UntypedFormGroup({
     trafficRadio: new UntypedFormControl('Month')
@@ -18,16 +20,21 @@ export class ChartHospitalityComponent {
     this.trafficRadioGroup.setValue({ trafficRadio: value });
     this.initCharts();
   }
-  constructor(private chartPerformanceDataRetrieval: ChartPerformanceDataRetrieval) { }
+  constructor(private chartPerformanceDataRetrieval: ChartPerformanceDataRetrieval,
+    private chartAverageDataRetrieval: ChartAverageDataRetrieval) { }
 
 
   public initData(hapyyIndex: number[], nps: number[], average: number[]) {
-    this.chartPerformanceDataRetrieval.initData(hapyyIndex, nps, average)
+    this.chartPerformanceDataRetrieval.initData(hapyyIndex, nps)
+    this.chartAverageDataRetrieval.initData(average)
   }
 
   public initCharts(period: string = 'Month') {
     this.chartPerformanceDataRetrieval.initMainChart(period);
-    this.hospitalityMainChart = this.chartPerformanceDataRetrieval.mainChart;
+    this.performanceDataMainChart = this.chartPerformanceDataRetrieval.mainChart;
+
+    this.chartAverageDataRetrieval.initMainChart(period)
+    this.averageDataMainChart = this.chartAverageDataRetrieval.mainChart;
   }
 
 }

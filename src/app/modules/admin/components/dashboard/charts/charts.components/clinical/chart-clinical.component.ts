@@ -22,7 +22,7 @@ export class ChartClinicalComponent implements OnInit {
   ngOnInit(): void {
   }
   public initData(hapyyIndex: number[], nps: number[], average: number[]) {
-    this.chartPerformanceDataRetrieval.initData(hapyyIndex, nps, average)
+    this.chartPerformanceDataRetrieval.initData(hapyyIndex, nps)
   }
 
   public initCharts(period: string = 'Month') {

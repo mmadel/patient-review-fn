@@ -3,8 +3,8 @@
         <c-row>
             <c-col sm="5">
                 <h4 class="card-title mb-0" id="hospitality">
-                        Hospitality
-                    </h4>
+                    Hospitality
+                </h4>
             </c-col>
             <c-col class="d-none d-md-block" sm="7">
                 <button cButton class="float-end" color="primary">
@@ -28,8 +28,13 @@
 
             </c-col>
             <c-col lg="6" *ngIf="loading">
-                <c-chart [data]="hospitalityMainChart.data" [height]="300" [ngStyle]="{'marginTop.px': 40}"
-                    [options]="hospitalityMainChart.options" [type]="hospitalityMainChart.type">
+                <c-chart [data]="performanceDataMainChart.data" [height]="300" [ngStyle]="{'marginTop.px': 40}"
+                    [options]="performanceDataMainChart.options" [type]="performanceDataMainChart.type">
+                </c-chart>
+            </c-col>
+            <c-col lg="6" *ngIf="loading">
+                <c-chart [data]="averageDataMainChart.data" [height]="300" [ngStyle]="{'marginTop.px': 40}"
+                    [options]="averageDataMainChart.options" [type]="averageDataMainChart.type">
                 </c-chart>
             </c-col>
 
