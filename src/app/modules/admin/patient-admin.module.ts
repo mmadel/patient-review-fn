@@ -38,8 +38,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
   DashboardFeedbackComponent,
   HospitalityDashboardComponent,
-  ClinicalDashboardComponent
-} from './components'
+  ClinicalDashboardComponent,
+  CardsComponent
+} from './components';
 
 const APP_ADMIN_COMPONENT = [
   DashboardFeedbackComponent,
@@ -48,7 +49,8 @@ const APP_ADMIN_COMPONENT = [
 ]
 @NgModule({
   declarations: [
-    APP_ADMIN_COMPONENT
+    APP_ADMIN_COMPONENT,
+    CardsComponent
   ],
   imports: [
     CommonModule,

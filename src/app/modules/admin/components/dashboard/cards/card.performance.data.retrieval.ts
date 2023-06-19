@@ -1,10 +1,10 @@
 import { PerformanceIndexContainer } from "../../../models/performance.index/performance.index.container";
-import { PerformanceColorSelector } from "../service.color/performance.color.selector";
-import { PerformanceData } from "./performance.data";
-import { ServicePerformanceData } from "./service.performance.data";
+import { CardPerformanceDataColorSelector } from "./card.performance.data.color.selector";
+import { PerformanceData } from "./cards.models/performance.data";
+import { ServicePerformanceData } from "./cards.models/service.performance.data";
 
-export class PerformanceDataCreator {
-    public static create(performanceContainer: PerformanceIndexContainer): PerformanceData[] {
+export class CardPerformanceDataRetrieval {
+    public static retrieve(performanceContainer: PerformanceIndexContainer): PerformanceData[] {
         var performanceData: PerformanceData[] = new Array();
 
         for (const [key, value] of Object.entries(performanceContainer)) {
@@ -12,7 +12,7 @@ export class PerformanceDataCreator {
                 var hospitalityServicePerformanceData: ServicePerformanceData[] = new Array();
                 for (const [hospitalityKey, hospitalityValue] of Object.entries(value)) {
                     var hospitalityPerformanceData: ServicePerformanceData = this.construcServicePerformanceData(hospitalityKey, hospitalityValue);
-                    hospitalityPerformanceData.color = PerformanceColorSelector.select('hospitality', hospitalityPerformanceData.performanceName, hospitalityPerformanceData.performanceValue);
+                    hospitalityPerformanceData.color = CardPerformanceDataColorSelector.select('hospitality', hospitalityPerformanceData.performanceName, hospitalityPerformanceData.performanceValue);
                     hospitalityServicePerformanceData.push(hospitalityPerformanceData);
                 }
                 performanceData.push({
@@ -23,7 +23,7 @@ export class PerformanceDataCreator {
                 var clinicalServicePerformanceData: ServicePerformanceData[] = new Array();
                 for (const [hospitalityKey, hospitalityValue] of Object.entries(value)) {
                     var clinicalPerformanceData: ServicePerformanceData = this.construcServicePerformanceData(hospitalityKey, hospitalityValue);
-                    clinicalPerformanceData.color = PerformanceColorSelector.select('clinical', clinicalPerformanceData.performanceName, clinicalPerformanceData.performanceValue);
+                    clinicalPerformanceData.color = CardPerformanceDataColorSelector.select('clinical', clinicalPerformanceData.performanceName, clinicalPerformanceData.performanceValue);
                     clinicalServicePerformanceData.push(clinicalPerformanceData);
                 }
                 performanceData.push({

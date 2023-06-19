@@ -1,21 +1,18 @@
-import { ServiceColorLoader } from "./performance.index.configuration/color.configuration.loader";
-import { ColorRange } from "./performance.index.configuration/models/color.range.values";
+import { CardPerformanceDataColorLoader } from "./card.performance.data.color.loader";
+import { ColorRange } from "./cards.models/colors/color.range.values";
 
-
-export class PerformanceColorSelector {
-
+export class CardPerformanceDataColorSelector{
     public static select(serviceName: string, indexName: string, indexValue: number) {
-        ServiceColorLoader.serviceName = serviceName;
-        var colorRange: ColorRange | null = ServiceColorLoader.load(indexName);
+        CardPerformanceDataColorLoader.serviceName = serviceName;
+        var colorRange: ColorRange | null = CardPerformanceDataColorLoader.load(indexName);
         return this.chooseServiceByService(indexValue, colorRange);
     }
-
+    
     private static numberInRange(value: number, min: number, max: number) {
         if (value >= min && value <= max)
             return true;
         return false;
     }
-
     private static chooseServiceByService(indexValue: number, colorRange: ColorRange | null): string {
         if (colorRange !== null) {
             if (this.numberInRange(indexValue,
@@ -33,6 +30,4 @@ export class PerformanceColorSelector {
         }
         return ""
     }
-
 }
-
