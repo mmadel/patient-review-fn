@@ -1,17 +1,18 @@
 import { Component, Input } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { ChartAverageDataRetrieval } from '../../chart.average.data.retrieval';
-import { ChartPerformanceDataRetrieval } from '../../chart.performance.data.retrieval';
 import { IChartProps } from '../../charts.models/IChartProps';
+import { HospitalityChartAverageDataRetrieval } from './data.retrieval/chart.hospitality.average.data.retrieval';
+import { HospitalityChartPerformanceDataRetrieval } from './data.retrieval/chart.clinical.performance.data.retrieval';
+
 
 @Component({
   selector: 'chart-hospitality',
   templateUrl: './chart-hospitality.component.html',
-  styleUrls: ['./chart-hospitality.component.css']
+  styleUrls: ['./chart-hospitality.component.scss']
 })
 export class ChartHospitalityComponent {
-  public performanceDataMainChart: IChartProps = {};
-  public averageDataMainChart: IChartProps = {};
+  public hospitalityPerformanceDataMainChart: IChartProps = {};
+  public hospitalityAverageDataMainChart: IChartProps = {};
   @Input() loading: boolean;
   public trafficRadioGroup = new UntypedFormGroup({
     trafficRadio: new UntypedFormControl('Month')
@@ -20,21 +21,21 @@ export class ChartHospitalityComponent {
     this.trafficRadioGroup.setValue({ trafficRadio: value });
     this.initCharts();
   }
-  constructor(private chartPerformanceDataRetrieval: ChartPerformanceDataRetrieval,
-    private chartAverageDataRetrieval: ChartAverageDataRetrieval) { }
+  constructor(private hospitalityChartPerformanceDataRetrieval: HospitalityChartPerformanceDataRetrieval,
+    private hospitalityChartAverageDataRetrieval: HospitalityChartAverageDataRetrieval) { }
 
 
   public initData(hapyyIndex: number[], nps: number[], average: number[]) {
-    this.chartPerformanceDataRetrieval.initData(hapyyIndex, nps)
-    this.chartAverageDataRetrieval.initData(average)
+    this.hospitalityChartPerformanceDataRetrieval.initData(hapyyIndex, nps)
+    this.hospitalityChartAverageDataRetrieval.initData(average)
   }
 
   public initCharts(period: string = 'Month') {
-    this.chartPerformanceDataRetrieval.initMainChart(period);
-    this.performanceDataMainChart = this.chartPerformanceDataRetrieval.mainChart;
+    this.hospitalityChartPerformanceDataRetrieval.initMainChart(period);
+    this.hospitalityPerformanceDataMainChart = this.hospitalityChartPerformanceDataRetrieval.mainChart;
 
-    this.chartAverageDataRetrieval.initMainChart(period)
-    this.averageDataMainChart = this.chartAverageDataRetrieval.mainChart;
+    this.hospitalityChartAverageDataRetrieval.initMainChart(period)
+    this.hospitalityAverageDataMainChart = this.hospitalityChartAverageDataRetrieval.mainChart;
   }
 
 }

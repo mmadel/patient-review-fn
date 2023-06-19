@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { IChartProps } from "../dashboard-charts-data";
-import { ChartMetaData } from "./ChartMetaData";
+import { IChartProps } from "../../../../dashboard-charts-data";
+import { ChartMetaData } from "../../../ChartMetaData";
 
 @Injectable({
     providedIn: 'any'
 })
-export class ChartAverageDataRetrieval {
+export class HospitalityChartAverageDataRetrieval {
     public mainChart: IChartProps = {};
     private averageData: number[] | undefined;
 

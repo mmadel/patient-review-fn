@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { ChartMetaData } from "./ChartMetaData";
-import { IChartProps } from "./charts.models/IChartProps";
+import { IChartProps } from "../../../../dashboard-charts-data";
+import { ChartMetaData } from "../../../ChartMetaData";
 
 @Injectable({
     providedIn: 'any'
 })
-export class ChartPerformanceDataRetrieval {
+export class ClinicalChartPerformanceDataRetrieval {
     private happyIndexData: number[] | undefined;
     private npsData: number[] | undefined;
     public mainChart: IChartProps = {};

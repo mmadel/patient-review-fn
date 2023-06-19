@@ -1,7 +1,7 @@
 import { getStyle, hexToRgba } from '@coreui/utils/src';
 import { TimeUtil } from 'src/app/modules/admin/utils/time.uti';
 export class ChartMetaData {
-    public static chartOptions(yMax:number) {
+    public static chartOptions(yMax: number) {
         const plugins = {
             legend: {
                 display: true
@@ -38,7 +38,7 @@ export class ChartMetaData {
                     radius: 0,
                     hitRadius: 10,
                     hoverRadius: 4,
-                    hoverBorderWidth: 0
+                    hoverBorderWidth: 3
                 }
             }
         };

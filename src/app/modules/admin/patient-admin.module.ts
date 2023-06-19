@@ -17,7 +17,6 @@ import {
   DropdownModule,
   ButtonGroupModule,
   ListGroupModule,
-  TooltipModule,
   TabsModule,
   NavModule,
   DateRangePickerModule,
@@ -71,7 +70,7 @@ const APP_ADMIN_COMPONENT = [
     DropdownModule,
     ButtonGroupModule,
     ListGroupModule,
-    TooltipModule,
+    
     TabsModule,
     NavModule,
     DateRangePickerModule,
