@@ -101,7 +101,7 @@
 
 
     <div class="d-grid gap-2 col-4 mx-auto mb-3">
-        <button cButton variant="outline" size="sm" shape="rounded-pill" (click)="submit()">
+        <button cButton variant="outline" size="sm" shape="rounded-pill" (click)="submit()" [disabled]="checkFields()">
             <span class="fs-3">
                 Submit
             </span>

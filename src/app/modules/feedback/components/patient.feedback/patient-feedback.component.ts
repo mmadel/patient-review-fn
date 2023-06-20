@@ -39,6 +39,11 @@ export class PatientFeedbackComponent implements OnInit {
   ngOnInit(): void {
     this.isSubmitted = false;
   }
+  checkFields(): boolean {
+    var isQuestionsSelected = this.model.feedbackQuestions?.clinicalFeedback === "" &&
+      this.model.feedbackQuestions?.clinicalFeedback === ""
+    return this.model.patientName === "" && isQuestionsSelected
+  }
   submit() {
     this.populateModel();
     this.spinner.show();
