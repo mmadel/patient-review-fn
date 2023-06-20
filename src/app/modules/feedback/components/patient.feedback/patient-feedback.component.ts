@@ -45,13 +45,13 @@ export class PatientFeedbackComponent implements OnInit {
     this.feedbackService.submit(this.model).subscribe((response) => {
       this.isSubmitted = true;
       this.spinner.hide();
-    })
-  }
-  back() {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/feedback/submit']).then(() => {
-        console.log(`After navigation I am on:${this.router.url}`)
-      })
+      setTimeout(() => {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/feedback/submit']).then(() => {
+            console.log(`After navigation I am on:${this.router.url}`)
+          })
+        })
+      }, 5000);  //5s
     })
   }
   public selectFeedback(event: any) {
@@ -95,9 +95,9 @@ export class PatientFeedbackComponent implements OnInit {
       }
     });
     console.log(hospitalityValue)
-    this.model.feedbackQuestions={
-      hospitalityFeedback :hospitalityValue,
-      clinicalFeedback:clinicalValue
+    this.model.feedbackQuestions = {
+      hospitalityFeedback: hospitalityValue,
+      clinicalFeedback: clinicalValue
 
     }
   }
