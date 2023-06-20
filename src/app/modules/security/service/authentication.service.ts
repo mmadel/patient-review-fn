@@ -1,6 +1,6 @@
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginResponse } from '../model/login.response';
 import { User } from '../model/user';
@@ -32,5 +32,31 @@ export class AuthenticationService {
     localStorage.removeItem('userRole');
     localStorage.removeItem('userName');
     this.user$.next(null);
+  }
+  fetchCurrentUser(): Observable<User> {
+    var userId: string | null = localStorage.getItem('userId');
+    return this.http.get<User>(`${this.userUrl}/find/loggedIn/` + userId)
+      .pipe(
+        tap(user => {
+          this.user$.next(user);
+        }),
+      );
+  }
+  getCurrentUser(): Observable<User | null> {
+    return this.user$.pipe(
+      switchMap(user => {
+        if (user) {
+          localStorage.setItem('userName', user.name || '{}')
+          return of(user);
+        }
+        const token = localStorage.getItem('token');
+        // if there is token then fetch the current user
+        if (token) {
+          return this.fetchCurrentUser();
+        }
+
+        return of(null);
+      })
+    );
   }
 }
