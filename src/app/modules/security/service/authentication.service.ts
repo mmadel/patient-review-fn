@@ -34,13 +34,23 @@ export class AuthenticationService {
     this.user$.next(null);
   }
   fetchCurrentUser(): Observable<User> {
-    var userId: string | null = localStorage.getItem('userId');
-    return this.http.get<User>(`${this.userUrl}/find/loggedIn/` + userId)
-      .pipe(
-        tap(user => {
-          this.user$.next(user);
-        }),
-      );
+    var user: User = {
+      id: localStorage.getItem('userId'),
+      name: null,
+      password: null,
+      address: null,
+      userRole: null,
+      clinics: null
+    }
+    var test: Observable<User> = new BehaviorSubject<User>(user);
+    return test;
+    //var userId: string | null = localStorage.getItem('userId');
+    // return this.http.get<User>(`${this.userUrl}/find/loggedIn/` + userId)
+    //   .pipe(
+    //     tap(user => {
+    //       this.user$.next(user);
+    //     }),
+    //   );
   }
   getCurrentUser(): Observable<User | null> {
     return this.user$.pipe(

@@ -3,6 +3,8 @@ import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
 import { ClinicService } from 'src/app/modules/admin/services/clinic/clinic.service';
+import { AuthenticationService } from 'src/app/modules/security/service/authentication.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-header-component',
   templateUrl: './admin-header-component.component.html',
@@ -47,21 +49,22 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
       0
     ]
   };
-  constructor(private classToggler: ClassToggleService, private clinicService: ClinicService) {
+  constructor(private classToggler: ClassToggleService, private clinicService: ClinicService
+    , private authService: AuthenticationService, private router: Router) {
     super();
   }
   ngOnInit(): void {
     //TODO : get username from local-storage
-      //this.userName = this.localService.getData('userName');
+    //this.userName = this.localService.getData('userName');
     //TODO : 
-      //this.userName = this.userName.charAt(0).toUpperCase()
+    //this.userName = this.userName.charAt(0).toUpperCase()
     //TODO : get clinics of loggedin user and emit to selectedClinic$ first clinic in list 
-      /*this.clinicService.getByUserId(Number(this.localService.getData('userId') || {})).subscribe(response => {
-        response.body?.forEach(element => {
-          this.clinics.push(element);
-        });
-        this.clinicService.selectedClinic$.next(this.clinics[0].id)
-      })*/
+    /*this.clinicService.getByUserId(Number(this.localService.getData('userId') || {})).subscribe(response => {
+      response.body?.forEach(element => {
+        this.clinics.push(element);
+      });
+      this.clinicService.selectedClinic$.next(this.clinics[0].id)
+    })*/
   }
   setTheme(value: string): void {
     this.themeSwitch.setValue({ themeSwitchRadio: value });
@@ -103,5 +106,9 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
       return false;
     }
     return true;
+  }
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/login');
   }
 }

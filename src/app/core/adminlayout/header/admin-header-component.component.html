@@ -36,8 +36,8 @@
     <!-- todo: header nav dropdown menus  -->
     <c-header-nav class="d-none d-lg-flex">
       <ng-container *ngTemplateOutlet="notifyDropdown"></ng-container>
-      <ng-container *ngTemplateOutlet="taskDropdown"></ng-container>
-      <ng-container *ngTemplateOutlet="messagesDropdown"></ng-container>
+      <!-- <ng-container *ngTemplateOutlet="taskDropdown"></ng-container> -->
+      <!-- <ng-container *ngTemplateOutlet="messagesDropdown"></ng-container> -->
     </c-header-nav>
     <c-header-nav class="ms-3 me-sm-4">
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
@@ -58,14 +58,13 @@
 <ng-template #userDropdown>
   <c-dropdown alignment="end" variant="nav-item">
     <a href [caret]="false" cDropdownToggle class="py-0">
-      <c-avatar cTextColor="primary" shape="rounded-1" size="md" src="./assets/img/avatars/8.jpg" status="success">
-      </c-avatar>
+      <c-avatar color="success" textColor="white">R</c-avatar>
     </a>
     <ul cDropdownMenu class="pt-0 pr-5 w-auto">
       <li>
         <h6 cDropdownHeader class="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Account</h6>
       </li>
-      <li>
+      <!-- <li>
         <a [routerLink]="[]" cDropdownItem>
           <svg cIcon class="me-2" name="cilBell"></svg>
           Updates
@@ -73,8 +72,8 @@
             42
           </c-badge>
         </a>
-      </li>
-      <li>
+      </li> -->
+      <!-- <li>
         <a routerLink="/apps/email/inbox" cDropdownItem>
           <svg cIcon class="me-2" name="cilEnvelopeOpen"></svg>
           Messages
@@ -82,8 +81,8 @@
             42
           </c-badge>
         </a>
-      </li>
-      <li>
+      </li> -->
+      <!-- <li>
         <a [routerLink]="[]" cDropdownItem>
           <svg cIcon class="me-2" name="cilTask"></svg>
           Tasks
@@ -91,8 +90,8 @@
             42
           </c-badge>
         </a>
-      </li>
-      <li>
+      </li> -->
+      <!-- <li>
         <a [routerLink]="[]" cDropdownItem>
           <svg cIcon class="me-2" name='cilCommentSquare'></svg>
           Comments
@@ -100,7 +99,7 @@
             42
           </c-badge>
         </a>
-      </li>
+      </li> -->
       <li>
         <h6 cDropdownHeader class="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Settings</h6>
       </li>
@@ -111,13 +110,13 @@
           Profile
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a [routerLink]="[]" cDropdownItem>
           <svg cIcon class="me-2" name="cilSettings"></svg>
           Settings
         </a>
-      </li>
-      <li>
+      </li> -->
+      <!-- <li>
         <a [routerLink]="[]" cDropdownItem>
           <svg cIcon class="me-2" name="cilCreditCard"></svg>
           Payments
@@ -125,8 +124,8 @@
             42
           </c-badge>
         </a>
-      </li>
-      <li>
+      </li> -->
+      <!-- <li>
         <a [routerLink]="[]" cDropdownItem>
           <svg cIcon class="me-2" name="cilFile"></svg>
           Projects
@@ -134,14 +133,14 @@
             42
           </c-badge>
         </a>
-      </li>
+      </li> -->
       <li>
         <hr cDropdownDivider />
       </li>
       <li>
-        <a [routerLink]="[]" cDropdownItem>
+        <a (click)="logout()" cDropdownItem>
           <svg cIcon class="me-2" name="cilLockLocked"></svg>
-          Lock Account
+          Logout
         </a>
       </li>
       <li></li>
@@ -149,7 +148,7 @@
   </c-dropdown>
 </ng-template>
 
-<ng-template #messagesDropdown>
+<!-- <ng-template #messagesDropdown>
   <c-dropdown alignment="end" variant="nav-item">
     <a [caret]="false" cDropdownToggle href>
       <svg cIcon class="my-1 mx-2" name="cilEnvelopeOpen" size="lg"></svg>
@@ -240,7 +239,7 @@
       </a>
     </div>
   </c-dropdown>
-</ng-template>
+</ng-template> -->
 
 <ng-template #notifyDropdown>
   <c-dropdown alignment="end" variant="nav-item">
@@ -251,7 +250,7 @@
 
       </c-badge>
     </a>
-    <div cDropdownMenu class="pt-0">
+    <!-- <div cDropdownMenu class="pt-0">
       <h6 cDropdownHeader class="bg-light dark:bg-white dark:bg-opacity-10">
         <strong>You have notifications</strong>
       </h6>
@@ -311,11 +310,11 @@
         </c-progress>
         <small class="text-medium-emphasis">243GB/256GB</small>
       </a>
-    </div>
+    </div> -->
   </c-dropdown>
 </ng-template>
 
-<ng-template #taskDropdown>
+<!-- <ng-template #taskDropdown>
   <c-dropdown alignment="end" variant="nav-item">
     <a [caret]="false" cDropdownToggle href>
       <svg cIcon class="my-1 mx-2" name="cilList" size="lg"></svg>
@@ -387,4 +386,4 @@
       </a>
     </div>
   </c-dropdown>
-</ng-template>
+</ng-template> -->
