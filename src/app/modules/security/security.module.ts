@@ -12,10 +12,13 @@ import {
 import { FormsModule } from '@angular/forms';
 import { IconModule } from '@coreui/icons-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoginComponent } from './components/login.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LoginComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
