@@ -47,7 +47,8 @@ export class DashboardFeedbackComponent implements OnInit {
   }
 
   getClinicalPerfromanceData(period: string = 'Month') {
-    this.performanceIndexService.getChartData(1, 1685566800000, 1688158799000, 'Month')
+    var dateRange: number[] = TimeUtil.getDateRangePerTimeUnit(period);
+    this.performanceIndexService.getChartData(1, dateRange[0], dateRange[1], period)
       .subscribe((result) => {
         this.cLoading = true;
 
