@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { PerformanceIndexService } from '../../services/performance/performance-index.service';
+import { TimeUtil } from '../../utils/time.uti';
 import { ChartClinicalComponent } from './charts/charts.components/clinical/chart-clinical.component';
 import { ChartHospitalityComponent } from './charts/charts.components/hospitality/chart-hospitality.component';
 @Component({
@@ -16,6 +17,7 @@ export class DashboardFeedbackComponent implements OnInit {
   constructor(private performanceIndexService: PerformanceIndexService) { }
 
   ngOnInit(): void {
+
     this.getHospitalityPerfromanceData();
     this.getClinicalPerfromanceData();
 
@@ -35,7 +37,8 @@ export class DashboardFeedbackComponent implements OnInit {
     this.getClinicalPerfromanceData(value)
   }
   getHospitalityPerfromanceData(period: string = 'Month') {
-    this.performanceIndexService.getChartData(1, 1685566800000, 1688158799000, 'Month')
+    var dateRange: number[] = TimeUtil.getDateRangePerTimeUnit(period);
+    this.performanceIndexService.getChartData(1, dateRange[0], dateRange[1], period)
       .subscribe((result) => {
         this.hLoading = true;
         this.chartHospitalityComponent.initData(result.hospitalityChartData[0], result.hospitalityChartData[1], result.hospitalityChartData[2])
