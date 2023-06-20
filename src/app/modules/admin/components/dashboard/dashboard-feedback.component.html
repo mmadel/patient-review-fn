@@ -1,5 +1,70 @@
 <dashboard-cards></dashboard-cards>
+<c-card class="mb-4">
+    <c-card-body>
+        <c-row>
+            <c-col sm="5" lg="12">
+                <h4 class="card-title mb-0" id="hospitality">
+                    Hospitality
+                </h4>
+            </c-col>
+            <c-col class="d-none d-md-block" sm="7" lg="12">
+                <button cButton class="float-end" color="primary">
+                    <svg cIcon name="cilCloudDownload"></svg>
+                </button>
+                <form [formGroup]="trafficRadioGroup">
+                    <c-button-group class="float-end me-3" role="group">
+                        <input class="btn-check" formControlName="trafficRadio" type="radio" value="Day" />
+                        <label (click)="setTrafficPeriod('Day')" cButton cFormCheckLabel color="secondary"
+                            variant="outline">Day</label>
 
-<chart-hospitality [loading]="loading"></chart-hospitality>
+                        <input class="btn-check" formControlName="trafficRadio" type="radio" value="Month" />
+                        <label (click)="setTrafficPeriod('Month')" cButton cFormCheckLabel color="secondary"
+                            variant="outline">Month</label>
 
-<chart-clinical [loading]="loading"></chart-clinical>
+                        <input class="btn-check" formControlName="trafficRadio" type="radio" value="Year" />
+                        <label (click)="setTrafficPeriod('Year')" cButton cFormCheckLabel color="secondary"
+                            variant="outline">Year</label>
+                    </c-button-group>
+                </form>
+
+            </c-col>
+            <chart-hospitality [loading]="loading"></chart-hospitality>
+        </c-row>
+    </c-card-body>
+</c-card>
+
+<c-card class="mb-4">
+    <c-card-body>
+        <c-row>
+            <c-col sm="5" lg="12">
+                <h4 class="card-title mb-0" id="hospitality">
+                    Clinical
+                </h4>
+            </c-col>
+            <c-col class="d-none d-md-block" sm="7" lg="12">
+                <button cButton class="float-end" color="primary">
+                    <svg cIcon name="cilCloudDownload"></svg>
+                </button>
+                <form [formGroup]="trafficRadioGroup">
+                    <c-button-group class="float-end me-3" role="group">
+                        <input class="btn-check" formControlName="trafficRadio" type="radio" value="Day" />
+                        <label (click)="setTrafficPeriod('Day')" cButton cFormCheckLabel color="secondary"
+                            variant="outline">Day</label>
+
+                        <input class="btn-check" formControlName="trafficRadio" type="radio" value="Month" />
+                        <label (click)="setTrafficPeriod('Month')" cButton cFormCheckLabel color="secondary"
+                            variant="outline">Month</label>
+
+                        <input class="btn-check" formControlName="trafficRadio" type="radio" value="Year" />
+                        <label (click)="setTrafficPeriod('Year')" cButton cFormCheckLabel color="secondary"
+                            variant="outline">Year</label>
+                    </c-button-group>
+                </form>
+
+            </c-col>
+            <chart-clinical [loading]="loading"></chart-clinical>
+        </c-row>
+    </c-card-body>
+</c-card>
+
+

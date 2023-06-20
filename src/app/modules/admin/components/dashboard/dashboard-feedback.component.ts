@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { PerformanceIndexService } from '../../services/performance/performance-index.service';
 import { ChartClinicalComponent } from './charts/charts.components/clinical/chart-clinical.component';
 import { ChartHospitalityComponent } from './charts/charts.components/hospitality/chart-hospitality.component';
@@ -25,6 +26,13 @@ export class DashboardFeedbackComponent implements OnInit {
         this.chartClinicalComponent.initCharts();
       })
 
+  }
+  public trafficRadioGroup = new UntypedFormGroup({
+    trafficRadio: new UntypedFormControl('Month')
+  });
+  setTrafficPeriod(value: string): void {
+    this.trafficRadioGroup.setValue({ trafficRadio: value });
+    console.log(value)
   }
 
 }
