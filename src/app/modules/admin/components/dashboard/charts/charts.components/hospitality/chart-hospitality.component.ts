@@ -19,7 +19,8 @@ export class ChartHospitalityComponent {
   });
   setTrafficPeriod(value: string): void {
     this.trafficRadioGroup.setValue({ trafficRadio: value });
-    this.initCharts();
+    console.log(value)
+    this.initCharts(value);
   }
   constructor(private hospitalityChartPerformanceDataRetrieval: HospitalityChartPerformanceDataRetrieval,
     private hospitalityChartAverageDataRetrieval: HospitalityChartAverageDataRetrieval) { }
