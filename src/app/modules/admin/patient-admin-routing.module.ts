@@ -7,8 +7,13 @@ const routes: Routes = [{
   component: DashboardFeedbackComponent,
   data: {
     title: 'Dashboard'
-  }
-}];
+  },
+}, {
+  path: '',
+  redirectTo: 'dashboard',
+  pathMatch: 'full',
+}
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
