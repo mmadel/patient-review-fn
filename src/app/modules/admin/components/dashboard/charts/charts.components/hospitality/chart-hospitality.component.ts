@@ -14,14 +14,7 @@ export class ChartHospitalityComponent {
   public hospitalityPerformanceDataMainChart: IChartProps = {};
   public hospitalityAverageDataMainChart: IChartProps = {};
   @Input() loading: boolean;
-  public trafficRadioGroup = new UntypedFormGroup({
-    trafficRadio: new UntypedFormControl('Month')
-  });
-  setTrafficPeriod(value: string): void {
-    this.trafficRadioGroup.setValue({ trafficRadio: value });
-    console.log(value)
-    this.initCharts(value);
-  }
+
   constructor(private hospitalityChartPerformanceDataRetrieval: HospitalityChartPerformanceDataRetrieval,
     private hospitalityChartAverageDataRetrieval: HospitalityChartAverageDataRetrieval) { }
 

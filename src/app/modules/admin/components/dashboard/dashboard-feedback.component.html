@@ -11,24 +11,24 @@
                 <button cButton class="float-end" color="primary">
                     <svg cIcon name="cilCloudDownload"></svg>
                 </button>
-                <form [formGroup]="trafficRadioGroup">
+                <form [formGroup]="hospitalityTrafficRadioGroup">
                     <c-button-group class="float-end me-3" role="group">
                         <input class="btn-check" formControlName="trafficRadio" type="radio" value="Day" />
-                        <label (click)="setTrafficPeriod('Day')" cButton cFormCheckLabel color="secondary"
+                        <label (click)="setHospitalityTrafficPeriod('Day')" cButton cFormCheckLabel color="secondary"
                             variant="outline">Day</label>
 
                         <input class="btn-check" formControlName="trafficRadio" type="radio" value="Month" />
-                        <label (click)="setTrafficPeriod('Month')" cButton cFormCheckLabel color="secondary"
+                        <label (click)="setHospitalityTrafficPeriod('Month')" cButton cFormCheckLabel color="secondary"
                             variant="outline">Month</label>
 
                         <input class="btn-check" formControlName="trafficRadio" type="radio" value="Year" />
-                        <label (click)="setTrafficPeriod('Year')" cButton cFormCheckLabel color="secondary"
+                        <label (click)="setHospitalityTrafficPeriod('Year')" cButton cFormCheckLabel color="secondary"
                             variant="outline">Year</label>
                     </c-button-group>
                 </form>
 
             </c-col>
-            <chart-hospitality [loading]="loading"></chart-hospitality>
+            <chart-hospitality [loading]="hLoading"></chart-hospitality>
         </c-row>
     </c-card-body>
 </c-card>
@@ -45,24 +45,24 @@
                 <button cButton class="float-end" color="primary">
                     <svg cIcon name="cilCloudDownload"></svg>
                 </button>
-                <form [formGroup]="trafficRadioGroup">
+                <form [formGroup]="clinicaltrafficRadioGroup">
                     <c-button-group class="float-end me-3" role="group">
                         <input class="btn-check" formControlName="trafficRadio" type="radio" value="Day" />
-                        <label (click)="setTrafficPeriod('Day')" cButton cFormCheckLabel color="secondary"
+                        <label (click)="setClinicalTrafficPeriod('Day')" cButton cFormCheckLabel color="secondary"
                             variant="outline">Day</label>
 
                         <input class="btn-check" formControlName="trafficRadio" type="radio" value="Month" />
-                        <label (click)="setTrafficPeriod('Month')" cButton cFormCheckLabel color="secondary"
+                        <label (click)="setClinicalTrafficPeriod('Month')" cButton cFormCheckLabel color="secondary"
                             variant="outline">Month</label>
 
                         <input class="btn-check" formControlName="trafficRadio" type="radio" value="Year" />
-                        <label (click)="setTrafficPeriod('Year')" cButton cFormCheckLabel color="secondary"
+                        <label (click)="setClinicalTrafficPeriod('Year')" cButton cFormCheckLabel color="secondary"
                             variant="outline">Year</label>
                     </c-button-group>
                 </form>
 
             </c-col>
-            <chart-clinical [loading]="loading"></chart-clinical>
+            <chart-clinical [loading]="cLoading"></chart-clinical>
         </c-row>
     </c-card-body>
 </c-card>

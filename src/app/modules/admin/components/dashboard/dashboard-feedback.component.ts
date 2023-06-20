@@ -11,28 +11,45 @@ import { ChartHospitalityComponent } from './charts/charts.components/hospitalit
 export class DashboardFeedbackComponent implements OnInit {
   @ViewChild(ChartHospitalityComponent) chartHospitalityComponent: ChartHospitalityComponent;
   @ViewChild(ChartClinicalComponent) chartClinicalComponent: ChartClinicalComponent;
-  loading: boolean = false;
-
+  hLoading: boolean = false;
+  cLoading = false;
   constructor(private performanceIndexService: PerformanceIndexService) { }
 
   ngOnInit(): void {
-    this.performanceIndexService.getChartData(1, 1685566800000, 1688158799000, 'Month')
-      .subscribe((result) => {
-        this.loading = true;
-        this.chartHospitalityComponent.initData(result.hospitalityChartData[0], result.hospitalityChartData[1], result.hospitalityChartData[2])
-        this.chartHospitalityComponent.initCharts();
-
-        this.chartClinicalComponent.initData(result.clinicalChartData[0], result.clinicalChartData[1], result.clinicalChartData[2])
-        this.chartClinicalComponent.initCharts();
-      })
+    this.getHospitalityPerfromanceData();
+    this.getClinicalPerfromanceData();
 
   }
-  public trafficRadioGroup = new UntypedFormGroup({
+  public hospitalityTrafficRadioGroup = new UntypedFormGroup({
     trafficRadio: new UntypedFormControl('Month')
   });
-  setTrafficPeriod(value: string): void {
-    this.trafficRadioGroup.setValue({ trafficRadio: value });
-    console.log(value)
+  public clinicaltrafficRadioGroup = new UntypedFormGroup({
+    trafficRadio: new UntypedFormControl('Month')
+  });
+  setHospitalityTrafficPeriod(value: string): void {
+    this.hospitalityTrafficRadioGroup.setValue({ trafficRadio: value });
+    this.getHospitalityPerfromanceData(value)
+  }
+  setClinicalTrafficPeriod(value: string): void {
+    this.clinicaltrafficRadioGroup.setValue({ trafficRadio: value });
+    this.getClinicalPerfromanceData(value)
+  }
+  getHospitalityPerfromanceData(period: string = 'Month') {
+    this.performanceIndexService.getChartData(1, 1685566800000, 1688158799000, 'Month')
+      .subscribe((result) => {
+        this.hLoading = true;
+        this.chartHospitalityComponent.initData(result.hospitalityChartData[0], result.hospitalityChartData[1], result.hospitalityChartData[2])
+        this.chartHospitalityComponent.initCharts(period);
+      })
   }
 
+  getClinicalPerfromanceData(period: string = 'Month') {
+    this.performanceIndexService.getChartData(1, 1685566800000, 1688158799000, 'Month')
+      .subscribe((result) => {
+        this.cLoading = true;
+
+        this.chartClinicalComponent.initData(result.clinicalChartData[0], result.clinicalChartData[1], result.clinicalChartData[2])
+        this.chartClinicalComponent.initCharts(period);
+      })
+  }
 }
