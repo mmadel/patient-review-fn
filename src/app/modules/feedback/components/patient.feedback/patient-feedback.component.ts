@@ -53,7 +53,6 @@ export class PatientFeedbackComponent implements OnInit {
       setTimeout(() => {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['/feedback/submit']).then(() => {
-            console.log(`After navigation I am on:${this.router.url}`)
           })
         })
       }, 5000);  //5s
