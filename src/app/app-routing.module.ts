@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponentComponent } from './core';
 import { DefaultLayoutComponent } from './core/reviewlayout/default-layout.component';
-import { LoginComponent } from './modules/security';
+import { LoginComponent } from './modules/security/components/login.component';
+
 import { AuthenticationGuardGuard } from './modules/security/service/authentication-guard.guard';
 
 const routes: Routes = [

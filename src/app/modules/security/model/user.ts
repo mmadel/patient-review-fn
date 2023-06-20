@@ -1,4 +1,5 @@
-import { Clinic } from "../../patient.admin/models/clinic.model";
+import { Clinic } from "../../admin/models/clinic.model";
+
 
 export interface User {
     id: string | null | undefined;

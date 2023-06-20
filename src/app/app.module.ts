@@ -1,5 +1,5 @@
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, Title } from '@angular/platform-browser';
@@ -33,6 +33,7 @@ import { AdminLayoutComponentComponent } from './core/adminlayout/admin-layout-c
 import {
   DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent
 } from './core/reviewlayout';
+import { AuthenticationInterceptorService } from './modules/security';
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
   DefaultFooterComponent,
@@ -84,6 +85,7 @@ const APP_ADMIN_CONTAINERS = [
     },
     IconSetService,
     Title,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
