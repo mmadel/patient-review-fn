@@ -5,12 +5,14 @@ import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
 import { ClinicService } from 'src/app/modules/admin/services/clinic/clinic.service';
 import { AuthenticationService } from 'src/app/modules/security/service/authentication.service';
 import { Router } from '@angular/router';
+import { Clinic } from 'src/app/modules/admin/models/clinic.model';
 @Component({
   selector: 'app-admin-header-component',
   templateUrl: './admin-header-component.component.html',
   styleUrls: ['./admin-header-component.component.css']
 })
 export class AdminHeaderComponentComponent extends HeaderComponent {
+  clinics: Clinic[] = new Array();
   @Input() sidebarId: string = "sidebar1";
 
   public newMessages = new Array(4)
@@ -65,6 +67,12 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
       });
       this.clinicService.selectedClinic$.next(this.clinics[0].id)
     })*/
+    this.clinicService.getByUserId(Number(localStorage.getItem('userId') || {})).subscribe(response => {
+      response.body?.forEach(element => {
+        this.clinics.push(element);
+      });
+      this.clinicService.selectedClinic$.next(this.clinics[0].id)
+    })
   }
   setTheme(value: string): void {
     this.themeSwitch.setValue({ themeSwitchRadio: value });

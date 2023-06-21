@@ -6,11 +6,8 @@
     </button>
     <c-header-nav class="d-none d-lg-flex me-auto">
       <select #userClinics cSelect sizing="sm" (change)="setSelectedClinic($event)">
-        <option value="1">
-          clinic-A
-        </option>
-        <option value="2">
-          clinic-B
+        <option *ngFor="let clinic of clinics" [value]="clinic.id">
+          {{clinic.name}}
         </option>
       </select>
     </c-header-nav>
