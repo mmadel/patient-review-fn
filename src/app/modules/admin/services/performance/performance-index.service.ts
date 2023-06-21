@@ -8,15 +8,15 @@ import { PerformanceIndexContainer } from '../../models/performance.index/perfor
   providedIn: 'root'
 })
 export class PerformanceIndexService {
-  private userUrl = environment.baseURL + 'performance/index/'
+  private userUrl = environment.baseURL + 'performance'
   constructor(private http: HttpClient) { }
 
   get(clinicId: number | null, startDate: number | null, endDate: number | null) {
-    return this.http.get<PerformanceIndexContainer>(`${this.userUrl}` + 'get/startDate/' + startDate + '/endDate/' + endDate + '/clinicId/' + clinicId, { observe: 'response' })
+    return this.http.get<PerformanceIndexContainer>(`${this.userUrl}` + '/get/startDate/' + startDate + '/endDate/' + endDate + '/clinicId/' + clinicId, { observe: 'response' })
   }
 
   getChartData(clinicId: number | null, startDate: number | null, endDate: number | null, unit: string) {
-    return this.http.get<PerformanceChartResponse>(`${this.userUrl}` + 'get/chart' 
+    return this.http.get<PerformanceChartResponse>(`${this.userUrl}` + '/get/chart' 
       + '/startDate/' + startDate
       + '/endDate/' + endDate
       + '/clinicId/' + clinicId

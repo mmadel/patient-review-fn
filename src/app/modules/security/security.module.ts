@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IconModule } from '@coreui/icons-angular';
-import { PatientAdminRoutingModule } from './patient-admin-routing.module';
-import { QRCodeModule } from 'angularx-qrcode';
+import { LoginComponent } from './components/login.component';
+
 import {
   AlertModule,
   BadgeModule,
@@ -18,6 +17,7 @@ import {
   DropdownModule,
   ButtonGroupModule,
   ListGroupModule,
+  TooltipModule,
   TabsModule,
   NavModule,
   DateRangePickerModule,
@@ -31,33 +31,16 @@ import {
 
 
 } from '@coreui/angular-pro';
+import { FormsModule } from '@angular/forms';
+import { IconModule } from '@coreui/icons-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { ChartjsModule } from '@coreui/angular-chartjs';
-import { ReactiveFormsModule } from '@angular/forms';
-
-import {
-  DashboardFeedbackComponent,
-  CardsComponent,
-  ChartHospitalityComponent,
-  ChartClinicalComponent,
-  FeedbackCreateComponent
-} from './components';
-
-
-const APP_ADMIN_COMPONENT = [
-  DashboardFeedbackComponent,
-  CardsComponent,
-  ChartHospitalityComponent,
-  ChartClinicalComponent,
-  FeedbackCreateComponent
-]
 @NgModule({
   declarations: [
-    APP_ADMIN_COMPONENT,
+    LoginComponent
   ],
   imports: [
     CommonModule,
-    PatientAdminRoutingModule,
+    FormsModule,
     AlertModule,
     BadgeModule,
     ButtonModule,
@@ -66,14 +49,13 @@ const APP_ADMIN_COMPONENT = [
     GridModule,
     SharedModule,
     SmartTableModule,
-    ReactiveFormsModule,
     TableModule,
     FormModule,
     DatePickerModule,
     DropdownModule,
     ButtonGroupModule,
     ListGroupModule,
-    
+    TooltipModule,
     TabsModule,
     NavModule,
     DateRangePickerModule,
@@ -85,9 +67,7 @@ const APP_ADMIN_COMPONENT = [
     MultiSelectModule,
     WidgetModule,
     ProgressModule,
-    ChartjsModule,
-    QRCodeModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
-export class PatientAdminModule { }
+export class SecurityModule { }

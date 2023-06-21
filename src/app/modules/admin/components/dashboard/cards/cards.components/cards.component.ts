@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { catchError, combineLatest, of, switchMap } from 'rxjs';
+import { catchError, combineLatest, filter, of, switchMap, tap } from 'rxjs';
 import { ClinicService } from 'src/app/modules/admin/services/clinic/clinic.service';
 import { PerformanceIndexService } from 'src/app/modules/admin/services/performance/performance-index.service';
 import { CardPerformanceDataRetrieval } from '../card.performance.data.retrieval';
@@ -22,15 +22,19 @@ export class CardsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     combineLatest([this.clinicService.selectedClinic$, this.clinicService.filterDate$])
       .pipe(
+        tap((result) => { console.log(result) }),
+        filter((result) => result[0] !== null),
         switchMap(result => {
-          const obs$ = this.performanceIndexService.get(result[0] === null ? 1 : result[0]
-            , result[1] === null ? moment(new Date(moment().startOf('month').format('YYYY-MM-DD'))).startOf('day').valueOf() : result[1][0]
-            , result[1] === null ? moment(new Date(moment().endOf('month').format('YYYY-MM-DD'))).endOf('day').valueOf() : result[1][1])
+          var startDate = result[1] === null ? moment(new Date(moment().startOf('month').format('YYYY-MM-DD'))).startOf('day').valueOf() : result[1][0];
+          var endDate = result[1] === null ? moment(new Date(moment().endOf('month').format('YYYY-MM-DD'))).endOf('day').valueOf() : result[1][1];
+          console.log(startDate)
+          const obs$ = this.performanceIndexService.get(result[0], startDate, endDate);
           return obs$.pipe(
             catchError(err => of(err))
           );
         }),
-      ).subscribe(result => {
+      ).subscribe((result) => {
+
         for (const [key, value] of Object.entries(CardPerformanceDataRetrieval.retrieve(result.body))) {
           for (const [dkey, dvalue] of Object.entries(value)) {
             if (dkey === 'hospitalityService') {

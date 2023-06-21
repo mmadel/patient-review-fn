@@ -2,35 +2,19 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponentComponent } from './core';
 import { DefaultLayoutComponent } from './core/reviewlayout/default-layout.component';
+import { LoginComponent } from './modules/security/components/login.component';
+
+import { AuthenticationGuardGuard } from './modules/security/service/authentication-guard.guard';
 
 const routes: Routes = [
   {
-    path: 'review',
-    component: DefaultLayoutComponent,
-    data: {
-      title: 'Review'
-    },
-    children: [
-      {
-        path: '',
-        loadChildren: () =>
-          import('./modules/review/pateint-review.module').then((m) => m.PateintReviewModule)
-      },
-    ]
+    path: 'login',
+    component: LoginComponent
   },
   {
-    path: 'admin',
-    component: AdminLayoutComponentComponent,
-    data: {
-      title: ''
-    },
-    children: [
-      {
-        path: '',
-        loadChildren: () =>
-          import('./modules/admin/patient-admin.module').then((m) => m.PatientAdminModule)
-      }
-    ]
+    path: '',
+    redirectTo: 'admin',
+    pathMatch: 'full',
   },
   {
     path: 'feedback',
@@ -46,6 +30,35 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'admin',
+    component: AdminLayoutComponentComponent,
+    canActivateChild: [AuthenticationGuardGuard],
+    data: {
+      title: ''
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./modules/admin/patient-admin.module').then((m) => m.PatientAdminModule)
+      }
+    ]
+  },
+  // {
+  //   path: 'review',
+  //   component: DefaultLayoutComponent,
+  //   data: {
+  //     title: 'Review'
+  //   },
+  //   children: [
+  //     {
+  //       path: '',
+  //       loadChildren: () =>
+  //         import('./modules/review/pateint-review.module').then((m) => m.PateintReviewModule)
+  //     },
+  //   ]
+  // }
 ];
 
 @NgModule({

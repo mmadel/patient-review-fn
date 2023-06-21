@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
+import { filter, mergeMap, switchMap, tap } from 'rxjs';
+import { ClinicService } from '../../services/clinic/clinic.service';
 import { PerformanceIndexService } from '../../services/performance/performance-index.service';
 import { TimeUtil } from '../../utils/time.uti';
 import { ChartClinicalComponent } from './charts/charts.components/clinical/chart-clinical.component';
@@ -14,7 +16,7 @@ export class DashboardFeedbackComponent implements OnInit {
   @ViewChild(ChartClinicalComponent) chartClinicalComponent: ChartClinicalComponent;
   hLoading: boolean = false;
   cLoading = false;
-  constructor(private performanceIndexService: PerformanceIndexService) { }
+  constructor(private performanceIndexService: PerformanceIndexService, private clinicService: ClinicService) { }
 
   ngOnInit(): void {
 
@@ -37,9 +39,13 @@ export class DashboardFeedbackComponent implements OnInit {
     this.getClinicalPerfromanceData(value)
   }
   getHospitalityPerfromanceData(period: string = 'Month') {
+
     var dateRange: number[] = TimeUtil.getDateRangePerTimeUnit(period);
-    this.performanceIndexService.getChartData(1, dateRange[0], dateRange[1], period)
-      .subscribe((result) => {
+    this.clinicService.selectedClinic$.pipe(
+      filter((id) => id !== null),
+      mergeMap(id => {
+        return this.performanceIndexService.getChartData(id, dateRange[0], dateRange[1], period)
+      })).subscribe((result) => {
         this.hLoading = true;
         this.chartHospitalityComponent.initData(result.hospitalityChartData[0], result.hospitalityChartData[1], result.hospitalityChartData[2])
         this.chartHospitalityComponent.initCharts(period);
@@ -48,10 +54,12 @@ export class DashboardFeedbackComponent implements OnInit {
 
   getClinicalPerfromanceData(period: string = 'Month') {
     var dateRange: number[] = TimeUtil.getDateRangePerTimeUnit(period);
-    this.performanceIndexService.getChartData(1, dateRange[0], dateRange[1], period)
-      .subscribe((result) => {
+    this.clinicService.selectedClinic$.pipe(
+      filter((id) => id !== null),
+      mergeMap(id => {
+        return this.performanceIndexService.getChartData(id, dateRange[0], dateRange[1], period)
+      })).subscribe((result) => {
         this.cLoading = true;
-
         this.chartClinicalComponent.initData(result.clinicalChartData[0], result.clinicalChartData[1], result.clinicalChartData[2])
         this.chartClinicalComponent.initCharts(period);
       })
