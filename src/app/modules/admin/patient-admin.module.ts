@@ -39,6 +39,7 @@ import {
   CardsComponent,
   ChartHospitalityComponent,
   ChartClinicalComponent,
+  FeedbackCreateComponent
 } from './components';
 
 
@@ -47,6 +48,7 @@ const APP_ADMIN_COMPONENT = [
   CardsComponent,
   ChartHospitalityComponent,
   ChartClinicalComponent,
+  FeedbackCreateComponent
 ]
 @NgModule({
   declarations: [
