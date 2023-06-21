@@ -1,1 +1,16 @@
-<p>feedback-create works!</p>
+<c-col xs="12" class="mb-4">
+    <c-card>
+        <c-card-header ngPreserveWhitespaces>
+            <strong>Patient Creation</strong> <small></small>
+        </c-card-header>
+        <c-card-body>
+            <p class="text-medium-emphasis small">
+                Scan the QR code by tablet to open Pateint creation Link, or Open the following link in your browser
+            </p>
+            <qrcode *ngIf="createFeedbackURL" [qrdata]="createFeedbackURL" [width]="300" [errorCorrectionLevel]="'M'">
+            </qrcode>
+
+            <a href="">https://patient-feedback/create</a>
+        </c-card-body>
+    </c-card>
+</c-col>

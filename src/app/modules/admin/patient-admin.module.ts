@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@coreui/icons-angular';
 import { PatientAdminRoutingModule } from './patient-admin-routing.module';
+import { QRCodeModule } from 'angularx-qrcode';
 import {
   AlertModule,
   BadgeModule,
@@ -85,6 +86,7 @@ const APP_ADMIN_COMPONENT = [
     WidgetModule,
     ProgressModule,
     ChartjsModule,
+    QRCodeModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
