@@ -10,7 +10,7 @@
             <qrcode *ngIf="createFeedbackURL" [qrdata]="createFeedbackURL" [width]="300" [errorCorrectionLevel]="'M'">
             </qrcode>
 
-            <a href="">https://patient-feedback/create</a>
+            <a href="{{baseURL}}/#/feedback/submit?clinicId={{clinicId}}">https://patient-feedback/create</a>
         </c-card-body>
     </c-card>
 </c-col>

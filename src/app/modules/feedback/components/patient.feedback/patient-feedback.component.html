@@ -9,7 +9,7 @@
                     </h1>
                 </c-card-header>
                 <c-card-body>
-                    <div class="text-center">
+                    <div class="text-center" *ngIf="hospitalityToggle">
                         <a class="btn btn-link" name="hospitality-VeryGood"
                             [ngClass]="{'border-success' : hospitalityToggle.VGood}" (click)="selectFeedback($event)">
                             <svg cIcon name="cilMoodVeryGood" size="6xl" class="text-success"></svg>
@@ -41,7 +41,7 @@
                     </h1>
                 </c-card-header>
                 <c-card-body>
-                    <div class="text-center">
+                    <div class="text-center" *ngIf="clinicalToggle">
                         <a class="btn btn-link" name="clinical-VeryGood"
                             [ngClass]="{'border-success' : clinicalToggle.VGood}" (click)="selectFeedback($event)">
                             <svg cIcon name="cilMoodVeryGood" size="6xl" class="text-success"></svg>

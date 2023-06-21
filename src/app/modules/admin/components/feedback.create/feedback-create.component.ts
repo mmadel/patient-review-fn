@@ -15,7 +15,7 @@ export class FeedbackCreateComponent implements OnInit {
   ngOnInit(): void {
     this.clinicService.selectedClinic$.subscribe(clinicId => {
       this.clinicId = clinicId
-      this.createFeedbackURL = this.baseURL + '/#/feedback/submit';
+      this.createFeedbackURL = this.baseURL + '/#/feedback/submit?clinicId=' + clinicId;
     })
   }
 

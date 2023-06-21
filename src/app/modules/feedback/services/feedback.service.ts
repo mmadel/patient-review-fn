@@ -8,7 +8,7 @@ import { PatientFeedback } from '../models/patient.feedback';
 })
 export class FeedbackService {
 
-  private userUrl = environment.baseURL + 'patient/submit'
+  private userUrl = environment.baseURL + 'feedback/submit'
   constructor(private httpClient: HttpClient) { }
 
   public submit(patientFeedback: PatientFeedback) {

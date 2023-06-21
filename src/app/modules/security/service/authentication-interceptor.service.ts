@@ -10,11 +10,12 @@ import * as _ from 'lodash';
   providedIn: 'root'
 })
 export class AuthenticationInterceptorService implements HttpInterceptor {
-  
+
   constructor(private authService: AuthenticationService,
     private router: Router, private spinner: NgxSpinnerService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    //console.log(req.url)
     const accessToken = localStorage.getItem('token') || '{}';
     this.spinner.show();
     return next.handle(this.addAuthorizationHeader(req, accessToken)).pipe(
@@ -38,10 +39,14 @@ export class AuthenticationInterceptorService implements HttpInterceptor {
     );
 
   }
-
+  private test(url: string) {
+    console.log(_.split(url, '/', 4)[3])
+  }
   private addAuthorizationHeader(request: HttpRequest<any>, token: string): HttpRequest<any> {
+    var requestMapping: string = _.split(request.url, '/', 4)[3];
     var securedURLS: string[] = new Array();
     var notSecuredURLS: string[] = new Array();
+
     UserRoleURLS.forEach(element => {
       if (localStorage.getItem('userRole') !== undefined &&
         element.name === localStorage.getItem('userRole'))
@@ -49,13 +54,12 @@ export class AuthenticationInterceptorService implements HttpInterceptor {
       if (element.name === 'PERMITTED')
         notSecuredURLS = element.urls;
     });
-    if (_.some(notSecuredURLS, (el) => _.includes(request.url, el))) {
-      console.log('not secured')
+    if (_.some(notSecuredURLS, (el) => _.includes(requestMapping, el))) {
+      //console.log('not secured')
       return request;
     }
-    console.log('request.url ' + request.url)
-    if (_.some(securedURLS, (el) => _.includes(request.url, el))) {
-      console.log('secured')
+    if (_.some(securedURLS, (el) => _.includes(requestMapping, el))) {
+      //  console.log('secured ' + request.url)
       if (token) {
         return request.clone({
           setHeaders: { Authorization: `Bearer ${token}` }
@@ -63,7 +67,7 @@ export class AuthenticationInterceptorService implements HttpInterceptor {
       }
       return request;
     }
-    console.log('rejected')
+    //console.log('rejected ' + request.url)
     return Observable.create(EMPTY);;
   }
 

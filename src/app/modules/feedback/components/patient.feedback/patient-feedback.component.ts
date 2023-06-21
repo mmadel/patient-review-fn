@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PatientFeedback } from '../../models/patient.feedback';
 import { FeedbackService } from '../../services/feedback.service';
@@ -11,33 +11,32 @@ import { FeedbackService } from '../../services/feedback.service';
 })
 export class PatientFeedbackComponent implements OnInit {
   isSubmitted: boolean = false;
-  model: PatientFeedback = {
-    clinicId: 0,
-    feedbackQuestions: {
-      hospitalityFeedback: '',
-      clinicalFeedback: ''
-    },
-    patientName: '',
-  }
-  hospitalityToggle: any = {
-    VGood: false,
-    Good: false,
-    VSad: false,
-    Sad: false
-  }
-  clinicalToggle: any = {
-    VGood: false,
-    Good: false,
-    VSad: false,
-    Sad: false
-  }
+  clinicId: number;
+  model: PatientFeedback;
+  hospitalityToggle: any
+  clinicalToggle: any
 
   constructor(private feedbackService: FeedbackService,
     private spinner: NgxSpinnerService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
     this.isSubmitted = false;
+    this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
+    console.log('oninit ' + this.clinicId)
+    this.initModel()
+    if (this.clinicId === 0 || this.clinicId === undefined || this.clinicId === null) {
+      this.router.navigate(['admin/feedback/create']);
+    } else {
+      this.router.navigate([], {
+        queryParams: {
+          'clinicId': null,
+        },
+        queryParamsHandling: 'merge'
+      })
+    }
   }
   checkFields(): boolean {
     var isQuestionsSelected = this.model.feedbackQuestions?.clinicalFeedback === "" &&
@@ -51,11 +50,15 @@ export class PatientFeedbackComponent implements OnInit {
       this.isSubmitted = true;
       this.spinner.hide();
       setTimeout(() => {
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/feedback/submit']).then(() => {
+        //window.location.reload()
+        this.router.navigateByUrl('feedback/submit', { skipLocationChange: true }).then(() => {
+          console.log(`Before navigation I am on:${this.router.url}`)
+          this.router.navigate(['feedback/submit'], { queryParams: { clinicId: this.clinicId } }).then(() => {
+            console.log(`After navigation I am on:${this.router.url}`)
+            this.ngOnInit()
           })
         })
-      }, 5000);  //5s
+      }, 1000);  //5s
     })
   }
   public selectFeedback(event: any) {
@@ -85,7 +88,7 @@ export class PatientFeedbackComponent implements OnInit {
   private populateModel() {
     let hospitalityValue: string = '';
     let clinicalValue: string = '';
-    this.model.clinicId = 1;
+    this.model.clinicId = this.clinicId;
     Object.keys(this.hospitalityToggle).forEach((key, index) => {
       if (this.hospitalityToggle[key]) {
         hospitalityValue = key;
@@ -98,11 +101,35 @@ export class PatientFeedbackComponent implements OnInit {
         return;
       }
     });
-    console.log(hospitalityValue)
     this.model.feedbackQuestions = {
       hospitalityFeedback: hospitalityValue,
       clinicalFeedback: clinicalValue
 
     }
+  }
+  private initModel() {
+    var model: PatientFeedback = {
+      clinicId: 0,
+      feedbackQuestions: {
+        hospitalityFeedback: '',
+        clinicalFeedback: ''
+      },
+      patientName: '',
+    }
+    this.model = model;
+    var hospitalityToggle: any = {
+      VGood: false,
+      Good: false,
+      VSad: false,
+      Sad: false
+    }
+    this.hospitalityToggle = hospitalityToggle
+    var clinicalToggle: any = {
+      VGood: false,
+      Good: false,
+      VSad: false,
+      Sad: false
+    }
+    this.clinicalToggle = clinicalToggle;
   }
 }

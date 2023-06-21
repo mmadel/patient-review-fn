@@ -5,14 +5,14 @@ export interface USerRoleMap {
 export const UserRoleURLS: USerRoleMap[] = [
     {
         name: "ADMIN",
-        urls: ['dashboard', 'patient/find/clinic', 'clinic', 'user', 'report',]
+        urls: ['performance', 'clinic']
     },
     {
         name: "USER",
-        urls: ['patient/find/clinic/','/find/clinics/']
+        urls: []
     },
     {
-        name:"PERMITTED",
-        urls: ['/feedback/api/patient/submit']
+        name: "PERMITTED",
+        urls: ['feedback', 'authentication']
     }
 ]
