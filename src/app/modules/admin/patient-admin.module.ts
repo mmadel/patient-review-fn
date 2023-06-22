@@ -42,7 +42,9 @@ import {
   ChartClinicalComponent,
   FeedbackCreateComponent,
   ClinicListComponent,
-  ClinicCreateComponent
+  ClinicCreateComponent,
+  UserListComponent,
+  UserCreateComponent
 } from './components';
 
 
@@ -53,11 +55,13 @@ const APP_ADMIN_COMPONENT = [
   ChartClinicalComponent,
   FeedbackCreateComponent,
   ClinicListComponent,
-  ClinicCreateComponent
+  ClinicCreateComponent,
+  UserListComponent,
+  UserCreateComponent
 ]
 @NgModule({
   declarations: [
-    APP_ADMIN_COMPONENT,
+    APP_ADMIN_COMPONENT
   ],
   imports: [
     CommonModule,
