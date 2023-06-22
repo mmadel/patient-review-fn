@@ -33,7 +33,7 @@ import {
 } from '@coreui/angular-pro';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ChartjsModule } from '@coreui/angular-chartjs';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   DashboardFeedbackComponent,
@@ -70,6 +70,7 @@ const APP_ADMIN_COMPONENT = [
     GridModule,
     SharedModule,
     SmartTableModule,
+    FormsModule,
     ReactiveFormsModule,
     TableModule,
     FormModule,

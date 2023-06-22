@@ -16,4 +16,9 @@ export class ClinicService {
   getByUserId(userId: number) {
     return this.htpClient.get<Clinic[]>(`${this.userUrl}` + '/find/userId/' + userId, { observe: 'response' })
   }
+  create(clinic: Clinic) {
+    const headers = { 'content-type': 'application/json' }
+    var createClinicClinic = this.userUrl +'/create'
+    return this.htpClient.post(createClinicClinic, JSON.stringify(clinic), { 'headers': headers, observe: 'response' })
+  }
 }
