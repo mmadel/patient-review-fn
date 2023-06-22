@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FeedbackCreateComponent } from './components';
+import { ClinicCreateComponent, FeedbackCreateComponent } from './components';
 import { DashboardFeedbackComponent } from './components/dashboard/dashboard-feedback.component';
 
 const routes: Routes = [{
@@ -23,7 +23,14 @@ const routes: Routes = [{
       path: 'feedback/create',
       component: FeedbackCreateComponent,
       data: {
-        title: 'create',
+        title: 'feedback-create',
+      },
+    },
+    {
+      path: 'clinic/create',
+      component: ClinicCreateComponent,
+      data: {
+        title: 'clinic-create',
       },
     }
   ]
