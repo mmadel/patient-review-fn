@@ -10,6 +10,12 @@ export class UserService {
   private userUrl = environment.baseURL + 'user'
   constructor(private http: HttpClient) { }
 
+  create(user: User) {
+    const headers = { 'content-type': 'application/json' }
+    var createUserURL = environment.baseURL + 'authentication/register'
+    return this.http.post(createUserURL, JSON.stringify(user), { 'headers': headers, observe: 'response' })
+  }
+
   get() {
     return this.http.get<User[]>(`${this.userUrl}` + '/find', { observe: 'response' })
   }

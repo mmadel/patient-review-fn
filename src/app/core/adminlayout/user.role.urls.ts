@@ -5,7 +5,7 @@ export interface USerRoleMap {
 export const UserRoleURLS: USerRoleMap[] = [
     {
         name: "ADMIN",
-        urls: ['performance', 'clinic']
+        urls: ['performance', 'clinic','user']
     },
     {
         name: "USER",

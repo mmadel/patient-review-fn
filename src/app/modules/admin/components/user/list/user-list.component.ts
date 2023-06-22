@@ -30,7 +30,7 @@ export class UserListComponent implements OnInit {
     )
   }
   create() {
-    this.router.navigateByUrl('/user/create');
+    this.router.navigateByUrl('/admin/user/create');
   }
 
 }
