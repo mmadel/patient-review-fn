@@ -18,7 +18,7 @@ export class ClinicService {
   }
   get() {
     var findClinicClinic = this.userUrl + '/find'
-    return this.htpClient.get<Clinic[]>(findClinicClinic + '/find', { observe: 'response' })
+    return this.htpClient.get<Clinic[]>(findClinicClinic, { observe: 'response' })
   }
   create(clinic: Clinic) {
     const headers = { 'content-type': 'application/json' }
