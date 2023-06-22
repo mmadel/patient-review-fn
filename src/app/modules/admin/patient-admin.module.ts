@@ -33,14 +33,16 @@ import {
 } from '@coreui/angular-pro';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ChartjsModule } from '@coreui/angular-chartjs';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   DashboardFeedbackComponent,
   CardsComponent,
   ChartHospitalityComponent,
   ChartClinicalComponent,
-  FeedbackCreateComponent
+  FeedbackCreateComponent,
+  ClinicListComponent,
+  ClinicCreateComponent
 } from './components';
 
 
@@ -49,7 +51,9 @@ const APP_ADMIN_COMPONENT = [
   CardsComponent,
   ChartHospitalityComponent,
   ChartClinicalComponent,
-  FeedbackCreateComponent
+  FeedbackCreateComponent,
+  ClinicListComponent,
+  ClinicCreateComponent
 ]
 @NgModule({
   declarations: [
@@ -66,6 +70,7 @@ const APP_ADMIN_COMPONENT = [
     GridModule,
     SharedModule,
     SmartTableModule,
+    FormsModule,
     ReactiveFormsModule,
     TableModule,
     FormModule,
@@ -73,7 +78,7 @@ const APP_ADMIN_COMPONENT = [
     DropdownModule,
     ButtonGroupModule,
     ListGroupModule,
-    
+
     TabsModule,
     NavModule,
     DateRangePickerModule,

@@ -14,6 +14,10 @@ export const NavItems: INavData[] = [
       {
         name: 'Feedback Create',
         url: 'feedback/create'
+      },
+      {
+        name: 'Clinics',
+        url: 'clinic/list'
       }
     ]
   },
