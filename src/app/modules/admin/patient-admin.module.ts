@@ -41,7 +41,8 @@ import {
   ChartHospitalityComponent,
   ChartClinicalComponent,
   FeedbackCreateComponent,
-  ClinicListComponent
+  ClinicListComponent,
+  ClinicCreateComponent
 } from './components';
 
 
@@ -51,7 +52,8 @@ const APP_ADMIN_COMPONENT = [
   ChartHospitalityComponent,
   ChartClinicalComponent,
   FeedbackCreateComponent,
-  ClinicListComponent
+  ClinicListComponent,
+  ClinicCreateComponent
 ]
 @NgModule({
   declarations: [
