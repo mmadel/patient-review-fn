@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClinicCreateComponent, ClinicListComponent, FeedbackCreateComponent } from './components';
+import { ClinicCreateComponent, ClinicListComponent, FeedbackCreateComponent, UserCreateComponent, UserListComponent } from './components';
 import { DashboardFeedbackComponent } from './components/dashboard/dashboard-feedback.component';
 
 const routes: Routes = [{
@@ -13,7 +13,7 @@ const routes: Routes = [{
   path: '',
   redirectTo: 'dashboard',
   pathMatch: 'full',
-},{
+}, {
   path: '',
   data: {
     title: 'administration',
@@ -32,11 +32,24 @@ const routes: Routes = [{
       data: {
         title: 'clinic-create',
       },
-    },{
+    }, {
       path: 'clinic/list',
       component: ClinicListComponent,
       data: {
         title: 'clinic-list',
+      },
+    },
+    {
+      path: 'user/list',
+      component: UserListComponent,
+      data: {
+        title: 'user-list',
+      },
+    }, {
+      path: 'user/create',
+      component: UserCreateComponent,
+      data: {
+        title: 'user-create',
       },
     }
   ]

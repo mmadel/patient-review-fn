@@ -18,6 +18,10 @@ export const NavItems: INavData[] = [
       {
         name: 'Clinics',
         url: 'clinic/list'
+      },
+      {
+        name: 'Users',
+        url: 'user/list'
       }
     ]
   },
