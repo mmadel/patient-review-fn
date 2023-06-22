@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClinicCreateComponent, FeedbackCreateComponent } from './components';
+import { ClinicCreateComponent, ClinicListComponent, FeedbackCreateComponent } from './components';
 import { DashboardFeedbackComponent } from './components/dashboard/dashboard-feedback.component';
 
 const routes: Routes = [{
@@ -31,6 +31,12 @@ const routes: Routes = [{
       component: ClinicCreateComponent,
       data: {
         title: 'clinic-create',
+      },
+    },{
+      path: 'clinic/list',
+      component: ClinicListComponent,
+      data: {
+        title: 'clinic-list',
       },
     }
   ]

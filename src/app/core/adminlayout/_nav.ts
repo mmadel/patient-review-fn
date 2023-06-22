@@ -16,8 +16,8 @@ export const NavItems: INavData[] = [
         url: 'feedback/create'
       },
       {
-        name: 'Clinic Create',
-        url: 'clinic/create'
+        name: 'Clinics',
+        url: 'clinic/list'
       }
     ]
   },
