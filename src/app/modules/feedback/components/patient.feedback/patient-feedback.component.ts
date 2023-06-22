@@ -58,7 +58,7 @@ export class PatientFeedbackComponent implements OnInit {
             this.ngOnInit()
           })
         })
-      }, 1000);  //5s
+      }, 5000);  //5s
     })
   }
   public selectFeedback(event: any) {
