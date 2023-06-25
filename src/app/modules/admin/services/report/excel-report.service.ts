@@ -7,7 +7,7 @@ import { ExcelReportCriteria } from '../../models/report/excel.report.criteria';
   providedIn: 'root'
 })
 export class ExcelReportService {
-  private baseUrl = environment.baseURL + 'reports/';
+  private baseUrl = environment.baseURL + 'reports';
   constructor(private httpClient: HttpClient) { }
 
   public export(reportCriteria: ExcelReportCriteria){
