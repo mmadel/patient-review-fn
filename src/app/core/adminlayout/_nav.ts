@@ -25,4 +25,15 @@ export const NavItems: INavData[] = [
       }
     ]
   },
+  {
+    name: 'Reports',
+    url: '',
+    iconComponent: { name: 'cil-search' },
+    children: [
+      {
+        name: 'Patient Feedback',
+        url: 'report/feedback'
+      }
+    ]
+  },
 ];
