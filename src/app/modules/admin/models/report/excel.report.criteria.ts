@@ -4,6 +4,6 @@ export class ExcelReportCriteria {
     startDate_date: Date | null;
     endDate_date: Date | null;
     clinicId: number;
-    serviceName: string;
+    serviceName: string ="";
     feedbackFilter: string[];
 }

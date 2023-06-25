@@ -19,7 +19,26 @@
           -->
                 <form cForm>
                     <c-row>
-                        <c-col xs="6" class="mb-2">
+                        <c-col lg="4" xs="12" class="mb-2">
+                            <c-card>
+                                <c-card-header>
+                                    <h6>
+                                        Service
+                                    </h6>
+                                </c-card-header>
+                                <c-card-body>
+                                    <form cForm>
+                                        <select cSelect cFormControl name="recommendation"
+                                            [(ngModel)]="reportCriteria.serviceName">
+                                            <option value="">Select</option>
+                                            <option *ngFor="let service of serviceNames" [value]="service.serviceValue">
+                                                {{service.serviceName}}</option>
+                                        </select>
+                                    </form>
+                                </c-card-body>
+                            </c-card>
+                        </c-col>
+                        <c-col lg="4" xs="12" class="mb-2">
                             <c-card>
                                 <c-card-header>
                                     <h6>
@@ -27,39 +46,31 @@
                                     </h6>
                                 </c-card-header>
                                 <c-card-body>
-                                    <c-col class="mb-2" xs="12">
-                                    </c-col>
-                                    <div>
-                                        <c-col class="mb-2" xs="12">
-                                            <form cForm>
-                                                <c-multi-select multiple [(ngModel)]="reportCriteria.feedbackFilter"
-                                                    name="sssss">
-                                                    <c-multi-select-option *ngFor="let feedback of feedbackValues"
-                                                        [value]="feedback.feedbackValue">{{feedback.feedbackName}}</c-multi-select-option>
-                                                </c-multi-select>
-                                            </form>
-                                        </c-col>
-                                    </div>
+                                    <form cForm>
+                                        <c-multi-select multiple [(ngModel)]="reportCriteria.feedbackFilter"
+                                            name="sssss">
+                                            <c-multi-select-option *ngFor="let feedback of feedbackValues"
+                                                [value]="feedback.feedbackValue">{{feedback.feedbackName}}</c-multi-select-option>
+                                        </c-multi-select>
+                                    </form>
                                 </c-card-body>
                             </c-card>
                         </c-col>
-                        <c-col xs="6" class="mb-2">
+                        <c-col lg="4" xs="12" class="mb-2">
                             <c-card>
                                 <c-card-header>
                                     <h6>Date Range</h6>
                                 </c-card-header>
                                 <c-card-body>
-                                    <c-col class="mb-2" xs="12">
-                                        <c-date-range-picker [(startDate)]="reportCriteria.startDate_date"
-                                            [(endDate)]="reportCriteria.endDate_date"
-                                            [ranges]="customRanges"></c-date-range-picker>
-                                    </c-col>
+                                    <c-date-range-picker [(startDate)]="reportCriteria.startDate_date"
+                                        [(endDate)]="reportCriteria.endDate_date"
+                                        [ranges]="customRanges"></c-date-range-picker>
                                 </c-card-body>
                             </c-card>
                         </c-col>
-                        <c-col xs="12" class="text-center">
+                        <c-col lg="12" xs="12" class="text-center">
                             <button cButton class="me-1" (click)="export()" color="primary" variant="outline"
-                                style="width: 15%;">
+                                style="width: 15%;" [disabled]="isValidInputs()">
                                 Export
                             </button>
                         </c-col>
