@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import feedbackValues from '../../../models/data/feedback-data-stor';
 import { ExcelReportCriteria } from '../../../models/report/excel.report.criteria';
+import { ExcelReportService } from '../../../services/report/excel-report.service';
 
 @Component({
   selector: 'app-excel-report',
@@ -36,12 +37,13 @@ export class ExcelReportComponent implements OnInit {
       new Date(new Date().getFullYear(), new Date().getMonth(), 0)
     ]
   };
-  constructor() { }
+  constructor(private excelReportService:ExcelReportService) { }
 
   ngOnInit(): void {
   }
-  search() {
+  export() {
     this.formatDate();
+    this.callExportService();
   }
   private formatDate() {
     
@@ -50,7 +52,19 @@ export class ExcelReportComponent implements OnInit {
     if (this.reportCriteria.endDate_date !== undefined)
       this.reportCriteria.endDate = this.reportCriteria.endDate_date ? moment(new Date(this.reportCriteria.endDate_date)).endOf('day').valueOf() : 0;
   }
-  private export(){
-    
+  private callExportService(){
+    this.excelReportService.export(this.reportCriteria).subscribe(
+      (response) => {
+        const a = document.createElement('a')
+        const objectUrl = URL.createObjectURL(response)
+        a.href = objectUrl
+        var nameDatePart = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+        a.download = 'feedback-' + nameDatePart + '.xlsx';
+        a.click();
+        URL.revokeObjectURL(objectUrl);
+      },
+      (error) => {
+        console.log(error)
+      });
   }
 }
