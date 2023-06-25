@@ -44,7 +44,8 @@ import {
   ClinicListComponent,
   ClinicCreateComponent,
   UserListComponent,
-  UserCreateComponent
+  UserCreateComponent,
+  ExcelReportComponent
 } from './components';
 
 
@@ -57,11 +58,13 @@ const APP_ADMIN_COMPONENT = [
   ClinicListComponent,
   ClinicCreateComponent,
   UserListComponent,
-  UserCreateComponent
+  UserCreateComponent,
+  ExcelReportComponent
 ]
 @NgModule({
   declarations: [
-    APP_ADMIN_COMPONENT
+    APP_ADMIN_COMPONENT,
+
   ],
   imports: [
     CommonModule,
