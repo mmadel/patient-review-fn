@@ -53,7 +53,7 @@ const routes: Routes = [{
       },
     },
     {
-      path: 'user/update',
+      path: 'user/update/:userId',
       component: UserUpdateComponent,
       data: {
         title: 'user-update',

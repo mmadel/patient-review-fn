@@ -15,6 +15,7 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
     this.userService.get().subscribe(response => {
       response.body?.forEach(element => {
+        console.log(JSON.stringify(element))
         if (element.clinics?.length !== undefined && element.clinics?.length > 0) {
           if (element.userRole === 'ADMIN')
             element.userRole = "Administrator";
@@ -32,12 +33,12 @@ export class UserListComponent implements OnInit {
   create() {
     this.router.navigateByUrl('/admin/user/create');
   }
-  delete(id:string | undefined | null){
+  delete(id: string | undefined | null) {
     console.log(id)
   }
 
-  update(id:string | undefined | null){
-      console.log(id)
+  update(id: string | undefined | null) {
+    this.router.navigate(['/admin/user/update', id])
   }
 
 }

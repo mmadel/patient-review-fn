@@ -86,6 +86,7 @@ export class UserCreateComponent implements OnInit {
       address = address + this.form.useraddressstate + ",";
     if (this.form.useraddressprovince)
       address = address + this.form.useraddressprovince + ",";
+    address = address + this.form.useraddresscity + ",";
     address = address + this.form.useraddresszipcode;
     return address
   }

@@ -19,4 +19,7 @@ export class UserService {
   get() {
     return this.http.get<User[]>(`${this.userUrl}` + '/find', { observe: 'response' })
   }
+  getById(id:string | null) {
+    return this.http.get<User>(`${this.userUrl}` + '/find/userId/' + id)
+  }
 }
