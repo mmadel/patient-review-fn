@@ -1,0 +1,85 @@
+<ngx-spinner></ngx-spinner>
+<c-row>
+    <c-col xs="12" class="mb-4">
+        <c-card>
+            <c-card-header ngPreserveWhitespaces>
+                <strong>Patient Feedback Reports</strong>
+            </c-card-header>
+            <c-card-body>
+                <p class="text-medium-emphasis small">
+                    The Abiltiy to create patient reports using his/her Feedback inputs
+                </p>
+                <c-callout color="danger" *ngIf="searchInputNotValid">
+                    {{errorMsg}}
+                </c-callout>
+                <!--
+              <div style="float: left;margin-top: 4%;">
+              <svg cIcon name="cilFindInPage" title="cilFindInPage" size="7xl"></svg>
+            </div>
+          -->
+                <form cForm>
+                    <c-row>
+                        <c-col lg="4" xs="12" class="mb-2">
+                            <c-card>
+                                <c-card-header>
+                                    <h6>
+                                        Service
+                                    </h6>
+                                </c-card-header>
+                                <c-card-body>
+                                    <form cForm>
+                                        <select cSelect cFormControl name="recommendation"
+                                            [(ngModel)]="reportCriteria.serviceName">
+                                            <option value="">Select</option>
+                                            <option *ngFor="let service of serviceNames" [value]="service.serviceValue">
+                                                {{service.serviceName}}</option>
+                                        </select>
+                                    </form>
+                                </c-card-body>
+                            </c-card>
+                        </c-col>
+                        <c-col lg="4" xs="12" class="mb-2">
+                            <c-card>
+                                <c-card-header>
+                                    <h6>
+                                        Patient Feedback
+                                    </h6>
+                                </c-card-header>
+                                <c-card-body>
+                                    <form cForm>
+                                        <c-multi-select multiple [(ngModel)]="reportCriteria.feedbackFilter"
+                                            name="sssss">
+                                            <c-multi-select-option *ngFor="let feedback of feedbackValues"
+                                                [value]="feedback.feedbackValue">{{feedback.feedbackName}}</c-multi-select-option>
+                                        </c-multi-select>
+                                    </form>
+                                </c-card-body>
+                            </c-card>
+                        </c-col>
+                        <c-col lg="4" xs="12" class="mb-2">
+                            <c-card>
+                                <c-card-header>
+                                    <h6>Date Range</h6>
+                                </c-card-header>
+                                <c-card-body>
+                                    <c-date-range-picker [(startDate)]="reportCriteria.startDate_date"
+                                        [(endDate)]="reportCriteria.endDate_date"
+                                        [ranges]="customRanges"></c-date-range-picker>
+                                </c-card-body>
+                            </c-card>
+                        </c-col>
+                        <c-col lg="12" xs="12" class="text-center">
+                            <button cButton class="me-1" (click)="export()" color="primary" variant="outline"
+                                style="width: 15%;" [disabled]="isValidInputs()">
+                                Export
+                            </button>
+                        </c-col>
+                    </c-row>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>
+<c-row *ngIf="errorMsg !==''">
+    <c-alert color="danger">{{errorMsg}}</c-alert>
+</c-row>
