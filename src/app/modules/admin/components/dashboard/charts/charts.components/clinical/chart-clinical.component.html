@@ -1,0 +1,12 @@
+<c-row>
+    <c-col lg="6" *ngIf="loading">
+        <c-chart [data]="performanceDataMainChart.data" [height]="300" [ngStyle]="{'marginTop.px': 40}"
+            [options]="performanceDataMainChart.options" [type]="performanceDataMainChart.type">
+        </c-chart>
+    </c-col>
+    <c-col lg="6" *ngIf="loading">
+        <c-chart [data]="averageDataMainChart.data" [height]="300" [ngStyle]="{'marginTop.px': 40}"
+            [options]="averageDataMainChart.options" [type]="averageDataMainChart.type">
+        </c-chart>
+    </c-col>
+</c-row>

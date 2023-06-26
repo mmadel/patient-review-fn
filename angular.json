@@ -20,22 +20,29 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/_redirects"
             ],
             "styles": [
+              "src/scss/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "src/scss/styles.scss"
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
+              
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "chart.js",
+              "@coreui/chartjs/dist/js/coreui-chartjs.js",
+              "fast-deep-equal"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2m",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",

@@ -1,0 +1,13 @@
+<c-row>
+    <c-col lg="6" *ngIf="loading">
+        <c-chart [data]="hospitalityPerformanceDataMainChart.data" [height]="300"
+            [ngStyle]="{'marginTop.px': 40}" [options]="hospitalityPerformanceDataMainChart.options"
+            [type]="hospitalityPerformanceDataMainChart.type">
+        </c-chart>
+    </c-col>
+    <c-col lg="6" *ngIf="loading">
+        <c-chart [data]="hospitalityAverageDataMainChart.data" [height]="300" [ngStyle]="{'marginTop.px': 40}"
+            [options]="hospitalityAverageDataMainChart.options" [type]="hospitalityAverageDataMainChart.type">
+        </c-chart>
+    </c-col>
+</c-row>

@@ -1,1 +1,8 @@
-<p>patient-review works!</p>
+<c-progress class="mb-3" [height]="30">
+    <c-progress-bar color="info" [animated]="true" [value]="progressValue"
+        variant="striped">{{progressValue}}%</c-progress-bar>
+</c-progress>
+
+<app-feedback-review *ngIf="counter === 1"></app-feedback-review>
+<app-feedback-items *ngIf="counter === 2"></app-feedback-items>
+<app-submit-review *ngIf="counter === 3"></app-submit-review>

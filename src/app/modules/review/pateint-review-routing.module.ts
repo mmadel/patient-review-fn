@@ -1,28 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientReviewComponent } from './components/patient.review/patient-review.component';
-import { PatientSubmitionComponent } from './components/patient.submition/patient-submition.component';
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
   path: '',
   data: {
     title: 'PatientReview',
   },
   children: [
     {
-      path: 'review',
+      path: 'feedback',
       component: PatientReviewComponent,
       data: {
         title: 'Patient Review',
       },
     },
-    {
-      path: 'submit',
-      component: PatientSubmitionComponent,
-      data: {
-        title: 'Submition',
-      },
-    }
   ]
 }];
 

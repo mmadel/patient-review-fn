@@ -1,0 +1,11 @@
+/feedback/api/feedback/submit https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/feedback/submit 200
+/feedback/api/performance/get/startDate/:startDate/endDate/:endDate/clinicId/:clinicId https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/performance/get/startDate/:startDate/endDate/:endDate/clinicId/:clinicId 200
+/feedback/api/performance/get/chart/startDate/:startDate/endDate/:endDate/clinicId/:clinicId/chartTimeUnit/:chartTimeUnit https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/performance/get/chart/startDate/:startDate/endDate/:endDate/clinicId/:clinicId/chartTimeUnit/:chartTimeUnit 200
+/feedback/api/clinic/find/userId/:userId https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/clinic/find/userId/:userId 200
+/feedback/api/clinic/find https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/clinic/find 200
+/feedback/api/clinic/create https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/clinic/create 200
+/feedback/api/authentication/login https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/authentication/login 200
+/feedback/api/authentication/register https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/authentication/register 200
+/feedback/api/user/find https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/user/find 200
+/feedback/api/reports/excel https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/reports/excel 200
+/*  /index.html   200
