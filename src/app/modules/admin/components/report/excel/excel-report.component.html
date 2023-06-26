@@ -80,3 +80,6 @@
         </c-card>
     </c-col>
 </c-row>
+<c-row *ngIf="errorMsg !==''">
+    <c-alert color="danger">{{errorMsg}}</c-alert>
+</c-row>
