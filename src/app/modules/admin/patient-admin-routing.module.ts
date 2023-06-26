@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClinicCreateComponent, ClinicListComponent, FeedbackCreateComponent, UserCreateComponent, UserListComponent } from './components';
+import { ClinicCreateComponent, ClinicListComponent, FeedbackCreateComponent, UserCreateComponent, UserListComponent, UserUpdateComponent } from './components';
 import { DashboardFeedbackComponent } from './components/dashboard/dashboard-feedback.component';
 
 const routes: Routes = [{
@@ -50,6 +50,13 @@ const routes: Routes = [{
       component: UserCreateComponent,
       data: {
         title: 'user-create',
+      },
+    },
+    {
+      path: 'user/update',
+      component: UserUpdateComponent,
+      data: {
+        title: 'user-update',
       },
     }
   ]
