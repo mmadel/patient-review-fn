@@ -12,6 +12,7 @@
   </c-col>
 </c-row>
 <hr />
+<c-alert color="danger" *ngIf="errorMessage !== ''">{{ errorMessage }}</c-alert>
 <table cTable>
   <thead cTableColor="light">
     <tr>
@@ -34,12 +35,12 @@
       <td>{{clinic.zipcode}}</td>
       <td>
         <button cButton variant="outline" class="me-3" (click)="update(clinic.id)">
-            <svg cIcon name="cilPen"></svg>
+          <svg cIcon name="cilPen"></svg>
         </button>
         <button cButton variant="outline" (click)="deleteClinic(clinic.id)">
-            <svg cIcon name="cilTrash"></svg>
+          <svg cIcon name="cilTrash"></svg>
         </button>
-    </td>
+      </td>
     </tr>
 
   </tbody>

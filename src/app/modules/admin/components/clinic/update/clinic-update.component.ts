@@ -77,6 +77,7 @@ export class ClinicUpdateComponent implements OnInit {
       address = address + this.form.clinicaddressstate + ",";
     if (this.form.clinicaddressprovince)
       address = address + this.form.clinicaddressprovince + ",";
+    address = address + this.form.clinicaddresscity + ",";
     address = address + this.form.clinicaddresszipcode;
     return address
   }
