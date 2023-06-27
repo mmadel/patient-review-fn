@@ -13,5 +13,5 @@
 /feedback/api/reports/excel https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/reports/excel 200
 /feedback/api/clinic/find/clinicId/:clinicId https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/clinic/find/clinicId/:clinicId 200
 /feedback/api/clinic/update https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/clinic/update 200
-/feedback/api/clinic/delete/clinicId/:clinicId https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/clinic/delete/clinicId/:clinicId
+/feedback/api/clinic/delete/clinicId/:clinicId https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/clinic/delete/clinicId/:clinicId 200
 /*  /index.html   200
