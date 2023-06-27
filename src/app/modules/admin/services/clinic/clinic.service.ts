@@ -8,28 +8,29 @@ import { Clinic } from '../../models/clinic.model';
   providedIn: 'root'
 })
 export class ClinicService {
-  private userUrl = environment.baseURL + 'clinic'
+  private clinicUrl = environment.baseURL + 'clinic'
   public selectedClinic$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   public filterDate$: BehaviorSubject<number[] | null> = new BehaviorSubject<number[] | null>(null);
   constructor(private htpClient: HttpClient) { }
 
   getByUserId(userId: number) {
-    return this.htpClient.get<Clinic[]>(`${this.userUrl}` + '/find/userId/' + userId, { observe: 'response' })
+    return this.htpClient.get<Clinic[]>(`${this.clinicUrl}` + '/find/userId/' + userId, { observe: 'response' })
   }
   get() {
-    var findClinicClinic = this.userUrl + '/find'
+    var findClinicClinic = this.clinicUrl + '/find'
     return this.htpClient.get<Clinic[]>(findClinicClinic, { observe: 'response' })
   }
   create(clinic: Clinic) {
     const headers = { 'content-type': 'application/json' }
-    var createClinicClinic = this.userUrl + '/create'
+    var createClinicClinic = this.clinicUrl + '/create'
     return this.htpClient.post(createClinicClinic, JSON.stringify(clinic), { 'headers': headers, observe: 'response' })
   }
 
   getById(id: string | null) {
-    return this.htpClient.get<Clinic>(`${this.userUrl}` + '/find/clinicId/' + id)
+    return this.htpClient.get<Clinic>(`${this.clinicUrl}` + '/find/clinicId/' + id)
   }
   delete(id: string | null) {
-    return this.htpClient.delete(`${this.userUrl}` + '/delete/clinicId/' + id)
+    var deleteClinicURL = this.clinicUrl +  '/delete/clinicId/';
+    return this.htpClient.delete(deleteClinicURL + id)
   }
 }
