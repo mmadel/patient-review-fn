@@ -45,4 +45,11 @@ export class ClinicListComponent implements OnInit {
     }
     return renderedClinic;
   }
+  update(id: number | undefined | null) {
+
+  }
+
+  deleteClinic(id: number | undefined | null) {
+
+  }
 }

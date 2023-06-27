@@ -7,6 +7,7 @@ export * from './dashboard/charts/charts.components/hospitality/chart-hospitalit
 export * from './dashboard/charts/charts.components/clinical/chart-clinical.component'
 export * from './clinic/clinic-list.component'
 export * from './clinic/create/clinic-create.component'
+export * from './clinic/update/clinic-update.component'
 export * from './user/list/user-list.component'
 export * from './user/create/user-create.component'
 export * from './user/update/user-update.component'

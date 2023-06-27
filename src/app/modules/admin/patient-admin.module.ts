@@ -46,7 +46,7 @@ import {
   UserListComponent,
   UserCreateComponent,
   UserUpdateComponent,
-  ExcelReportComponent
+  ExcelReportComponent,ClinicUpdateComponent
 } from './components';
 
 
