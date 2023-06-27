@@ -7,5 +7,11 @@
 /feedback/api/authentication/login https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/authentication/login 200
 /feedback/api/authentication/register https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/authentication/register 200
 /feedback/api/user/find https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/user/find 200
+/feedback/api/user/find/userId/:userId https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/user/find/userId/:userId 200
+/feedback/api/user/update https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/user/update 200
+/feedback/api/user/delete/userId/:userId https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/user/delete/userId/:userId 200
 /feedback/api/reports/excel https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/reports/excel 200
+/feedback/api/clinic/find/clinicId/:clinicId https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/clinic/find/clinicId/:clinicId 200
+/feedback/api/clinic/update https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/clinic/update 200
+/feedback/api/clinic/delete/clinicId/:clinicId https://patient-feedback-service-35ab17466c7a.herokuapp.com/feedback/api/clinic/delete/clinicId/:clinicId 200
 /*  /index.html   200

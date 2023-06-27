@@ -32,5 +32,14 @@ export class UserListComponent implements OnInit {
   create() {
     this.router.navigateByUrl('/admin/user/create');
   }
+  deleteUser(id: string | undefined | null) {
+    this.userService.delete(id || '{}').subscribe(() => {
+      location.reload();
+    })
+  }
+
+  update(id: string | undefined | null) {
+    this.router.navigate(['/admin/user/update', id])
+  }
 
 }

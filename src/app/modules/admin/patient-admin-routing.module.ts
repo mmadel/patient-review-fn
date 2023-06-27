@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClinicCreateComponent, ClinicListComponent, ExcelReportComponent, FeedbackCreateComponent, UserCreateComponent, UserListComponent } from './components';
+
+import { ClinicCreateComponent, ClinicListComponent, ClinicUpdateComponent, ExcelReportComponent, FeedbackCreateComponent, UserCreateComponent, UserListComponent, UserUpdateComponent } from './components';
+
 import { DashboardFeedbackComponent } from './components/dashboard/dashboard-feedback.component';
 
 const routes: Routes = [{
@@ -40,6 +42,13 @@ const routes: Routes = [{
       },
     },
     {
+      path: 'clinic/update/:clinicId',
+      component: ClinicUpdateComponent,
+      data: {
+        title: 'clinic-update',
+      },
+    },
+    {
       path: 'user/list',
       component: UserListComponent,
       data: {
@@ -53,6 +62,12 @@ const routes: Routes = [{
       },
     },
     {
+      path: 'user/update/:userId',
+      component: UserUpdateComponent,
+      data: {
+        title: 'user-update',
+      }
+    }, {
       path: 'report/feedback',
       component: ExcelReportComponent,
       data: {
