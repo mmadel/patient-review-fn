@@ -46,7 +46,7 @@ export class ClinicListComponent implements OnInit {
     return renderedClinic;
   }
   update(id: number | undefined | null) {
-
+    this.router.navigate(['/admin/clinic/update', id])
   }
 
   deleteClinic(id: number | undefined | null) {
