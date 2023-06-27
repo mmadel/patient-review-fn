@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash';
-import { add } from 'lodash';
 import { User } from 'src/app/modules/security/model/user';
 import { Countries } from '../../../models/address/country.model';
 import { Clinic } from '../../../models/clinic.model';

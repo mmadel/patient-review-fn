@@ -25,4 +25,11 @@ export class ClinicService {
     var createClinicClinic = this.userUrl + '/create'
     return this.htpClient.post(createClinicClinic, JSON.stringify(clinic), { 'headers': headers, observe: 'response' })
   }
+
+  getById(id: string | null) {
+    return this.htpClient.get<Clinic>(`${this.userUrl}` + '/find/clinicId/' + id)
+  }
+  delete(id: string | null) {
+    return this.htpClient.delete(`${this.userUrl}` + '/delete/clinicId/' + id)
+  }
 }

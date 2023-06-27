@@ -16,6 +16,7 @@ interface RenderedClinic {
   styleUrls: ['./clinic-list.component.css']
 })
 export class ClinicListComponent implements OnInit {
+  errorMessage: string | null = '';
   clinics: RenderedClinic[] | null = new Array();
   constructor(private router: Router, private clinicService: ClinicService) { }
 
@@ -44,5 +45,18 @@ export class ClinicListComponent implements OnInit {
       zipcode: splitted[3]
     }
     return renderedClinic;
+  }
+  update(id: number | undefined | null) {
+    this.router.navigate(['/admin/clinic/update', id])
+  }
+
+  deleteClinic(id: number | undefined | null) {
+    this.clinicService.delete(id?.toString() || '{}').subscribe(() => {
+      this.errorMessage =''
+      location.reload();
+    }, error => {
+      this.errorMessage = error.error.error;
+    },
+    )
   }
 }
