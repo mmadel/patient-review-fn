@@ -6,7 +6,7 @@
     </button>
     <c-header-nav class="d-none d-lg-flex me-auto">
       <select #userClinics cSelect sizing="sm" (change)="setSelectedClinic($event)">
-        <option *ngFor="let clinic of clinics" [value]="clinic.id">
+        <option *ngFor="let clinic of clinics" [value]="clinic.id" >
           {{clinic.name}}
         </option>
       </select>

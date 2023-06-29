@@ -69,6 +69,9 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
     })*/
     this.clinicService.getByUserId(Number(localStorage.getItem('userId') || {})).subscribe(response => {
       response.body?.forEach(element => {
+        var selectedClinicId = localStorage.getItem('selected-clinic')
+        if(element.id === selectedClinicId)
+          element.selected = true;
         this.clinics.push(element);
       });
       this.clinicService.selectedClinic$.next(this.clinics[0].id)
@@ -79,6 +82,7 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
     this.classToggler.toggle('body', 'dark-theme');
   }
   setSelectedClinic(event: any) {
+    localStorage.setItem('selected-clinic',event.target.value)
     this.clinicService.selectedClinic$.next(event.target.value)
   }
   startDateChange(event: any) {
