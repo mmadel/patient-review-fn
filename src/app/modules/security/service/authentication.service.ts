@@ -31,6 +31,7 @@ export class AuthenticationService {
     localStorage.removeItem('userId');
     localStorage.removeItem('userRole');
     localStorage.removeItem('userName');
+    localStorage.removeItem('selected-clinic');
     this.user$.next(null);
   }
   fetchCurrentUser(): Observable<User> {
