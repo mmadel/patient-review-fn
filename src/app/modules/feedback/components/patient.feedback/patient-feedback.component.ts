@@ -11,6 +11,7 @@ import { FeedbackService } from '../../services/feedback.service';
 })
 export class PatientFeedbackComponent implements OnInit {
   isSubmitted: boolean = false;
+  isClinicIdEmpty: boolean = false;
   clinicId: number;
   model: PatientFeedback;
   hospitalityToggle: any
@@ -22,13 +23,17 @@ export class PatientFeedbackComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    window.addEventListener("keyup", disableF5);
+    window.addEventListener("keydown", disableF5);
 
+    function disableF5(e:any) {
+      if ((e.which || e.keyCode) == 116) e.preventDefault();
+    };
     this.isSubmitted = false;
     this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
-    console.log('oninit ' + this.clinicId)
     this.initModel()
     if (this.clinicId === 0 || this.clinicId === undefined || this.clinicId === null) {
-      this.router.navigate(['admin/feedback/create']);
+      this.isClinicIdEmpty = true;
     } else {
       this.router.navigate([], {
         queryParams: {

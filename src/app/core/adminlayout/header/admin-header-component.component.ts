@@ -67,14 +67,15 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
       });
       this.clinicService.selectedClinic$.next(this.clinics[0].id)
     })*/
+    var selectedClinicId = localStorage.getItem('selected-clinic')
     this.clinicService.getByUserId(Number(localStorage.getItem('userId') || {})).subscribe(response => {
       response.body?.forEach(element => {
-        var selectedClinicId = localStorage.getItem('selected-clinic')
-        if(element.id === selectedClinicId)
+        if (element.id == selectedClinicId)
           element.selected = true;
         this.clinics.push(element);
       });
-      this.clinicService.selectedClinic$.next(this.clinics[0].id)
+      console.log(JSON.stringify(this.clinics))
+      this.clinicService.selectedClinic$.next(Number(selectedClinicId))
     })
   }
   setTheme(value: string): void {
@@ -82,7 +83,7 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
     this.classToggler.toggle('body', 'dark-theme');
   }
   setSelectedClinic(event: any) {
-    localStorage.setItem('selected-clinic',event.target.value)
+    localStorage.setItem('selected-clinic', event.target.value)
     this.clinicService.selectedClinic$.next(event.target.value)
   }
   startDateChange(event: any) {
