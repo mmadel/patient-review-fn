@@ -69,7 +69,7 @@ export class UserCreateComponent implements OnInit {
         (response) => {
           this.router.navigateByUrl('admin/user/list')
         },
-        (error) => { console.log(error); });
+        (error) => { this.errorMessage = error.error.error });
     } else {
       console.log('not valid')
       this.errorMessage = 'Please enter valid data';

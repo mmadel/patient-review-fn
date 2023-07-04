@@ -94,11 +94,11 @@ export class UserUpdateComponent implements OnInit {
       clinics: this.createClinics(this.form.selectedClinics)
     }
     if (this.userCreateForm.valid) {
-      this.userService.create(user).subscribe(
+      this.userService.update(user).subscribe(
         (response) => {
           this.router.navigateByUrl('admin/user/list')
         },
-        (error) => { console.log(error); });
+        (error) => { this.errorMessage = error.error.error;});
     } else {
       console.log('not valid')
       this.errorMessage = 'Please enter valid data';
