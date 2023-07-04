@@ -75,7 +75,7 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
         this.clinics.push(element);
       });
       console.log(JSON.stringify(this.clinics))
-      this.clinicService.selectedClinic$.next(Number(selectedClinicId))
+      this.clinicService.selectedClinic$.next(Number(selectedClinicId) === 0?this.clinics[0].id:Number(selectedClinicId) )
     })
   }
   setTheme(value: string): void {
