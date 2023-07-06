@@ -8,7 +8,7 @@
                 </c-card-header>
                 <c-card-body>
                     <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
-                    <form cForm #userCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
+                    <form cForm #userCreateForm="ngForm" (ngSubmit)="create($event)" (change)="resetError()">
                         <div class="form-group">
                             <small *ngIf="name.invalid && (name.dirty || name.touched)" class="form-text text-danger">
                                 user name is required
@@ -129,8 +129,8 @@
                         <div class="form-group">
                             <c-input-group class="mb-3">
                                 <c-multi-select *ngIf="returnClinics" multiple cSelect sizing="sm"
-                                    autoComplete="selectedClinics" name="selectedClinics" id="selectedClinics"
-                                    [(ngModel)]="form.selectedClinics" #selectedClinics="ngModel">
+                                    autoComplete="selectedClinics" name="selectedClinics" id="selectedClinics" 
+                                    [(ngModel)]="form.selectedClinics">
                                     <c-multi-select-option *ngFor="let clinic of returnClinics"
                                         [value]="clinic.id?.toString()"
                                         [selected]="clinic.selected">{{clinic.name}}</c-multi-select-option>

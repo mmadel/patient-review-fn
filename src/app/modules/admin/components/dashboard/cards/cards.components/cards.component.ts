@@ -22,12 +22,11 @@ export class CardsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     combineLatest([this.clinicService.selectedClinic$, this.clinicService.filterDate$])
       .pipe(
-        tap((result) => { console.log(result) }),
+        tap((result) => { }),
         filter((result) => result[0] !== null),
         switchMap(result => {
           var startDate = result[1] === null ? moment(new Date(moment().startOf('month').format('YYYY-MM-DD'))).startOf('day').valueOf() : result[1][0];
           var endDate = result[1] === null ? moment(new Date(moment().endOf('month').format('YYYY-MM-DD'))).endOf('day').valueOf() : result[1][1];
-          console.log(startDate)
           const obs$ = this.performanceIndexService.get(result[0], startDate, endDate);
           return obs$.pipe(
             catchError(err => of(err))
@@ -46,7 +45,7 @@ export class CardsComponent implements OnInit, OnDestroy {
           }
 
         }
-      }, (err) => console.log(err.error.message))
+      }, (err) => {})
   }
 
 }

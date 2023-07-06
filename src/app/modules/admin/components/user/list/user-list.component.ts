@@ -10,6 +10,7 @@ import { UserService } from '../../../services/user/user.service';
 })
 export class UserListComponent implements OnInit {
   users: User[] = new Array();
+  isLoggedIn: boolean;
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
@@ -25,9 +26,13 @@ export class UserListComponent implements OnInit {
       });
     },
       error => {
-        console.log(error)
       },
     )
+  }
+  isLoggedInUser(id: string | null | undefined) {
+    var userId: string = localStorage.getItem('userId') || '{}';
+    this.isLoggedIn= userId == id ? true : false;
+    return this.isLoggedIn;
   }
   create() {
     this.router.navigateByUrl('/admin/user/create');

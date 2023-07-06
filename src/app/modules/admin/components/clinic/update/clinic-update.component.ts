@@ -63,9 +63,8 @@ export class ClinicUpdateComponent implements OnInit {
         (response) => {
           this.router.navigateByUrl('admin/clinic/list')
         },
-        (error) => { console.log(error); });
+        (error) => {  });
     } else {
-      console.log('not valid')
       this.errorMessage = 'Please enter valid data';
     }
   }

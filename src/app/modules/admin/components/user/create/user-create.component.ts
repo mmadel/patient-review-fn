@@ -48,14 +48,17 @@ export class UserCreateComponent implements OnInit {
       response.body?.forEach(element => {
         this.returnClinics?.push(element)
       });
-      console.log(this.returnClinics)
     },
       error => {
-        console.log(error)
+        
       },
     )
   }
-  create() {
+  create(event: any) {
+    if (event.submitter.innerHTML === ' Select all options '){
+      return;
+    }
+      
     var user: User = {
       id: null,
       name: this.form.name,
@@ -71,7 +74,6 @@ export class UserCreateComponent implements OnInit {
         },
         (error) => { this.errorMessage = error.error.error });
     } else {
-      console.log('not valid')
       this.errorMessage = 'Please enter valid data';
     }
   }

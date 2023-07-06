@@ -57,9 +57,7 @@ export class PatientFeedbackComponent implements OnInit {
       setTimeout(() => {
         //window.location.reload()
         this.router.navigateByUrl('feedback/submit', { skipLocationChange: true }).then(() => {
-          console.log(`Before navigation I am on:${this.router.url}`)
           this.router.navigate(['feedback/submit'], { queryParams: { clinicId: this.clinicId } }).then(() => {
-            console.log(`After navigation I am on:${this.router.url}`)
             this.ngOnInit()
           })
         })

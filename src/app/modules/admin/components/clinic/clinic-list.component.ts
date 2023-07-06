@@ -27,7 +27,6 @@ export class ClinicListComponent implements OnInit {
       });
     },
       error => {
-        console.log(error)
       },
     )
   }

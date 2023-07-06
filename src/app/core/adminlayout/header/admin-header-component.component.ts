@@ -74,7 +74,6 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
           element.selected = true;
         this.clinics.push(element);
       });
-      console.log(JSON.stringify(this.clinics))
       this.clinicService.selectedClinic$.next(Number(selectedClinicId) === 0?this.clinics[0].id:Number(selectedClinicId) )
     })
   }
@@ -94,9 +93,7 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
     this.emitFilterDate(this.startDate, this.endDate)
   }
   emitFilterDate(startDate: number, endDate: number) {
-    console.log('emitFilterDate');
     var validDate = this.validateDateCriteria(startDate, endDate)
-    console.log('validDate ' + validDate);
     if (validDate) {
       var dates: number[] = [startDate, endDate]
       this.clinicService.filterDate$.next(dates)
@@ -104,18 +101,13 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
   }
   validateDateCriteria(startDate: number, endDate: number): boolean {
     if (startDate > endDate) {
-      console.log('this.dashBoardDateCriteria.startDate ' + startDate);
-      console.log('this.dashBoardDateCriteria.endDate ' + endDate);
-      console.log('this.dashBoardDateCriteria.startDate > this.dashBoardDateCriteria.endDate');
       return false;
     }
 
     if (isNaN(startDate)) {
-      console.log('isNaN(this.dashBoardDateCriteria.startDate)');
       return false;
     }
     if (isNaN(endDate)) {
-      console.log('isNaN(this.dashBoardDateCriteria.endDate)');
       return false;
     }
     return true;

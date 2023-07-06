@@ -76,7 +76,6 @@ export class UserUpdateComponent implements OnInit {
         });
       },
         error => {
-          console.log(error)
         },
       )
     })
@@ -100,7 +99,6 @@ export class UserUpdateComponent implements OnInit {
         },
         (error) => { this.errorMessage = error.error.error;});
     } else {
-      console.log('not valid')
       this.errorMessage = 'Please enter valid data';
     }
   }
