@@ -1,5 +1,5 @@
-<c-row>
-    <c-col *ngFor="let widget of brandData; index as i" md="12" lg="6" xl="3">
+<c-row *ngIf="data">
+    <c-col  *ngFor="let widget of data; index as i" md="12" lg="6" xl="3">
       <c-widget-stat-d
         
         [color]="widget.color"
