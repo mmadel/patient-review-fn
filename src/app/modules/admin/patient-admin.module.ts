@@ -28,8 +28,6 @@ import {
   MultiSelectModule,
   WidgetModule,
   ProgressModule,
-
-
 } from '@coreui/angular-pro';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ChartjsModule } from '@coreui/angular-chartjs';
@@ -47,7 +45,8 @@ import {
   UserCreateComponent,
   UserUpdateComponent,
   ExcelReportComponent,
-  ClinicUpdateComponent
+  ClinicUpdateComponent,
+  ServiceCountersComponent
 } from './components';
 
 
@@ -63,7 +62,8 @@ const APP_ADMIN_COMPONENT = [
   UserCreateComponent,
   UserUpdateComponent,
   ExcelReportComponent,
-  ClinicUpdateComponent
+  ClinicUpdateComponent,
+  ServiceCountersComponent
 ]
 @NgModule({
   declarations: [
