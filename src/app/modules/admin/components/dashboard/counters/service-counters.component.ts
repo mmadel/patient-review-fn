@@ -37,13 +37,21 @@ export class ServiceCountersComponent implements OnInit {
             veryPositive: 0,
             positive: 0,
             negative: 0,
-            veryNegative: 0
+            veryNegative: 0,
+            veryPositivePercentage: 0,
+            positivePercentage: 0,
+            negativePercentage: 0,
+            veryNegativePercentage: 0
           },
           clinicalCountersContainer: {
             veryPositive: 0,
             positive: 0,
             negative: 0,
-            veryNegative: 0
+            veryNegative: 0,
+            veryPositivePercentage: 0,
+            positivePercentage: 0,
+            negativePercentage: 0,
+            veryNegativePercentage: 0
           }
         }
         for (const [key, value] of Object.entries(result.body)) {

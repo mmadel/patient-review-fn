@@ -7,7 +7,7 @@ export class countersContainerFiller {
         {
             icon: this.icons.cilMoodVeryGood,
             color: 'success',
-            values: [{ title: 'hospitality', value: '89K' }, { title: 'clinical', value: '459' }],
+            values: [{ title: 'hospitality', value: '' }, { title: 'clinical', value: '' }],
             capBg: { '--cui-card-cap-bg': '#3b5998' },
 
 
@@ -15,37 +15,49 @@ export class countersContainerFiller {
         {
             icon: this.icons.cilHappy,
             color: 'info',
-            values: [{ title: 'hospitality', value: '973k' }, { title: 'clinical', value: '1.792' }],
+            values: [{ title: 'hospitality', value: '' }, { title: 'clinical', value: '' }],
             capBg: { '--cui-card-cap-bg': '#00aced' },
 
         },
         {
             icon: this.icons.cilMeh,
             color: 'warning',
-            values: [{ title: 'hospitality', value: '500' }, { title: 'clinical', value: '1.292' }],
+            values: [{ title: 'hospitality', value: '' }, { title: 'clinical', value: '' }],
             capBg: { '--cui-card-cap-bg': '#4875b4' },
         },
         {
             icon: this.icons.cilFrown,
             color: 'danger',
-            values: [{ title: 'hospitality', value: '500' }, { title: 'clinical', value: '1.292' }],
+            values: [{ title: 'hospitality', value: '' }, { title: 'clinical', value: '' }],
             capBg: { '--cui-card-cap-bg': '#4875b4' },
         },
     ];
-    
+
     public static fill(countersContainer: CountersContainer) {
-       this.data[0].values[0].value = countersContainer.hospitalityCounterContainer.veryPositive.toString()
-       this.data[0].values[1].value = countersContainer.clinicalCountersContainer.veryPositive.toString()
+        this.data[0].values[0].value = "(" + countersContainer.hospitalityCounterContainer.veryPositive.toString() + ")"
+            + " " + countersContainer.hospitalityCounterContainer.veryPositivePercentage.toString() + "%";
 
-       this.data[1].values[0].value = countersContainer.hospitalityCounterContainer.positive.toString()
-       this.data[1].values[1].value = countersContainer.clinicalCountersContainer.positive.toString()
+        this.data[0].values[1].value = "(" + countersContainer.clinicalCountersContainer.veryPositive.toString() + ")"
+            + " " + countersContainer.clinicalCountersContainer.veryPositivePercentage.toString() + "%";
 
-       this.data[2].values[0].value = countersContainer.hospitalityCounterContainer.negative.toString()
-       this.data[2].values[1].value = countersContainer.clinicalCountersContainer.negative.toString()
+        this.data[1].values[0].value = "(" + countersContainer.hospitalityCounterContainer.positive.toString() + ")"
+            + " " + countersContainer.hospitalityCounterContainer.positivePercentage.toString() + "%";
 
-       this.data[3].values[0].value = countersContainer.hospitalityCounterContainer.veryNegative.toString()
-       this.data[3].values[1].value = countersContainer.clinicalCountersContainer.veryNegative.toString()
+        this.data[1].values[1].value = "(" + countersContainer.clinicalCountersContainer.positive.toString() + ")"
+            + " " + countersContainer.clinicalCountersContainer.positivePercentage.toString() + "%";
 
-       return this.data;
+        this.data[2].values[0].value = "(" + countersContainer.hospitalityCounterContainer.negative.toString() + ")"
+            + " " + countersContainer.hospitalityCounterContainer.negativePercentage.toString() + "%";
+
+        this.data[2].values[1].value = "(" + countersContainer.clinicalCountersContainer.negative.toString() + ")"
+            + " " + countersContainer.clinicalCountersContainer.negativePercentage.toString() + "%";
+
+        this.data[3].values[0].value = "(" + countersContainer.hospitalityCounterContainer.veryNegative.toString() + ")"
+            + " " + countersContainer.hospitalityCounterContainer.veryNegativePercentage.toString() + "%";
+
+        this.data[3].values[1].value = "(" + countersContainer.clinicalCountersContainer.veryNegative.toString() + ")"
+            + " " + countersContainer.clinicalCountersContainer.veryNegativePercentage.toString() + "%";
+
+        return this.data;
     }
 }
