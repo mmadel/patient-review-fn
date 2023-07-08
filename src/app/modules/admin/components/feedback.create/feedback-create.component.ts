@@ -9,13 +9,18 @@ import { ClinicService } from '../../services/clinic/clinic.service';
 export class FeedbackCreateComponent implements OnInit {
   public createFeedbackURL: string
   public clinicId: number | null;
+  public clinicName: string | null;
   public baseURL: string = location.origin;
   constructor(private clinicService: ClinicService) { }
 
   ngOnInit(): void {
     this.clinicService.selectedClinic$.subscribe(clinicId => {
-      this.clinicId = clinicId
-      this.createFeedbackURL = this.baseURL + '/#/feedback/submit?clinicId=' + clinicId;
+      this.clinicService.selectedClinicName$.subscribe(name => {
+        this.clinicName = name;
+        this.clinicId = clinicId
+        this.createFeedbackURL = this.baseURL + '/#/feedback/submit?clinicId=' + clinicId;
+      });
+
     })
   }
 

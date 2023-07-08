@@ -74,7 +74,8 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
           element.selected = true;
         this.clinics.push(element);
       });
-      this.clinicService.selectedClinic$.next(Number(selectedClinicId) === 0?this.clinics[0].id:Number(selectedClinicId) )
+      this.clinicService.selectedClinic$.next(Number(selectedClinicId) === 0 ? this.clinics[0].id : Number(selectedClinicId))
+      this.clinicService.selectedClinicName$.next(this.clinics[0].name)
     })
   }
   setTheme(value: string): void {
@@ -84,6 +85,11 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
   setSelectedClinic(event: any) {
     localStorage.setItem('selected-clinic', event.target.value)
     this.clinicService.selectedClinic$.next(event.target.value)
+    for(let i = 0 ; i<this.clinics.length ;i++){
+      if(this.clinics[i].id == Number(event.target.value)){
+        this.clinicService.selectedClinicName$.next(this.clinics[i].name)
+      }
+    }
   }
   startDateChange(event: any) {
     this.startDate = event ? moment(new Date(event)).startOf('day').valueOf() : 0;
