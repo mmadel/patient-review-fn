@@ -37,7 +37,7 @@
         <button cButton variant="outline" class="me-3" (click)="update(clinic.id)">
           <svg cIcon name="cilPen"></svg>
         </button>
-        <button cButton variant="outline" (click)="deleteClinic(clinic.id)">
+        <button cButton variant="outline" (click)="confirmDelete(clinic.id)">
           <svg cIcon name="cilTrash"></svg>
         </button>
       </td>
@@ -45,3 +45,16 @@
 
   </tbody>
 </table>
+<c-modal id="liveDemoModal" [visible]="visibleConfirmDelete">
+  <c-modal-header>
+    <h5 cModalTitle>Modal title</h5>
+    <button (click)="closeDeleteConfirmation()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>Are you sure  to delete this clinic?</c-modal-body>
+  <c-modal-footer>
+    <button (click)="closeDeleteConfirmation()" cButton color="secondary">
+      Close
+    </button>
+    <button cButton color="primary" (click)="handleDelete()">Save changes</button>
+  </c-modal-footer>
+</c-modal>
