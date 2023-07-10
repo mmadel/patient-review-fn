@@ -78,14 +78,13 @@ export class ExcelReportComponent implements OnInit {
         this.errorMsg = ""
       },
       (error) => {
-        console.log(error)
-        this.errorMsg = "The inputs data returns empty result"
+        this.errorMsg = "The inputs data returns empty result for selected clinic"
       });
   }
   public isValidInputs(): boolean {
     var checkFeedbackList = this.reportCriteria.feedbackFilter === undefined || this.reportCriteria.feedbackFilter.length === 0;
     var checkDateRange = this.reportCriteria.startDate_date === undefined || this.reportCriteria.endDate_date === undefined;
-    var result: boolean = (this.reportCriteria.serviceName === null) || checkFeedbackList || checkDateRange ? true : false
+    var result: boolean = (this.reportCriteria.serviceName === undefined || this.reportCriteria.serviceName.length < 0) || checkFeedbackList || checkDateRange ? true : false
     return result;
 
   }
