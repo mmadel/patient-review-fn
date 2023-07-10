@@ -11,6 +11,8 @@ import { UserService } from '../../../services/user/user.service';
 export class UserListComponent implements OnInit {
   users: User[] = new Array();
   isLoggedIn: boolean;
+  public visibleConfirmDelete = false;
+  selectedUserId: string | undefined | null
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
@@ -37,7 +39,17 @@ export class UserListComponent implements OnInit {
   create() {
     this.router.navigateByUrl('/admin/user/create');
   }
-  deleteUser(id: string | undefined | null) {
+  confirmDelete(id: string | undefined | null){
+    this.visibleConfirmDelete = !this.visibleConfirmDelete;
+    this.selectedUserId = id;
+  }
+  closeDeleteConfirmation(){
+    this.visibleConfirmDelete = !this.visibleConfirmDelete;
+  }
+  handleDelete(){
+    this.deleteUser(this.selectedUserId);
+  }
+  private deleteUser(id: string | undefined | null) {
     this.userService.delete(id || '{}').subscribe(() => {
       location.reload();
     })

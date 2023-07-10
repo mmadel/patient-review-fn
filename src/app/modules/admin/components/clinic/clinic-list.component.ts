@@ -18,6 +18,8 @@ interface RenderedClinic {
 export class ClinicListComponent implements OnInit {
   errorMessage: string | null = '';
   clinics: RenderedClinic[] | null = new Array();
+  public visibleConfirmDelete = false;
+  selectedClinicId: number | undefined | null
   constructor(private router: Router, private clinicService: ClinicService) { }
 
   ngOnInit(): void {
@@ -48,7 +50,16 @@ export class ClinicListComponent implements OnInit {
   update(id: number | undefined | null) {
     this.router.navigate(['/admin/clinic/update', id])
   }
-
+  confirmDelete(id: number | undefined | null){
+    this.visibleConfirmDelete = !this.visibleConfirmDelete;
+    this.selectedClinicId = id;
+  }
+  closeDeleteConfirmation(){
+    this.visibleConfirmDelete = !this.visibleConfirmDelete;
+  }
+  handleDelete(){
+    this.deleteClinic(this.selectedClinicId);
+  }
   deleteClinic(id: number | undefined | null) {
     this.clinicService.delete(id?.toString() || '{}').subscribe(() => {
       this.errorMessage =''

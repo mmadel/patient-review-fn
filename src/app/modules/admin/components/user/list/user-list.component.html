@@ -39,7 +39,7 @@
                     [disabled]="isLoggedInUser(user.id)">
                     <svg cIcon name="cilPen"></svg>
                 </button>
-                <button cButton variant="outline" (click)="deleteUser(user.id)" [disabled]="isLoggedInUser(user.id)">
+                <button cButton variant="outline" (click)="confirmDelete(user.id)" [disabled]="isLoggedInUser(user.id)">
                     <svg cIcon name="cilTrash"></svg>
                 </button>
             </td>
@@ -50,3 +50,16 @@
 
     </tbody>
 </table>
+<c-modal id="liveDemoModal" [visible]="visibleConfirmDelete">
+    <c-modal-header>
+      <h5 cModalTitle>Modal title</h5>
+      <button (click)="closeDeleteConfirmation()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>Are you sure  to delete this user?</c-modal-body>
+    <c-modal-footer>
+      <button (click)="closeDeleteConfirmation()" cButton color="secondary">
+        Close
+      </button>
+      <button cButton color="primary" (click)="handleDelete()">Save changes</button>
+    </c-modal-footer>
+  </c-modal>
