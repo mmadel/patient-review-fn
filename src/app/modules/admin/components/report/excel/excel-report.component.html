@@ -28,12 +28,13 @@
                                 </c-card-header>
                                 <c-card-body>
                                     <form cForm>
-                                        <select cSelect cFormControl name="recommendation"
+                                        <c-multi-select multiple cSelect cFormControl name="service_name"
                                             [(ngModel)]="reportCriteria.serviceName">
-                                            <option value="">Select</option>
-                                            <option *ngFor="let service of serviceNames" [value]="service.serviceValue">
-                                                {{service.serviceName}}</option>
-                                        </select>
+
+                                            <c-multi-select-option *ngFor="let service of serviceNames"
+                                                [value]="service.serviceValue">
+                                                {{service.serviceName}}</c-multi-select-option>
+                                        </c-multi-select>
                                     </form>
                                 </c-card-body>
                             </c-card>
@@ -48,7 +49,7 @@
                                 <c-card-body>
                                     <form cForm>
                                         <c-multi-select multiple [(ngModel)]="reportCriteria.feedbackFilter"
-                                            name="sssss">
+                                            name="fback">
                                             <c-multi-select-option *ngFor="let feedback of feedbackValues"
                                                 [value]="feedback.feedbackValue">{{feedback.feedbackName}}</c-multi-select-option>
                                         </c-multi-select>
