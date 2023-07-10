@@ -15,7 +15,7 @@ import { ExcelReportService } from '../../../services/report/excel-report.servic
 })
 export class ExcelReportComponent implements OnInit {
   searchInputNotValid: boolean = false;
-  errorMsg: string="";
+  errorMsg: string = "";
   reportCriteria: ExcelReportCriteria = new ExcelReportCriteria();
   feedbackValues = feedbackValues;
   serviceNames = ServiceName;
@@ -75,16 +75,17 @@ export class ExcelReportComponent implements OnInit {
         a.download = 'feedback-' + nameDatePart + '.xlsx';
         a.click();
         URL.revokeObjectURL(objectUrl);
-        this.errorMsg=""
+        this.errorMsg = ""
       },
       (error) => {
+        console.log(error)
         this.errorMsg = "The inputs data returns empty result"
       });
   }
   public isValidInputs(): boolean {
     var checkFeedbackList = this.reportCriteria.feedbackFilter === undefined || this.reportCriteria.feedbackFilter.length === 0;
     var checkDateRange = this.reportCriteria.startDate_date === undefined || this.reportCriteria.endDate_date === undefined;
-    var result: boolean = this.reportCriteria.serviceName === '' || checkFeedbackList || checkDateRange ? true : false
+    var result: boolean = (this.reportCriteria.serviceName === null) || checkFeedbackList || checkDateRange ? true : false
     return result;
 
   }
