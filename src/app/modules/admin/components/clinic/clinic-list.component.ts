@@ -59,6 +59,7 @@ export class ClinicListComponent implements OnInit {
   }
   handleDelete(){
     this.deleteClinic(this.selectedClinicId);
+    this.visibleConfirmDelete = !this.visibleConfirmDelete;
   }
   deleteClinic(id: number | undefined | null) {
     this.clinicService.delete(id?.toString() || '{}').subscribe(() => {
