@@ -82,6 +82,15 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
       });
       this.clinicService.selectedClinic$.next(Number(selectedClinicId) === 0 ? this.clinics[0].id : Number(selectedClinicId))
       this.clinicService.selectedClinicName$.next(this.clinics[0].name)
+      if(Number(selectedClinicId) === 0 ){
+        this.clinicService.selectedClinicName$.next(this.clinics[0].name)
+      }else{
+        for (let i = 0; i < this.clinics.length; i++) {
+          if (this.clinics[i].id == Number(selectedClinicId)) {
+            this.clinicService.selectedClinicName$.next(this.clinics[i].name)
+          }
+        }
+      }
     })
   }
   setTheme(value: string): void {
