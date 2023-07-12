@@ -18,6 +18,7 @@ export class ServiceCountersComponent implements OnInit {
   constructor(private clinicService: ClinicService, private performanceIndexService: PerformanceIndexService) { }
   icons = { cilMoodVeryGood, cilHappy, cilMeh, cilFrown };
   data: any;
+  total:number;
   ngOnInit(): void {
     combineLatest([this.clinicService.selectedClinic$, this.clinicService.filterDate$])
       .pipe(
@@ -38,6 +39,7 @@ export class ServiceCountersComponent implements OnInit {
             positive: 0,
             negative: 0,
             veryNegative: 0,
+            total:0,
             veryPositivePercentage: 0,
             positivePercentage: 0,
             negativePercentage: 0,
@@ -48,6 +50,7 @@ export class ServiceCountersComponent implements OnInit {
             positive: 0,
             negative: 0,
             veryNegative: 0,
+            total:0,
             veryPositivePercentage: 0,
             positivePercentage: 0,
             negativePercentage: 0,
@@ -64,6 +67,7 @@ export class ServiceCountersComponent implements OnInit {
           }
         }
         this.data = countersContainerFiller.fill(countersContainer);
+        this.total = countersContainer.hospitalityCounterContainer.total;
       }, (err) => { })
   }
 
