@@ -26,7 +26,7 @@ export class PatientFeedbackComponent implements OnInit {
     window.addEventListener("keyup", disableF5);
     window.addEventListener("keydown", disableF5);
 
-    function disableF5(e:any) {
+    function disableF5(e: any) {
       if ((e.which || e.keyCode) == 116) e.preventDefault();
     };
     this.isSubmitted = false;
@@ -44,9 +44,25 @@ export class PatientFeedbackComponent implements OnInit {
     }
   }
   checkFields(): boolean {
-    var isQuestionsSelected = this.model.feedbackQuestions?.clinicalFeedback === "" &&
-      this.model.feedbackQuestions?.clinicalFeedback === ""
-    return this.model.patientName === "" && isQuestionsSelected
+    var hospitalityValue: string = '';
+    var clinicalValue: string = '';
+    Object.keys(this.hospitalityToggle).forEach((key, index) => {
+      if (this.hospitalityToggle[key]) {
+        hospitalityValue = this.hospitalityToggle[key];
+        return;
+      }
+    });
+    Object.keys(this.clinicalToggle).forEach((key, index) => {
+      if (this.clinicalToggle[key]) {
+        clinicalValue = this.clinicalToggle[key];
+        return;
+      }
+    });
+    console.log((!hospitalityValue || !clinicalValue) + ' F')
+    console.log((this.model.patientName == "") + ' p')
+    var result: boolean = this.model.patientName == "" || (!hospitalityValue || !clinicalValue);
+    console.log(result)
+    return result;
   }
   submit() {
     this.populateModel();
