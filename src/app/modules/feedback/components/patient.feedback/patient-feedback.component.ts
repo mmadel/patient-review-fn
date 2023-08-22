@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import NoSleep from 'nosleep.js';
 import { PatientFeedback } from '../../models/patient.feedback';
 import { FeedbackService } from '../../services/feedback.service';
 
@@ -10,6 +11,7 @@ import { FeedbackService } from '../../services/feedback.service';
   styleUrls: ['./patient-feedback.component.css']
 })
 export class PatientFeedbackComponent implements OnInit {
+  @ViewChild('search') search: ElementRef;
   isSubmitted: boolean = false;
   isClinicIdEmpty: boolean = false;
   clinicId: number;
@@ -23,6 +25,7 @@ export class PatientFeedbackComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    
     window.addEventListener("keyup", disableF5);
     window.addEventListener("keydown", disableF5);
 
@@ -42,6 +45,7 @@ export class PatientFeedbackComponent implements OnInit {
         queryParamsHandling: 'merge'
       })
     }
+    document.getElementById("no_sleep_input")?.click();
   }
   checkFields(): boolean {
     var hospitalityValue: string = '';
@@ -57,11 +61,8 @@ export class PatientFeedbackComponent implements OnInit {
         clinicalValue = this.clinicalToggle[key];
         return;
       }
-    });
-    console.log((!hospitalityValue || !clinicalValue) + ' F')
-    console.log((this.model.patientName == "") + ' p')
+    });  
     var result: boolean = this.model.patientName == "" || (!hospitalityValue || !clinicalValue);
-    console.log(result)
     return result;
   }
   submit() {
@@ -150,5 +151,13 @@ export class PatientFeedbackComponent implements OnInit {
       Sad: false
     }
     this.clinicalToggle = clinicalToggle;
+  }
+  handleNoSleep(){
+    console.log('clickeed')
+    var noSleep = new NoSleep();
+    document.addEventListener('click', function enableNoSleep() {
+      document.removeEventListener('click', enableNoSleep, false);
+      noSleep.enable();
+    }, false);
   }
 }
