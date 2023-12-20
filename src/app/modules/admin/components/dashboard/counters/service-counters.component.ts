@@ -18,7 +18,7 @@ export class ServiceCountersComponent implements OnInit {
   constructor(private clinicService: ClinicService, private performanceIndexService: PerformanceIndexService) { }
   icons = { cilMoodVeryGood, cilHappy, cilMeh, cilFrown };
   data: any;
-  total:number;
+  total: number;
   ngOnInit(): void {
     combineLatest([this.clinicService.selectedClinic$, this.clinicService.filterDate$])
       .pipe(
@@ -39,7 +39,7 @@ export class ServiceCountersComponent implements OnInit {
             positive: 0,
             negative: 0,
             veryNegative: 0,
-            total:0,
+            total: 0,
             veryPositivePercentage: 0,
             positivePercentage: 0,
             negativePercentage: 0,
@@ -50,22 +50,23 @@ export class ServiceCountersComponent implements OnInit {
             positive: 0,
             negative: 0,
             veryNegative: 0,
-            total:0,
+            total: 0,
             veryPositivePercentage: 0,
             positivePercentage: 0,
             negativePercentage: 0,
             veryNegativePercentage: 0
           }
         }
-        for (const [key, value] of Object.entries(result.body)) {
-          if (key === 'hospitalityCounterContainer') {
-            countersContainer.hospitalityCounterContainer = <HospitalityCounterContainer>value;
+        if (result.body !== undefined)
+          for (const [key, value] of Object.entries(result.body)) {
+            if (key === 'hospitalityCounterContainer') {
+              countersContainer.hospitalityCounterContainer = <HospitalityCounterContainer>value;
 
+            }
+            if (key === 'clinicalCountersContainer') {
+              countersContainer.clinicalCountersContainer = <ClinicalCountersContainer>value;
+            }
           }
-          if (key === 'clinicalCountersContainer') {
-            countersContainer.clinicalCountersContainer = <ClinicalCountersContainer>value;
-          }
-        }
         this.data = countersContainerFiller.fill(countersContainer);
         this.total = countersContainer.hospitalityCounterContainer.total;
       }, (err) => { })

@@ -31,7 +31,8 @@ export class LoginComponent implements OnInit {
         if (response.userRole === 'ADMIN')
           this.router.navigateByUrl('/admin');
         if (response.userRole === 'USER')
-          console.log('response.userRole === USER ')
+          this.router.navigateByUrl('/normal');
+
         this.spinner.hide();
 
       }, err => {

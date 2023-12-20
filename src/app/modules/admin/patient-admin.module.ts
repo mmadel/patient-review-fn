@@ -105,6 +105,9 @@ const APP_ADMIN_COMPONENT = [
     QRCodeModule,
     ModalModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+  ],
+  exports:[
+    FeedbackCreateComponent
   ]
 })
 export class PatientAdminModule { }

@@ -14,6 +14,7 @@ import { Clinic } from 'src/app/modules/admin/models/clinic.model';
 export class AdminHeaderComponentComponent extends HeaderComponent {
   clinics: Clinic[] = new Array();
   @Input() sidebarId: string = "sidebar1";
+  isUserRole: boolean = false
 
   public newMessages = new Array(4)
   public newTasks = new Array(5)
@@ -56,6 +57,8 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
     super();
   }
   ngOnInit(): void {
+    if (localStorage.getItem('userRole') === 'USER')
+      this.isUserRole = true;
     //TODO : get username from local-storage
     //this.userName = this.localService.getData('userName');
     //TODO : 
@@ -80,14 +83,26 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
           return (a.name > b.name) ? 1 : -1;
         return 1;
       });
-      this.clinicService.selectedClinic$.next(Number(selectedClinicId) === 0 ? this.clinics[0].id : Number(selectedClinicId))
-      this.clinicService.selectedClinicName$.next(this.clinics[0].name)
-      if(Number(selectedClinicId) === 0 ){
-        this.clinicService.selectedClinicName$.next(this.clinics[0].name)
-      }else{
-        for (let i = 0; i < this.clinics.length; i++) {
-          if (this.clinics[i].id == Number(selectedClinicId)) {
-            this.clinicService.selectedClinicName$.next(this.clinics[i].name)
+      if ((localStorage.getItem('userRole') === 'USER')) {
+        this.clinicService.selectedClinicNormal$.next(Number(selectedClinicId) === 0 ? this.clinics[0].id : Number(selectedClinicId))
+        if (Number(selectedClinicId) === 0) {
+          this.clinicService.selectedClinicNameNormal$.next(this.clinics[0].name)
+        } else {
+          for (let i = 0; i < this.clinics.length; i++) {
+            if (this.clinics[i].id == Number(selectedClinicId)) {
+              this.clinicService.selectedClinicNameNormal$.next(this.clinics[i].name)
+            }
+          }
+        }
+      } else {
+        this.clinicService.selectedClinic$.next(Number(selectedClinicId) === 0 ? this.clinics[0].id : Number(selectedClinicId))
+        if (Number(selectedClinicId) === 0) {
+          this.clinicService.selectedClinicName$.next(this.clinics[0].name)
+        } else {
+          for (let i = 0; i < this.clinics.length; i++) {
+            if (this.clinics[i].id == Number(selectedClinicId)) {
+              this.clinicService.selectedClinicName$.next(this.clinics[i].name)
+            }
           }
         }
       }
@@ -100,9 +115,26 @@ export class AdminHeaderComponentComponent extends HeaderComponent {
   setSelectedClinic(event: any) {
     localStorage.setItem('selected-clinic', event.target.value)
     this.clinicService.selectedClinic$.next(event.target.value)
+    if (localStorage.getItem('userRole') === 'USER')
+      this.changeClinicForNormal(event)
+    else
+      this.changeClinicForAdmin(event);
+  }
+  private changeClinicForAdmin(event: any) {
+
+    this.clinicService.selectedClinic$.next(event.target.value)
     for (let i = 0; i < this.clinics.length; i++) {
       if (this.clinics[i].id == Number(event.target.value)) {
         this.clinicService.selectedClinicName$.next(this.clinics[i].name)
+      }
+    }
+  }
+  private changeClinicForNormal(event: any) {
+
+    this.clinicService.selectedClinicNormal$.next(event.target.value)
+    for (let i = 0; i < this.clinics.length; i++) {
+      if (this.clinics[i].id == Number(event.target.value)) {
+        this.clinicService.selectedClinicNameNormal$.next(this.clinics[i].name)
       }
     }
   }

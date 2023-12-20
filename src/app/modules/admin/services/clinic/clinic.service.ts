@@ -10,7 +10,9 @@ import { Clinic } from '../../models/clinic.model';
 export class ClinicService {
   private clinicUrl = environment.baseURL + 'clinic'
   public selectedClinic$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
+  public selectedClinicNormal$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   public selectedClinicName$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  public selectedClinicNameNormal$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   public filterDate$: BehaviorSubject<number[] | null> = new BehaviorSubject<number[] | null>(null);
   constructor(private htpClient: HttpClient) { }
 

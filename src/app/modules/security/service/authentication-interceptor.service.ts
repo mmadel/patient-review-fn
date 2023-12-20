@@ -42,8 +42,7 @@ export class AuthenticationInterceptorService implements HttpInterceptor {
   private addAuthorizationHeader(request: HttpRequest<any>, token: string): HttpRequest<any> {
     var requestMapping: string = _.split(request.url, '/', 4)[3];
     var securedURLS: string[] = new Array();
-    var notSecuredURLS: string[] = new Array();
-
+    var notSecuredURLS: string[] = new Array();    
     UserRoleURLS.forEach(element => {
       if (localStorage.getItem('userRole') !== undefined &&
         element.name === localStorage.getItem('userRole'))

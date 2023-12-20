@@ -6,31 +6,31 @@ import { ServicePerformanceData } from "./cards.models/service.performance.data"
 export class CardPerformanceDataRetrieval {
     public static retrieve(performanceContainer: PerformanceIndexContainer): PerformanceData[] {
         var performanceData: PerformanceData[] = new Array();
-
-        for (const [key, value] of Object.entries(performanceContainer)) {
-            if (key === 'hospitalityContainer') {
-                var hospitalityServicePerformanceData: ServicePerformanceData[] = new Array();
-                for (const [hospitalityKey, hospitalityValue] of Object.entries(value)) {
-                    var hospitalityPerformanceData: ServicePerformanceData = this.construcServicePerformanceData(hospitalityKey, hospitalityValue);
-                    hospitalityPerformanceData.color = CardPerformanceDataColorSelector.select('hospitality', hospitalityPerformanceData.performanceName, hospitalityPerformanceData.performanceValue);
-                    hospitalityServicePerformanceData.push(hospitalityPerformanceData);
+        if (performanceContainer !== undefined)
+            for (const [key, value] of Object.entries(performanceContainer)) {
+                if (key === 'hospitalityContainer') {
+                    var hospitalityServicePerformanceData: ServicePerformanceData[] = new Array();
+                    for (const [hospitalityKey, hospitalityValue] of Object.entries(value)) {
+                        var hospitalityPerformanceData: ServicePerformanceData = this.construcServicePerformanceData(hospitalityKey, hospitalityValue);
+                        hospitalityPerformanceData.color = CardPerformanceDataColorSelector.select('hospitality', hospitalityPerformanceData.performanceName, hospitalityPerformanceData.performanceValue);
+                        hospitalityServicePerformanceData.push(hospitalityPerformanceData);
+                    }
+                    performanceData.push({
+                        hospitalityService: hospitalityServicePerformanceData
+                    })
                 }
-                performanceData.push({
-                    hospitalityService: hospitalityServicePerformanceData
-                })
-            }
-            if (key === 'clinicalContainer') {
-                var clinicalServicePerformanceData: ServicePerformanceData[] = new Array();
-                for (const [hospitalityKey, hospitalityValue] of Object.entries(value)) {
-                    var clinicalPerformanceData: ServicePerformanceData = this.construcServicePerformanceData(hospitalityKey, hospitalityValue);
-                    clinicalPerformanceData.color = CardPerformanceDataColorSelector.select('clinical', clinicalPerformanceData.performanceName, clinicalPerformanceData.performanceValue);
-                    clinicalServicePerformanceData.push(clinicalPerformanceData);
+                if (key === 'clinicalContainer') {
+                    var clinicalServicePerformanceData: ServicePerformanceData[] = new Array();
+                    for (const [hospitalityKey, hospitalityValue] of Object.entries(value)) {
+                        var clinicalPerformanceData: ServicePerformanceData = this.construcServicePerformanceData(hospitalityKey, hospitalityValue);
+                        clinicalPerformanceData.color = CardPerformanceDataColorSelector.select('clinical', clinicalPerformanceData.performanceName, clinicalPerformanceData.performanceValue);
+                        clinicalServicePerformanceData.push(clinicalPerformanceData);
+                    }
+                    performanceData.push({
+                        clinicalService: clinicalServicePerformanceData
+                    })
                 }
-                performanceData.push({
-                    clinicalService: clinicalServicePerformanceData
-                })
             }
-        }
         return performanceData;
     }
 

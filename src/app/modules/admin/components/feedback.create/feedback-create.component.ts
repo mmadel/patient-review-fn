@@ -14,6 +14,23 @@ export class FeedbackCreateComponent implements OnInit {
   constructor(private clinicService: ClinicService) { }
 
   ngOnInit(): void {
+
+    if (localStorage.getItem('userRole') === 'USER')
+      this.observeNormalUser()
+    else
+      this.observeNormalAdmin()
+  }
+  observeNormalUser() {
+    this.clinicService.selectedClinicNormal$.subscribe(clinicId => {
+      this.clinicService.selectedClinicNameNormal$.subscribe(name => {
+        this.clinicName = name;
+        this.clinicId = clinicId
+        this.createFeedbackURL = this.baseURL + '/#/feedback/submit?clinicId=' + clinicId;
+      });
+
+    })
+  }
+  observeNormalAdmin() {
     this.clinicService.selectedClinic$.subscribe(clinicId => {
       this.clinicService.selectedClinicName$.subscribe(name => {
         this.clinicName = name;
@@ -23,5 +40,4 @@ export class FeedbackCreateComponent implements OnInit {
 
     })
   }
-
 }
