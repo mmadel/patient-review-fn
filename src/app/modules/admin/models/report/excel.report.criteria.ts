@@ -6,4 +6,5 @@ export class ExcelReportCriteria {
     clinicId: number | null;
     serviceName: string[];
     feedbackFilter: string[];
+    timeZone:string
 }

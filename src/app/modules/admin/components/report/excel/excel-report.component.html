@@ -19,11 +19,11 @@
           -->
                 <form cForm>
                     <c-row>
-                        <c-col lg="4" xs="12" class="mb-2">
+                        <c-col lg="3" xs="12" class="mb-2">
                             <c-card>
                                 <c-card-header>
                                     <h6>
-                                        Service
+                                        <strong>Service</strong>
                                     </h6>
                                 </c-card-header>
                                 <c-card-body>
@@ -39,11 +39,11 @@
                                 </c-card-body>
                             </c-card>
                         </c-col>
-                        <c-col lg="4" xs="12" class="mb-2">
+                        <c-col lg="3" xs="12" class="mb-2">
                             <c-card>
                                 <c-card-header>
                                     <h6>
-                                        Patient Feedback
+                                        <strong>Patient Feedback</strong>
                                     </h6>
                                 </c-card-header>
                                 <c-card-body>
@@ -57,15 +57,28 @@
                                 </c-card-body>
                             </c-card>
                         </c-col>
-                        <c-col lg="4" xs="12" class="mb-2">
+                        <c-col lg="3" xs="12" class="mb-2">
                             <c-card>
                                 <c-card-header>
-                                    <h6>Date Range</h6>
+                                    <h6><strong>Date Range</strong></h6>
                                 </c-card-header>
                                 <c-card-body>
                                     <c-date-range-picker [(startDate)]="reportCriteria.startDate_date"
                                         [(endDate)]="reportCriteria.endDate_date"
                                         [ranges]="customRanges"></c-date-range-picker>
+                                </c-card-body>
+                            </c-card>
+                        </c-col>
+                        <c-col lg="3" xs="12" class="mb-2">
+                            <c-card>
+                                <c-card-header>
+                                    <h6><strong>Time Zone</strong></h6>
+                                </c-card-header>
+                                <c-card-body>
+                                    <select cSelect cFormControl name="searchtimezone" id="searchtimezone" [(ngModel)]="reportCriteria.timeZone">
+                                        <option value="America/New_York">America-NY</option>
+                                        <option value="Africa/Cairo">Egypt-Cairo</option>
+                                    </select>
                                 </c-card-body>
                             </c-card>
                         </c-col>

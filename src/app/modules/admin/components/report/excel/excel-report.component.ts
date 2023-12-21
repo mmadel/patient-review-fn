@@ -46,6 +46,7 @@ export class ExcelReportComponent implements OnInit {
   constructor(private excelReportService: ExcelReportService, private clinicService: ClinicService) { }
 
   ngOnInit(): void {
+    this.reportCriteria.timeZone ="America/New_York"
     this.clinicService.selectedClinic$.pipe(
       filter(id => id !== null)
     ).subscribe(id => {
