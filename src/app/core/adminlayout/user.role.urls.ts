@@ -9,7 +9,7 @@ export const UserRoleURLS: USerRoleMap[] = [
     },
     {
         name: "USER",
-        urls: []
+        urls: ['clinic']
     },
     {
         name: "PERMITTED",

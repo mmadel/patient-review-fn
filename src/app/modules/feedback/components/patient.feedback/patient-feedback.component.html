@@ -1,4 +1,5 @@
-<span *ngIf="!isSubmitted">
+<ngx-spinner></ngx-spinner>
+<span *ngIf="!isSubmitted && !isClinicIdEmpty">
     <c-row>
         <c-col sm="12" lg="6" class="mb-3">
             <c-card class="mb-5">
@@ -118,3 +119,17 @@
         </c-card-body>
     </c-card>
 </span>
+<span *ngIf="!isSubmitted && isClinicIdEmpty">
+    <c-card>
+        <c-card-body>
+            <h1 class="text-center display-1">
+                OOOP..!!!
+                <svg cIcon name="cilSad" size="4xl"></svg>
+            </h1>
+            <h4 class="text-center display-6">
+                Don't copy URL ,just scan the QR Code.
+            </h4>
+        </c-card-body>
+    </c-card>
+</span>
+<input id="no_sleep_input" (click)="handleNoSleep()" type="hidden">

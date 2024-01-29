@@ -28,8 +28,8 @@ import {
   MultiSelectModule,
   WidgetModule,
   ProgressModule,
-
-
+  ModalModule,
+  HeaderModule
 } from '@coreui/angular-pro';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ChartjsModule } from '@coreui/angular-chartjs';
@@ -47,7 +47,8 @@ import {
   UserCreateComponent,
   UserUpdateComponent,
   ExcelReportComponent,
-  ClinicUpdateComponent
+  ClinicUpdateComponent,
+  ServiceCountersComponent
 } from './components';
 
 
@@ -63,7 +64,8 @@ const APP_ADMIN_COMPONENT = [
   UserCreateComponent,
   UserUpdateComponent,
   ExcelReportComponent,
-  ClinicUpdateComponent
+  ClinicUpdateComponent,
+  ServiceCountersComponent
 ]
 @NgModule({
   declarations: [
@@ -102,7 +104,12 @@ const APP_ADMIN_COMPONENT = [
     ProgressModule,
     ChartjsModule,
     QRCodeModule,
+    ModalModule,
+    HeaderModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+  ],
+  exports:[
+    FeedbackCreateComponent
   ]
 })
 export class PatientAdminModule { }

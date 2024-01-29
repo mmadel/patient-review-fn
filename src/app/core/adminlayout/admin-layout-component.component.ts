@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { INavData } from '@coreui/angular-pro';
 import { NavItems } from './_nav';
+import { NavItemsNormal } from './_navnormal';
 
 @Component({
   selector: 'app-admin-layout-component',
@@ -12,7 +13,10 @@ export class AdminLayoutComponentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.navItems = NavItems;
+    if (localStorage.getItem('userRole') === 'USER')
+      this.navItems = NavItemsNormal;
+    else
+      this.navItems = NavItems;
   }
 
 }

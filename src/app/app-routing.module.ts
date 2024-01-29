@@ -45,20 +45,21 @@ const routes: Routes = [
       }
     ]
   },
-  // {
-  //   path: 'review',
-  //   component: DefaultLayoutComponent,
-  //   data: {
-  //     title: 'Review'
-  //   },
-  //   children: [
-  //     {
-  //       path: '',
-  //       loadChildren: () =>
-  //         import('./modules/review/pateint-review.module').then((m) => m.PateintReviewModule)
-  //     },
-  //   ]
-  // }
+  {
+    path: 'normal',
+    component: AdminLayoutComponentComponent,
+    canActivateChild: [AuthenticationGuardGuard],
+    data: {
+      title: ''
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./modules/normal/normal.module').then((m) => m.NormalModule)
+      }
+    ]
+  },
 ];
 
 @NgModule({

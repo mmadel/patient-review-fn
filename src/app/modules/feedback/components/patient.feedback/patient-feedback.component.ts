@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import NoSleep from 'nosleep.js';
 import { PatientFeedback } from '../../models/patient.feedback';
 import { FeedbackService } from '../../services/feedback.service';
 
@@ -10,7 +11,9 @@ import { FeedbackService } from '../../services/feedback.service';
   styleUrls: ['./patient-feedback.component.css']
 })
 export class PatientFeedbackComponent implements OnInit {
+  @ViewChild('search') search: ElementRef;
   isSubmitted: boolean = false;
+  isClinicIdEmpty: boolean = false;
   clinicId: number;
   model: PatientFeedback;
   hospitalityToggle: any
@@ -22,13 +25,18 @@ export class PatientFeedbackComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    
+    window.addEventListener("keyup", disableF5);
+    window.addEventListener("keydown", disableF5);
 
+    function disableF5(e: any) {
+      if ((e.which || e.keyCode) == 116) e.preventDefault();
+    };
     this.isSubmitted = false;
     this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
-    console.log('oninit ' + this.clinicId)
     this.initModel()
     if (this.clinicId === 0 || this.clinicId === undefined || this.clinicId === null) {
-      this.router.navigate(['admin/feedback/create']);
+      this.isClinicIdEmpty = true;
     } else {
       this.router.navigate([], {
         queryParams: {
@@ -37,11 +45,25 @@ export class PatientFeedbackComponent implements OnInit {
         queryParamsHandling: 'merge'
       })
     }
+    document.getElementById("no_sleep_input")?.click();
   }
   checkFields(): boolean {
-    var isQuestionsSelected = this.model.feedbackQuestions?.clinicalFeedback === "" &&
-      this.model.feedbackQuestions?.clinicalFeedback === ""
-    return this.model.patientName === "" && isQuestionsSelected
+    var hospitalityValue: string = '';
+    var clinicalValue: string = '';
+    Object.keys(this.hospitalityToggle).forEach((key, index) => {
+      if (this.hospitalityToggle[key]) {
+        hospitalityValue = this.hospitalityToggle[key];
+        return;
+      }
+    });
+    Object.keys(this.clinicalToggle).forEach((key, index) => {
+      if (this.clinicalToggle[key]) {
+        clinicalValue = this.clinicalToggle[key];
+        return;
+      }
+    });  
+    var result: boolean = this.model.patientName == "" || (!hospitalityValue || !clinicalValue);
+    return result;
   }
   submit() {
     this.populateModel();
@@ -52,9 +74,7 @@ export class PatientFeedbackComponent implements OnInit {
       setTimeout(() => {
         //window.location.reload()
         this.router.navigateByUrl('feedback/submit', { skipLocationChange: true }).then(() => {
-          console.log(`Before navigation I am on:${this.router.url}`)
           this.router.navigate(['feedback/submit'], { queryParams: { clinicId: this.clinicId } }).then(() => {
-            console.log(`After navigation I am on:${this.router.url}`)
             this.ngOnInit()
           })
         })
@@ -131,5 +151,13 @@ export class PatientFeedbackComponent implements OnInit {
       Sad: false
     }
     this.clinicalToggle = clinicalToggle;
+  }
+  handleNoSleep(){
+    console.log('clickeed')
+    var noSleep = new NoSleep();
+    document.addEventListener('click', function enableNoSleep() {
+      document.removeEventListener('click', enableNoSleep, false);
+      noSleep.enable();
+    }, false);
   }
 }

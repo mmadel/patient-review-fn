@@ -22,4 +22,8 @@ export class PerformanceIndexService {
       + '/clinicId/' + clinicId
       + '/chartTimeUnit/' + unit)
   }
+
+  getCounter(clinicId: number | null, startDate: number | null, endDate: number | null){
+    return this.http.get<PerformanceIndexContainer>(`${this.userUrl}` + '/get/counters/startDate/' + startDate + '/endDate/' + endDate + '/clinicId/' + clinicId, { observe: 'response' })
+  }
 }

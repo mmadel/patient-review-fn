@@ -121,11 +121,17 @@ import {
   cilHappy,
   cilMeh,
   cilFrown,
-  cilSmile
+  cilSmile,
+  cilFactory,
+  cilGroup,
+  cilHospital
 
 } from '@coreui/icons';
 
 export const iconSubset = {
+  cilHospital,
+  cilGroup,
+  cilFactory,
   cibCcAmex,
   cibCcApplePay,
   cibCcMastercard,

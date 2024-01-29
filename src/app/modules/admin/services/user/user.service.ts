@@ -16,6 +16,11 @@ export class UserService {
     return this.http.post(createUserURL, JSON.stringify(user), { 'headers': headers, observe: 'response' })
   }
 
+  update(user: User){
+    const headers = { 'content-type': 'application/json' }
+    var updateUserURL = this.userUrl + '/update'
+    return this.http.post(updateUserURL, JSON.stringify(user), { 'headers': headers, observe: 'response' })
+  }
   get() {
     return this.http.get<User[]>(`${this.userUrl}` + '/find', { observe: 'response' })
   }

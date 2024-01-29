@@ -15,7 +15,6 @@ export class AuthenticationInterceptorService implements HttpInterceptor {
     private router: Router, private spinner: NgxSpinnerService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    //console.log(req.url)
     const accessToken = localStorage.getItem('token') || '{}';
     this.spinner.show();
     return next.handle(this.addAuthorizationHeader(req, accessToken)).pipe(
@@ -39,14 +38,11 @@ export class AuthenticationInterceptorService implements HttpInterceptor {
     );
 
   }
-  private test(url: string) {
-    console.log(_.split(url, '/', 4)[3])
-  }
+  
   private addAuthorizationHeader(request: HttpRequest<any>, token: string): HttpRequest<any> {
     var requestMapping: string = _.split(request.url, '/', 4)[3];
     var securedURLS: string[] = new Array();
-    var notSecuredURLS: string[] = new Array();
-
+    var notSecuredURLS: string[] = new Array();    
     UserRoleURLS.forEach(element => {
       if (localStorage.getItem('userRole') !== undefined &&
         element.name === localStorage.getItem('userRole'))
@@ -55,19 +51,16 @@ export class AuthenticationInterceptorService implements HttpInterceptor {
         notSecuredURLS = element.urls;
     });
     if (_.some(notSecuredURLS, (el) => _.includes(requestMapping, el))) {
-      //console.log('not secured')
       return request;
     }
     if (_.some(securedURLS, (el) => _.includes(requestMapping, el))) {
-      //  console.log('secured ' + request.url)
       if (token) {
         return request.clone({
           setHeaders: { Authorization: `Bearer ${token}` }
         });
       }
       return request;
-    }
-    //console.log('rejected ' + request.url)
+    }    
     return Observable.create(EMPTY);;
   }
 

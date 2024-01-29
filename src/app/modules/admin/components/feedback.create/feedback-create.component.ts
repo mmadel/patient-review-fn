@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { filter } from 'rxjs';
 import { ClinicService } from '../../services/clinic/clinic.service';
 
 @Component({
@@ -9,14 +10,17 @@ import { ClinicService } from '../../services/clinic/clinic.service';
 export class FeedbackCreateComponent implements OnInit {
   public createFeedbackURL: string
   public clinicId: number | null;
+  public clinicName: string | null;
   public baseURL: string = location.origin;
   constructor(private clinicService: ClinicService) { }
 
   ngOnInit(): void {
-    this.clinicService.selectedClinic$.subscribe(clinicId => {
-      this.clinicId = clinicId
-      this.createFeedbackURL = this.baseURL + '/#/feedback/submit?clinicId=' + clinicId;
+    this.clinicService.selectedClinic$.pipe(
+      filter(result => result !== null)
+    ).subscribe((clinic) => {
+      this.clinicName = clinic!.name;
+      this.clinicId = clinic!.id
+      this.createFeedbackURL = this.baseURL + '/#/feedback/submit?clinicId=' + clinic?.id;
     })
   }
-
 }

@@ -1,14 +1,14 @@
 <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple"></ngx-spinner>
 <c-row>
-  <c-col xs="12">
-    <h1>Clinic List</h1>
-  </c-col>
-  <c-col xs="12">
-    <div style="float: right;">
-      <button cButton color="primary" variant="outline" (click)="create()">
-        Create Clinic
-      </button>
-    </div>
+  <c-callout color="primary">
+    <h3>Clinics</h3>
+  </c-callout>
+</c-row>
+<c-row>
+  <c-col>
+    <button cButton style="float: right;" color="primary" variant="outline" (click)="create()">
+      <svg cIcon name="cilPlus"></svg>
+    </button>
   </c-col>
 </c-row>
 <hr />
@@ -34,14 +34,29 @@
       <td>{{clinic.ps}}</td>
       <td>{{clinic.zipcode}}</td>
       <td>
-        <button cButton variant="outline" class="me-3" (click)="update(clinic.id)">
-          <svg cIcon name="cilPen"></svg>
-        </button>
-        <button cButton variant="outline" (click)="deleteClinic(clinic.id)">
-          <svg cIcon name="cilTrash"></svg>
-        </button>
+        <c-button-group role="group">
+          <button cButton variant="outline" (click)="update(clinic)">
+            <svg cIcon name="cilPen"></svg>
+          </button>
+          <button cButton variant="outline" (click)="confirmDelete(clinic)">
+            <svg cIcon name="cilTrash"></svg>
+          </button>
+        </c-button-group>
       </td>
     </tr>
 
   </tbody>
 </table>
+<c-modal id="liveDemoModal" [visible]="visibleConfirmDelete">
+  <c-modal-header>
+    <h5 cModalTitle>Delete {{selectedClinic?.name}}</h5>
+    <button (click)="closeDeleteConfirmation()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>Are you sure to delete this clinic?</c-modal-body>
+  <c-modal-footer>
+    <button (click)="closeDeleteConfirmation()" cButton color="secondary">
+      Close
+    </button>
+    <button cButton color="primary" (click)="handleDelete()">Save changes</button>
+  </c-modal-footer>
+</c-modal>

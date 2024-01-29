@@ -19,7 +19,6 @@ export class PatientReviewComponent implements OnInit {
 
     this.counterService.reviewCounter$.subscribe((reviewCounter: number) => {
       this.counter = reviewCounter;
-      console.log(this.counter)
       if (reviewCounter > 1)
         this.proceedToNextStep();
     });
