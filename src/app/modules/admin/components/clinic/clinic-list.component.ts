@@ -19,7 +19,7 @@ export class ClinicListComponent implements OnInit {
   errorMessage: string | null = '';
   clinics: RenderedClinic[] | null = new Array();
   public visibleConfirmDelete = false;
-  selectedClinicId: number | undefined | null
+  selectedClinic: RenderedClinic | undefined | null
   constructor(private router: Router, private clinicService: ClinicService) { }
 
   ngOnInit(): void {
@@ -47,18 +47,18 @@ export class ClinicListComponent implements OnInit {
     }
     return renderedClinic;
   }
-  update(id: number | undefined | null) {
-    this.router.navigate(['/admin/clinic/update', id])
+  update(clinic: RenderedClinic | undefined | null) {
+    this.router.navigate(['/admin/clinic/update', clinic?.id])
   }
-  confirmDelete(id: number | undefined | null){
+  confirmDelete(clinic: RenderedClinic | undefined | null){
     this.visibleConfirmDelete = !this.visibleConfirmDelete;
-    this.selectedClinicId = id;
+    this.selectedClinic = clinic;
   }
   closeDeleteConfirmation(){
     this.visibleConfirmDelete = !this.visibleConfirmDelete;
   }
   handleDelete(){
-    this.deleteClinic(this.selectedClinicId);
+    this.deleteClinic(this.selectedClinic?.id);
     this.visibleConfirmDelete = !this.visibleConfirmDelete;
   }
   deleteClinic(id: number | undefined | null) {

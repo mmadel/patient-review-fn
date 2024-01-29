@@ -28,7 +28,8 @@ import {
   MultiSelectModule,
   WidgetModule,
   ProgressModule,
-  ModalModule
+  ModalModule,
+  HeaderModule
 } from '@coreui/angular-pro';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ChartjsModule } from '@coreui/angular-chartjs';
@@ -104,6 +105,7 @@ const APP_ADMIN_COMPONENT = [
     ChartjsModule,
     QRCodeModule,
     ModalModule,
+    HeaderModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ],
   exports:[

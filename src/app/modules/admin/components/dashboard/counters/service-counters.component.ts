@@ -23,11 +23,11 @@ export class ServiceCountersComponent implements OnInit {
     combineLatest([this.clinicService.selectedClinic$, this.clinicService.filterDate$])
       .pipe(
         tap((result) => { }),
-        filter((result) => result[0] !== null),
-        switchMap(result => {
+        filter((result) => result[0] !== null && result[0]!.id !== null),
+        switchMap(result => {          
           var startDate = result[1] === null ? moment(new Date(moment().startOf('month').format('YYYY-MM-DD'))).startOf('day').valueOf() : result[1][0];
           var endDate = result[1] === null ? moment(new Date(moment().endOf('month').format('YYYY-MM-DD'))).endOf('day').valueOf() : result[1][1];
-          const obs$ = this.performanceIndexService.getCounter(result[0], startDate, endDate);
+          const obs$ = this.performanceIndexService.getCounter(result[0]!.id, startDate, endDate);
           return obs$.pipe(
             catchError(err => of(err))
           );

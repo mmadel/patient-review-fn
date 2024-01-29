@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { filter } from 'rxjs';
+import { Clinic } from '../../../models/clinic.model';
 import feedbackValues from '../../../models/data/feedback-data-stor';
 import ServiceName from '../../../models/data/service-data.store';
 import { ExcelReportCriteria } from '../../../models/report/excel.report.criteria';
@@ -19,7 +20,9 @@ export class ExcelReportComponent implements OnInit {
   reportCriteria: ExcelReportCriteria = new ExcelReportCriteria();
   feedbackValues = feedbackValues;
   serviceNames = ServiceName;
-  clinicId: number | null;
+  userClinics: Clinic[] | null;
+  selectedClinic: Clinic | null
+  selectedClinicsIds: string[] | null;
   public customRanges = {
     Today: [new Date(), new Date()],
     Yesterday: [
@@ -46,11 +49,16 @@ export class ExcelReportComponent implements OnInit {
   constructor(private excelReportService: ExcelReportService, private clinicService: ClinicService) { }
 
   ngOnInit(): void {
-    this.reportCriteria.timeZone ="America/New_York"
+    this.reportCriteria.timeZone = "America/New_York"
     this.clinicService.selectedClinic$.pipe(
-      filter(id => id !== null)
-    ).subscribe(id => {
-      this.clinicId = id;
+      filter(clinic => clinic !== null)
+    ).subscribe(clinic => {
+      this.selectedClinic = clinic;
+    })
+    this.clinicService.userClinics$.pipe(
+      filter(clinics => clinics != null)
+    ).subscribe((result) => {
+      this.userClinics = result;
     })
   }
   export() {
@@ -58,17 +66,19 @@ export class ExcelReportComponent implements OnInit {
     this.callExportService();
   }
   private formatDate() {
-
+    var offset: number = new Date().getTimezoneOffset() / 60;
+    if (offset > 0)
+      offset = offset * -1;
     if (this.reportCriteria.startDate_date !== undefined)
-      this.reportCriteria.startDate = this.reportCriteria.startDate_date ? moment(new Date(this.reportCriteria.startDate_date)).startOf('day').valueOf() : 0;
+      this.reportCriteria.startDate = this.reportCriteria.startDate_date ? moment(this.reportCriteria.startDate_date).utcOffset(offset, true).startOf('day').valueOf() : 0;
     if (this.reportCriteria.endDate_date !== undefined)
-      this.reportCriteria.endDate = this.reportCriteria.endDate_date ? moment(new Date(this.reportCriteria.endDate_date)).endOf('day').valueOf() : 0;
+      this.reportCriteria.endDate = this.reportCriteria.endDate_date ? moment(this.reportCriteria.endDate_date).utcOffset(offset, true).endOf('day').valueOf() : 0;
   }
   private callExportService() {
-    this.reportCriteria.clinicId = this.clinicId;
+    const filteredClinics: Clinic[] | undefined = this.userClinics?.filter(obj => this.selectedClinicsIds?.includes(obj.id + ''));
+    this.reportCriteria.clinics = filteredClinics;
     this.excelReportService.export(this.reportCriteria).subscribe(
       (response) => {
-
         const a = document.createElement('a')
         const objectUrl = URL.createObjectURL(response)
         a.href = objectUrl
@@ -83,9 +93,10 @@ export class ExcelReportComponent implements OnInit {
       });
   }
   public isValidInputs(): boolean {
+    var selectedClinics = this.selectedClinicsIds === undefined || this.selectedClinicsIds!.length === 0;
     var checkFeedbackList = this.reportCriteria.feedbackFilter === undefined || this.reportCriteria.feedbackFilter.length === 0;
     var checkDateRange = this.reportCriteria.startDate_date === undefined || this.reportCriteria.endDate_date === undefined;
-    var result: boolean = (this.reportCriteria.serviceName === undefined || this.reportCriteria.serviceName.length < 0) || checkFeedbackList || checkDateRange ? true : false
+    var result: boolean = (this.reportCriteria.serviceName === undefined || this.reportCriteria.serviceName.length < 0) || checkFeedbackList || checkDateRange || selectedClinics ? true : false
     return result;
 
   }

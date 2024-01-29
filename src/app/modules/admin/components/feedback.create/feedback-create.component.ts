@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { filter } from 'rxjs';
 import { ClinicService } from '../../services/clinic/clinic.service';
 
 @Component({
@@ -14,30 +15,12 @@ export class FeedbackCreateComponent implements OnInit {
   constructor(private clinicService: ClinicService) { }
 
   ngOnInit(): void {
-
-    if (localStorage.getItem('userRole') === 'USER')
-      this.observeNormalUser()
-    else
-      this.observeNormalAdmin()
-  }
-  observeNormalUser() {
-    this.clinicService.selectedClinicNormal$.subscribe(clinicId => {
-      this.clinicService.selectedClinicNameNormal$.subscribe(name => {
-        this.clinicName = name;
-        this.clinicId = clinicId
-        this.createFeedbackURL = this.baseURL + '/#/feedback/submit?clinicId=' + clinicId;
-      });
-
-    })
-  }
-  observeNormalAdmin() {
-    this.clinicService.selectedClinic$.subscribe(clinicId => {
-      this.clinicService.selectedClinicName$.subscribe(name => {
-        this.clinicName = name;
-        this.clinicId = clinicId
-        this.createFeedbackURL = this.baseURL + '/#/feedback/submit?clinicId=' + clinicId;
-      });
-
+    this.clinicService.selectedClinic$.pipe(
+      filter(result => result !== null)
+    ).subscribe((clinic) => {
+      this.clinicName = clinic!.name;
+      this.clinicId = clinic!.id
+      this.createFeedbackURL = this.baseURL + '/#/feedback/submit?clinicId=' + clinic?.id;
     })
   }
 }

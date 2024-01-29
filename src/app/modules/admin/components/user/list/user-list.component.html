@@ -1,26 +1,25 @@
 <ngx-spinner></ngx-spinner>
 <c-row>
-    <c-col xs="12">
-        <h1>User List</h1>
+    <c-callout color="primary">
+      <h3>Users</h3>
+    </c-callout>
+  </c-row>
+  <c-row>
+    <c-col>
+      <button cButton style="float: right;" color="primary" variant="outline" (click)="create()">
+        <svg cIcon name="cilPlus"></svg>
+      </button>
     </c-col>
-    <c-col xs="12">
-        <div style="float: right;">
-            <button cButton color="primary" variant="outline" (click)="create()">
-                Create User
-            </button>
-        </div>
-    </c-col>
-</c-row>
+  </c-row>
 <hr />
-<table cTable *ngIf="users">
-    <thead cTableColor="light">
+<table cTable *ngIf="users" [striped]="true" hover>
+    <thead >
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Use Name</th>
-            <th scope="col">User Role</th>
-            <th scope="col">User Clinics</th>
-            <th scope="col">Action</th>
-            <th scope="col"></th>
+            <th scope="row">#</th>
+            <th scope="col">UserName</th>
+            <th scope="col">Role</th>
+            <th scope="col" style="width: 10%;">Action</th>
+            <th scope="col" style="width: 5%;"></th>
         </tr>
     </thead>
     <tbody>
@@ -29,37 +28,60 @@
             <td>{{user.name}}</td>
             <td>{{user.userRole}}</td>
             <td>
-                <ul>
-                    <li *ngFor="let clinic of user.clinics">{{clinic.name}}</li>
-                </ul>
+                <c-button-group role="group">
+                    <button cButton variant="outline" (click)="openUserClinics(user.clinics)">
+                        <svg cIcon name="cilHospital"></svg>
+                    </button>
+                    <button cButton variant="outline" (click)="update(user.id)" [disabled]="isLoggedInUser(user.id)">
+                        <svg cIcon name="cilPen"></svg>
+                    </button>
+                    <button cButton variant="outline" (click)="confirmDelete(user.id)"
+                        [disabled]="isLoggedInUser(user.id)">
+                        <svg cIcon name="cilTrash"></svg>
+                    </button>
+                </c-button-group>
 
             </td>
             <td>
-                <button cButton variant="outline" class="me-3" (click)="update(user.id)"
-                    [disabled]="isLoggedInUser(user.id)">
-                    <svg cIcon name="cilPen"></svg>
-                </button>
-                <button cButton variant="outline" (click)="confirmDelete(user.id)" [disabled]="isLoggedInUser(user.id)">
-                    <svg cIcon name="cilTrash"></svg>
-                </button>
-            </td>
-            <td>
-                <span *ngIf="isLoggedIn">LoggedIn</span>
+                <span *ngIf="isLoggedIn">
+                    <c-badge color="info">LoggedIn</c-badge>
+                </span>
             </td>
         </tr>
 
     </tbody>
 </table>
-<c-modal id="liveDemoModal" [visible]="visibleConfirmDelete">
+<c-modal id="deleteConfirm" [visible]="visibleConfirmDelete">
     <c-modal-header>
-      <h5 cModalTitle>Modal title</h5>
-      <button (click)="closeDeleteConfirmation()" cButtonClose></button>
+        <h5 cModalTitle>Delete Confirmation</h5>
+        <button (click)="closeDeleteConfirmation()" cButtonClose></button>
     </c-modal-header>
-    <c-modal-body>Are you sure  to delete this user?</c-modal-body>
+    <c-modal-body>Are you sure to delete this user?</c-modal-body>
     <c-modal-footer>
-      <button (click)="closeDeleteConfirmation()" cButton color="secondary">
-        Close
-      </button>
-      <button cButton color="primary" (click)="handleDelete()">Save changes</button>
+        <button (click)="closeDeleteConfirmation()" cButton color="secondary">
+            Close
+        </button>
+        <button cButton color="primary" (click)="handleDelete()">Save changes</button>
     </c-modal-footer>
-  </c-modal>
+</c-modal>
+<c-modal id="userclinics" [visible]="visibleUserClinics" size="lg">
+    <c-modal-header>
+        <h5 cModalTitle>User Clinis</h5>
+    </c-modal-header>
+    <c-modal-body>
+        <table cTable small>
+            <thead cTableColor="light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" style="width: 50%;">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let clinic of selectedClinics; index as i;">
+                    <td>{{i+1}}</td>
+                    <td>{{clinic.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </c-modal-body>
+</c-modal>

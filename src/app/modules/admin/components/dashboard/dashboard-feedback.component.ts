@@ -42,9 +42,9 @@ export class DashboardFeedbackComponent implements OnInit {
 
     var dateRange: number[] = TimeUtil.getDateRangePerTimeUnit(period);
     this.clinicService.selectedClinic$.pipe(
-      filter((id) => id !== null),
-      mergeMap(id => {
-        return this.performanceIndexService.getChartData(id, dateRange[0], dateRange[1], period)
+      filter((clinic) => clinic !== null && clinic?.id !== null),
+      mergeMap(clinic => {
+        return this.performanceIndexService.getChartData(clinic!.id, dateRange[0], dateRange[1], period)
       })).subscribe((result) => {
         this.hLoading = true;
         this.chartHospitalityComponent.initData(result.hospitalityChartData[0], result.hospitalityChartData[1], result.hospitalityChartData[2])
@@ -55,9 +55,9 @@ export class DashboardFeedbackComponent implements OnInit {
   getClinicalPerfromanceData(period: string = 'Month') {
     var dateRange: number[] = TimeUtil.getDateRangePerTimeUnit(period);
     this.clinicService.selectedClinic$.pipe(
-      filter((id) => id !== null),
-      mergeMap(id => {
-        return this.performanceIndexService.getChartData(id, dateRange[0], dateRange[1], period)
+      filter((clinic) => clinic !== null && clinic?.id !== null),
+      mergeMap(clinic => {
+        return this.performanceIndexService.getChartData(clinic!.id, dateRange[0], dateRange[1], period)
       })).subscribe((result) => {
         this.cLoading = true;
         this.chartClinicalComponent.initData(result.clinicalChartData[0], result.clinicalChartData[1], result.clinicalChartData[2])
