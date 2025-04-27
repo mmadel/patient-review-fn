@@ -19,7 +19,7 @@ export class DashboardFeedbackComponent implements OnInit {
   constructor(private performanceIndexService: PerformanceIndexService, private clinicService: ClinicService) { }
 
   ngOnInit(): void {
-
+    console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
     this.getHospitalityPerfromanceData();
     this.getClinicalPerfromanceData();
 
@@ -44,7 +44,7 @@ export class DashboardFeedbackComponent implements OnInit {
     this.clinicService.selectedClinic$.pipe(
       filter((clinic) => clinic !== null && clinic?.id !== null),
       mergeMap(clinic => {
-        return this.performanceIndexService.getChartData(clinic!.id, dateRange[0], dateRange[1], period)
+        return this.performanceIndexService.getChartData(clinic!.id, dateRange[0], dateRange[1], period,Intl.DateTimeFormat().resolvedOptions().timeZone)
       })).subscribe((result) => {
         this.hLoading = true;
         this.chartHospitalityComponent.initData(result.hospitalityChartData[0], result.hospitalityChartData[1], result.hospitalityChartData[2])
@@ -57,7 +57,7 @@ export class DashboardFeedbackComponent implements OnInit {
     this.clinicService.selectedClinic$.pipe(
       filter((clinic) => clinic !== null && clinic?.id !== null),
       mergeMap(clinic => {
-        return this.performanceIndexService.getChartData(clinic!.id, dateRange[0], dateRange[1], period)
+        return this.performanceIndexService.getChartData(clinic!.id, dateRange[0], dateRange[1], period,Intl.DateTimeFormat().resolvedOptions().timeZone)
       })).subscribe((result) => {
         this.cLoading = true;
         this.chartClinicalComponent.initData(result.clinicalChartData[0], result.clinicalChartData[1], result.clinicalChartData[2])

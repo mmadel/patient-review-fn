@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { PerformanceChartResponse } from '../../models/performance.chart.response';
@@ -15,12 +15,14 @@ export class PerformanceIndexService {
     return this.http.get<PerformanceIndexContainer>(`${this.userUrl}` + '/get/startDate/' + startDate + '/endDate/' + endDate + '/clinicId/' + clinicId, { observe: 'response' })
   }
 
-  getChartData(clinicId: number | null, startDate: number | null, endDate: number | null, unit: string) {
+  getChartData(clinicId: number | null, startDate: number | null, endDate: number | null, unit: string, timezone:string) {
+    let params = new HttpParams().set('tz', timezone);
     return this.http.get<PerformanceChartResponse>(`${this.userUrl}` + '/get/chart' 
       + '/startDate/' + startDate
       + '/endDate/' + endDate
       + '/clinicId/' + clinicId
-      + '/chartTimeUnit/' + unit)
+      + '/chartTimeUnit/' + unit
+      , { params: params })
   }
 
   getCounter(clinicId: number | null, startDate: number | null, endDate: number | null){
