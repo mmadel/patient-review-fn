@@ -45,15 +45,15 @@ export class PatientFeedbackComponent implements OnInit {
   selectedHospitalityEmoji: any = null;
   selectedClinicalEmoji: any = null;
   hospitalityEmojis = [
-    { label: 'Good', image: 'assets/emojis/good.png' },
-    { label: 'Bad', image: 'assets/emojis/bad.png' },
-    { label: 'Terrible', image: 'assets/emojis/terrible.png' }
+    { label: 'Excellent', image: 'assets/emojis/good.png' },
+    { label: 'Average', image: 'assets/emojis/bad.png' },
+    { label: 'Needs Improvement', image: 'assets/emojis/terrible.png' }
   ];
 
   clinicalEmojis = [
-    { label: 'Good', image: 'assets/emojis/good.png' },
-    { label: 'Bad', image: 'assets/emojis/bad.png' },
-    { label: 'Terrible', image: 'assets/emojis/terrible.png' }
+    { label: 'Excellent', image: 'assets/emojis/good.png' },
+    { label: 'Average', image: 'assets/emojis/bad.png' },
+    { label: 'Needs Improvement', image: 'assets/emojis/terrible.png' }
   ];
 
   ngOnInit(): void {
