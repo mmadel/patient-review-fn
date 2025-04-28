@@ -40,7 +40,8 @@ export class PatientFeedbackComponent implements OnInit {
   clinicalToggle: any
   feedbackForm: FormGroup
   isValidForm: boolean = false;
-  constructor(private feedbackService: FeedbackService) { }
+  constructor(private feedbackService: FeedbackService,
+    private spinner: NgxSpinnerService) { }
   currentPage: 'rating' | 'form' | 'thanks' = 'rating'; // Add 'thanks' page state
   selectedHospitalityEmoji: any = null;
   selectedClinicalEmoji: any = null;
@@ -92,10 +93,18 @@ export class PatientFeedbackComponent implements OnInit {
   submitFeedback() {
     this.isClicked = true
     if (this.feedbackForm?.valid) {
-      setTimeout(() => {
-        this.currentPage = 'thanks'; // Switch to the thanks page after submitting
-        this.isSubmitted = true;
-      }, 800); // Simulate a small delay before transition
+      this.spinner.show();
+      this.feedbackService.submit({
+        clinicId: 0,
+        feedbackQuestions: null,
+        patientName: ''
+      }).subscribe(rr => {
+        this.spinner.hide();
+        setTimeout(() => {
+          this.currentPage = 'thanks';
+          this.isSubmitted = true;
+        }, 800);
+      })
     } else {
       this.isValidForm = true;
     }
