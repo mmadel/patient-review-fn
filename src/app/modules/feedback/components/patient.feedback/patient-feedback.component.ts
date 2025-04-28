@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EncryptionService } from 'src/app/util/encryption/encryption.service';
 import { PatientFeedback } from '../../models/patient.feedback';
+import { PateintFeedbackQuestion } from '../../models/patient.feedback.question';
 import { FeedbackService } from '../../services/feedback.service';
 @Component({
   selector: 'app-patient-feedback',
@@ -36,7 +37,13 @@ export class PatientFeedbackComponent implements OnInit {
   isSubmitted: boolean = false;;
   isClinicIdEmpty: boolean = false;
   clinicId: number;
-  model: PatientFeedback;
+  model: PatientFeedback = {
+    clinicId: 0,
+    feedbackQuestions: null,
+    patientName: '',
+    firstName: '',
+    lastName: ''
+  };
   hospitalityToggle: any
   clinicalToggle: any
   feedbackForm: FormGroup
@@ -96,14 +103,11 @@ export class PatientFeedbackComponent implements OnInit {
   }
 
   submitFeedback() {
+    this.fillModel()
     this.isClicked = true
     if (this.feedbackForm?.valid) {
       this.spinner.show();
-      this.feedbackService.submit({
-        clinicId: 0,
-        feedbackQuestions: null,
-        patientName: ''
-      }).subscribe(rr => {
+      this.feedbackService.submit(this.model).subscribe(rr => {
         this.spinner.hide();
         setTimeout(() => {
           this.currentPage = 'thanks';
@@ -112,6 +116,34 @@ export class PatientFeedbackComponent implements OnInit {
       })
     } else {
       this.isValidForm = true;
+    }
+  }
+  private fillModel() {
+    this.model.feedbackQuestions = this.fillReaction();
+    this.model.optionalFeedback = this.feedbackForm.get('comments')?.value
+    this.model.clinicId = this.clinicId
+    this.model.firstName = this.feedbackForm.get('firstName')?.value;
+    this.model.lastName = this.feedbackForm.get('lastName')?.value
+  }
+  private fillReaction(): PateintFeedbackQuestion {
+    let hospitalityFeedback: string = '';
+    let clinicalFeedback: string = '';
+    if (this.selectedHospitalityEmoji.label === 'Excellent')
+      hospitalityFeedback = 'Good'
+    if (this.selectedHospitalityEmoji.label === 'Average')
+      hospitalityFeedback = 'Sad'
+    if (this.selectedHospitalityEmoji.label === 'Needs Improvement')
+      hospitalityFeedback = 'VSad'
+
+    if (this.selectedClinicalEmoji.label === 'Excellent')
+      clinicalFeedback = 'Good'
+    if (this.selectedClinicalEmoji.label === 'Average')
+      clinicalFeedback = 'Sad'
+    if (this.selectedClinicalEmoji.label === 'Needs Improvement')
+      clinicalFeedback = 'VSad'
+    return {
+      hospitalityFeedback: hospitalityFeedback,
+      clinicalFeedback: clinicalFeedback
     }
   }
   private getclinicId() {
