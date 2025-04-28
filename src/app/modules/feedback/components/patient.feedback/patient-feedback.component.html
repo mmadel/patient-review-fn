@@ -1,135 +1,108 @@
-<ngx-spinner></ngx-spinner>
-<span *ngIf="!isSubmitted && !isClinicIdEmpty">
-    <c-row>
-        <c-col sm="12" lg="6" class="mb-3">
-            <c-card class="mb-5">
-                <c-card-header>
-                    <h1 class="text-center display-4">
-                        Hospitality Service
-                        <!-- <fa-icon [icon]="['fas','circle-h']" size="sm"></fa-icon> -->
-                    </h1>
-                </c-card-header>
-                <c-card-body>
-                    <div class="text-center" *ngIf="hospitalityToggle">
-                        <a class="btn btn-link" name="hospitality-VeryGood"
-                            [ngClass]="{'border-success' : hospitalityToggle.VGood}" (click)="selectFeedback($event)">
-                            <svg cIcon name="cilMoodVeryGood" size="6xl" class="text-success"></svg>
-                        </a>
+<!-- Rating Page -->
+<div class="feedback-container" *ngIf="currentPage === 'rating'" @fadeIn>
+  <div class="feedback-header">
+    <h2 class="feedback-title">How Was Your Visit?</h2>
+    <div class="title-underline"></div>
+  </div>
 
-                        <a class="btn btn-link" name="hospitality-Happy"
-                            [ngClass]="{'border-primary' : hospitalityToggle.Good}" (click)="selectFeedback($event)">
-                            <svg cIcon name="cilHappy" size="6xl" class="text-info"></svg>
-                        </a>
-                        <a class="btn btn-link" name="hospitality-Meh"
-                            [ngClass]="{'border-warning' : hospitalityToggle.Sad}" (click)="selectFeedback($event)">
-                            <svg cIcon name="cilMeh" size="6xl" class="text-warning"></svg>
-                        </a>
-
-                        <a class="btn btn-link" name="hospitality-Frown"
-                            [ngClass]="{'border-danger' : hospitalityToggle.VSad}" (click)="selectFeedback($event)">
-                            <svg cIcon name="cilFrown" size="6xl" class="text-danger"></svg>
-                        </a>
-                    </div>
-                </c-card-body>
-            </c-card>
-        </c-col>
-        <c-col sm="12" lg="6" class="mb-3">
-            <c-card class="mb-5">
-                <c-card-header>
-                    <h1 class="text-center display-4">
-                        Clinical Service
-                        <!-- <fa-icon [icon]="['fas','hospital-user']" size="sm"></fa-icon> -->
-                    </h1>
-                </c-card-header>
-                <c-card-body>
-                    <div class="text-center" *ngIf="clinicalToggle">
-                        <a class="btn btn-link" name="clinical-VeryGood"
-                            [ngClass]="{'border-success' : clinicalToggle.VGood}" (click)="selectFeedback($event)">
-                            <svg cIcon name="cilMoodVeryGood" size="6xl" class="text-success"></svg>
-                        </a>
-
-                        <a class="btn btn-link" name="clinical-Happy"
-                            [ngClass]="{'border-primary' : clinicalToggle.Good}" (click)="selectFeedback($event)">
-                            <svg cIcon name="cilHappy" size="6xl" class="text-info"></svg>
-                        </a>
-                        <a class="btn btn-link" name="clinical-Meh" [ngClass]="{'border-warning' : clinicalToggle.Sad}"
-                            (click)="selectFeedback($event)">
-                            <svg cIcon name="cilMeh" size="6xl" class="text-warning"></svg>
-                        </a>
-
-                        <a class="btn btn-link" name="clinical-Frown"
-                            [ngClass]="{'border-danger' : clinicalToggle.VSad}" (click)="selectFeedback($event)">
-                            <svg cIcon name="cilFrown" size="6xl" class="text-danger"></svg>
-                        </a>
-                    </div>
-                </c-card-body>
-            </c-card>
-        </c-col>
-        <c-col sm="12" lg="12" class="mb-3">
-            <c-card>
-                <c-card-header>
-                    <h3>
-                        Optional Feedback
-                    </h3>
-                </c-card-header>
-                <c-card-body>
-                    <textarea cFormControl id="optionalFeedback" rows="5"
-                        [(ngModel)]="model.optionalFeedback"></textarea>
-                </c-card-body>
-            </c-card>
-        </c-col>
-    </c-row>
-
-
-    <c-card class="mb-5">
-        <c-card-header>
-            <h1 class="display-6">
-                Please enter your name
-            </h1>
-        </c-card-header>
-        <c-card-body>
-            <div class="text-center">
-                <c-input-group class="mb-3">
-                    <span cInputGroupText id="basic-addon1">
-                        <svg cIcon name="cibSuperuser" size="3xl"></svg>
-                    </span>
-                    <input aria-describedby="basic-addon1" [(ngModel)]="model.patientName" cFormControl
-                        placeholder="Patient Name" />
-                </c-input-group>
-            </div>
-        </c-card-body>
-    </c-card>
-
-
-    <div class="d-grid gap-2 col-4 mx-auto mb-3">
-        <button cButton variant="outline" size="sm" shape="rounded-pill" (click)="submit()" [disabled]="checkFields()">
-            <span class="fs-3">
-                Submit
-            </span>
-        </button>
+  <!-- Hospitality Service -->
+  <div class="service-card hospitality-service" [class.completed]="selectedHospitalityEmoji">
+    <div class="service-header">
+      <h3 class="service-title">
+        Hospitality Service
+        <div class="service-underline"></div>
+      </h3>
     </div>
-</span>
-<span *ngIf="isSubmitted">
-    <c-card>
-        <c-card-body>
-            <h1 class="text-center display-1">
-                Thank you!
-                <svg cIcon name="cilSmile" size="4xl"></svg>
-            </h1>
-        </c-card-body>
-    </c-card>
-</span>
-<span *ngIf="!isSubmitted && isClinicIdEmpty">
-    <c-card>
-        <c-card-body>
-            <h1 class="text-center display-1">
-                OOOP..!!!
-                <svg cIcon name="cilSad" size="4xl"></svg>
-            </h1>
-            <h4 class="text-center display-6">
-                Don't copy URL ,just scan the QR Code.
-            </h4>
-        </c-card-body>
-    </c-card>
-</span>
-<input id="no_sleep_input" (click)="handleNoSleep()" type="hidden">
+    <p class="service-description">
+      How was your experience with our front desk, waiting area, and overall hospitality?
+    </p>
+
+    <div class="emoji-rating">
+      <div class="emoji-item" *ngFor="let emoji of hospitalityEmojis" (click)="selectEmoji('hospitality', emoji)"
+        [class.selected]="selectedHospitalityEmoji === emoji">
+        <div class="emoji-face">
+          <img [src]="emoji.image" [alt]="emoji.label" class="emoji-img">
+        </div>
+        <span class="emoji-label">{{ emoji.label }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clinical Service -->
+  <div class="service-card clinical-service" [class.completed]="selectedClinicalEmoji">
+    <div class="service-header">
+      <h3 class="service-title">
+        Clinical Service
+        <div class="service-underline"></div>
+      </h3>
+    </div>
+    <p class="service-description">
+      How was your experience with our medical staff, diagnosis, and treatment?
+    </p>
+
+    <div class="emoji-rating">
+      <div class="emoji-item" *ngFor="let emoji of clinicalEmojis" (click)="selectEmoji('clinical', emoji)"
+        [class.selected]="selectedClinicalEmoji === emoji">
+        <div class="emoji-face">
+          <img [src]="emoji.image" [alt]="emoji.label" class="emoji-img">
+        </div>
+        <span class="emoji-label">{{ emoji.label }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Completion Indicator -->
+  <div class="completion-indicator" *ngIf="bothSelected()" @fadeIn>
+    <div class="swipe-hint-container">
+      <p>Swiping left to continue...</p>
+      <div class="swipe-hint">
+        <div class="swipe-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Form Page -->
+<div class="feedback-form-container" *ngIf="currentPage === 'form'" @slideIn>
+  <div class="form-header">
+    <button class="back-button" (click)="goBack()">
+      ← Back
+    </button>
+    <h2>Share More Feedback</h2>
+  </div>
+
+  <form class="feedback-form" [formGroup]="feedbackForm" (submit)="submitFeedback()">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" formControlName="firstName"
+        [ngClass]="{'is-invalid': feedbackForm.get('firstName')?.invalid && isClicked}">
+    </div>
+    <div *ngIf="feedbackForm.get('firstName')?.hasError('required') && isClicked" class="text-danger mx-1">
+      Please provide us with your First Name
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" formControlName="lastName"
+        [ngClass]="{'is-invalid': feedbackForm.get('firstName')?.invalid && isClicked}">
+    </div>
+    <div *ngIf="feedbackForm.get('lastName')?.hasError('required') && isClicked" class="text-danger mx-1">
+      Please provide us with your Last Name
+    </div>
+    <div class="form-group">
+      <label for="comments">Your Feedback</label>
+      <textarea id="comments" name="comments" rows="5" formControlName="comments"></textarea>
+    </div>
+
+    <button type="submit" class="form-submit-btn">Send Feedback</button>
+  </form>
+</div>
+
+<!-- Thanks Page -->
+<div class="thanks-container" *ngIf="currentPage === 'thanks'" @slideIn>
+  <div class="thanks-message">
+    <h2>Thank You!</h2>
+    <p>Your feedback has been submitted successfully.</p>
+    <button (click)="goBack()">Go Back</button>
+  </div>
+</div>
