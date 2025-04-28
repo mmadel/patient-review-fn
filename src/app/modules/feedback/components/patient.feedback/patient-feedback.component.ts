@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { EncryptionService } from 'src/app/util/encryption/encryption.service';
 import { PatientFeedback } from '../../models/patient.feedback';
 import { FeedbackService } from '../../services/feedback.service';
 @Component({
@@ -41,7 +42,10 @@ export class PatientFeedbackComponent implements OnInit {
   feedbackForm: FormGroup
   isValidForm: boolean = false;
   constructor(private feedbackService: FeedbackService,
-    private spinner: NgxSpinnerService) { }
+    private spinner: NgxSpinnerService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private encryptionService: EncryptionService) { }
   currentPage: 'rating' | 'form' | 'thanks' = 'rating'; // Add 'thanks' page state
   selectedHospitalityEmoji: any = null;
   selectedClinicalEmoji: any = null;
@@ -58,6 +62,7 @@ export class PatientFeedbackComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.getclinicId()
     this.feedbackForm = new FormGroup({
       'firstName': new FormControl(null, [Validators.required]),
       'lastName': new FormControl(null, [Validators.required]),
@@ -108,5 +113,22 @@ export class PatientFeedbackComponent implements OnInit {
     } else {
       this.isValidForm = true;
     }
+  }
+  private getclinicId() {
+    var cachedClinicId = localStorage.getItem('clinicId')
+    if (cachedClinicId === null) {
+      this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
+      var encryptClinicId = this.encryptionService.encrypt((this.clinicId).toString())
+      localStorage.setItem('clinicId', encryptClinicId)
+    } else {
+      this.clinicId = Number(this.encryptionService.decrypt(cachedClinicId));
+    }
+    this.router.navigate([], {
+      queryParams: {
+        'clinicId': null,
+      },
+      queryParamsHandling: 'merge'
+    })
+    console.log(this.clinicId + ' Clinic-ID')
   }
 }
