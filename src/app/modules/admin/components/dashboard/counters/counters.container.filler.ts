@@ -21,12 +21,6 @@ export class countersContainerFiller {
         },
         {
             icon: this.icons.cilMeh,
-            color: 'warning',
-            values: [{ title: 'hospitality', value: '' }, { title: 'clinical', value: '' }],
-            capBg: { '--cui-card-cap-bg': '#4875b4' },
-        },
-        {
-            icon: this.icons.cilFrown,
             color: 'danger',
             values: [{ title: 'hospitality', value: '' }, { title: 'clinical', value: '' }],
             capBg: { '--cui-card-cap-bg': '#4875b4' },
@@ -51,13 +45,6 @@ export class countersContainerFiller {
 
         this.data[2].values[1].value = "(" + countersContainer.clinicalCountersContainer.negative.toString() + ")"
             + " " + countersContainer.clinicalCountersContainer.negativePercentage.toString() + "%";
-
-        this.data[3].values[0].value = "(" + countersContainer.hospitalityCounterContainer.veryNegative.toString() + ")"
-            + " " + countersContainer.hospitalityCounterContainer.veryNegativePercentage.toString() + "%";
-
-        this.data[3].values[1].value = "(" + countersContainer.clinicalCountersContainer.veryNegative.toString() + ")"
-            + " " + countersContainer.clinicalCountersContainer.veryNegativePercentage.toString() + "%";
-
         return this.data;
     }
 }

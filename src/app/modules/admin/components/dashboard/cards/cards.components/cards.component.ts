@@ -20,32 +20,32 @@ export class CardsComponent implements OnInit, OnDestroy {
     this.clinicService.filterDate$.next(null)
   }
   ngOnInit(): void {
-    combineLatest([this.clinicService.selectedClinic$, this.clinicService.filterDate$])
-      .pipe(
-        tap((result) => { }),
-        filter((result) => result[0] !== null && result[0]?.id !== null),
-        switchMap(result => {
-          var startDate = result[1] === null ? moment(new Date(moment().startOf('month').format('YYYY-MM-DD'))).startOf('day').valueOf() : result[1][0];
-          var endDate = result[1] === null ? moment(new Date(moment().endOf('month').format('YYYY-MM-DD'))).endOf('day').valueOf() : result[1][1];
-          const obs$ = this.performanceIndexService.get(result[0]!.id, startDate, endDate);
-          return obs$.pipe(
-            catchError(err => of(err))
-          );
-        }),
-      ).subscribe((result) => {
+    // combineLatest([this.clinicService.selectedClinic$, this.clinicService.filterDate$])
+    //   .pipe(
+    //     tap((result) => { }),
+    //     filter((result) => result[0] !== null && result[0]?.id !== null),
+    //     switchMap(result => {
+    //       var startDate = result[1] === null ? moment(new Date(moment().startOf('month').format('YYYY-MM-DD'))).startOf('day').valueOf() : result[1][0];
+    //       var endDate = result[1] === null ? moment(new Date(moment().endOf('month').format('YYYY-MM-DD'))).endOf('day').valueOf() : result[1][1];
+    //       const obs$ = this.performanceIndexService.get(result[0]!.id, startDate, endDate);
+    //       return obs$.pipe(
+    //         catchError(err => of(err))
+    //       );
+    //     }),
+    //   ).subscribe((result) => {
 
-        for (const [key, value] of Object.entries(CardPerformanceDataRetrieval.retrieve(result.body))) {
-          for (const [dkey, dvalue] of Object.entries(value)) {
-            if (dkey === 'hospitalityService') {
-              this.hospitalityServiceData = dvalue;
-            }
-            if (dkey === 'clinicalService') {
-              this.clinicalServiceData = dvalue;
-            }
-          }
+    //     for (const [key, value] of Object.entries(CardPerformanceDataRetrieval.retrieve(result.body))) {
+    //       for (const [dkey, dvalue] of Object.entries(value)) {
+    //         if (dkey === 'hospitalityService') {
+    //           this.hospitalityServiceData = dvalue;
+    //         }
+    //         if (dkey === 'clinicalService') {
+    //           this.clinicalServiceData = dvalue;
+    //         }
+    //       }
 
-        }
-      }, (err) => { })
+    //     }
+    //   }, (err) => { })
   }
 
 }

@@ -129,18 +129,18 @@ export class PatientFeedbackComponent implements OnInit {
     let hospitalityFeedback: string = '';
     let clinicalFeedback: string = '';
     if (this.selectedHospitalityEmoji.label === 'Excellent')
-      hospitalityFeedback = 'Good'
+      hospitalityFeedback = 'VGood'
     if (this.selectedHospitalityEmoji.label === 'Average')
-      hospitalityFeedback = 'Sad'
+      hospitalityFeedback = 'Good'
     if (this.selectedHospitalityEmoji.label === 'Needs Improvement')
-      hospitalityFeedback = 'VSad'
+      hospitalityFeedback = 'Sad'
 
     if (this.selectedClinicalEmoji.label === 'Excellent')
-      clinicalFeedback = 'Good'
+      clinicalFeedback = 'VGood'
     if (this.selectedClinicalEmoji.label === 'Average')
-      clinicalFeedback = 'Sad'
+      clinicalFeedback = 'Good'
     if (this.selectedClinicalEmoji.label === 'Needs Improvement')
-      clinicalFeedback = 'VSad'
+      clinicalFeedback = 'Sad'
     return {
       hospitalityFeedback: hospitalityFeedback,
       clinicalFeedback: clinicalFeedback
