@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { cilFrown, cilHappy, cilMeh, cilMoodVeryGood } from '@coreui/icons';
 import * as moment from 'moment';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError, combineLatest, filter, of, switchMap, tap } from 'rxjs';
 import { ClinicalCountersContainer } from '../../../models/counters/clinical.counters.container';
 import { CountersContainer } from '../../../models/counters/counters.container';
@@ -15,11 +16,12 @@ import { countersContainerFiller } from './counters.container.filler';
 })
 export class ServiceCountersComponent implements OnInit {
 
-  constructor(private clinicService: ClinicService, private performanceIndexService: PerformanceIndexService) { }
+  constructor(private clinicService: ClinicService, private performanceIndexService: PerformanceIndexService,private spinner: NgxSpinnerService) { }
   icons = { cilMoodVeryGood, cilHappy, cilMeh, cilFrown };
   data: any;
   total: number;
   ngOnInit(): void {
+    this.spinner.show();
     combineLatest([this.clinicService.selectedClinic$, this.clinicService.filterDate$])
       .pipe(
         tap((result) => { }),
@@ -33,6 +35,7 @@ export class ServiceCountersComponent implements OnInit {
           );
         }),
       ).subscribe((result) => {
+        this.spinner.hide();
         var countersContainer: CountersContainer = {
           hospitalityCounterContainer: {
             veryPositive: 0,

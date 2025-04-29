@@ -83,7 +83,7 @@
     <div class="form-group">
       <label for="lastName">Last Name</label>
       <input type="text" id="lastName" name="lastName" formControlName="lastName"
-        [ngClass]="{'is-invalid': feedbackForm.get('firstName')?.invalid && isClicked}">
+        [ngClass]="{'is-invalid': feedbackForm.get('lastName')?.invalid && isClicked}">
     </div>
     <div *ngIf="feedbackForm.get('lastName')?.hasError('required') && isClicked" class="text-danger mx-1">
       Please provide us with your Last Name

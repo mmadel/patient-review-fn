@@ -108,6 +108,8 @@ export class PatientFeedbackComponent implements OnInit {
     if (this.feedbackForm?.valid) {
       this.spinner.show();
       this.feedbackService.submit(this.model).subscribe(rr => {
+        this.feedbackForm.reset();
+        this.isClicked = false
         this.spinner.hide();
         setTimeout(() => {
           this.currentPage = 'thanks';
@@ -154,6 +156,7 @@ export class PatientFeedbackComponent implements OnInit {
       localStorage.setItem('clinicId', encryptClinicId)
     } else {
       this.clinicId = Number(this.encryptionService.decrypt(cachedClinicId));
+      console.log(this.clinicId)
     }
     this.router.navigate([], {
       queryParams: {

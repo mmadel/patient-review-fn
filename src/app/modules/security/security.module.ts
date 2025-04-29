@@ -31,7 +31,7 @@ import {
 
 
 } from '@coreui/angular-pro';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IconModule } from '@coreui/icons-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
@@ -41,6 +41,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     AlertModule,
     BadgeModule,
     ButtonModule,

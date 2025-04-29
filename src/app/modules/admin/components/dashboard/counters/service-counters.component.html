@@ -8,3 +8,11 @@
     </c-widget-stat-d>
   </c-col>
 </c-row>
+<ng-container *ngIf="!data;">
+  <div class="skeleton-wrapper">
+    <div class="skeleton-line title"></div>
+    <div class="skeleton-line"></div>
+    <div class="skeleton-line"></div>
+    <div class="skeleton-line short"></div>
+  </div>
+</ng-container>
