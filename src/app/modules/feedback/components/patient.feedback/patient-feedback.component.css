@@ -178,14 +178,6 @@ html, body {
   font-weight: 700;
 }
 
-.hospitality-service .emoji-item.selected .emoji-face {
-  border-color: #42a5f5;
-}
-
-.hospitality-service .emoji-item.selected .emoji-label {
-  color: #42a5f5;
-}
-
 /* ===== FORM STYLES ===== */
 .feedback-form-container {
   overflow: hidden; /* No scrollbar */
@@ -528,4 +520,33 @@ html, body {
 input:focus, textarea:focus {
   outline: none;
   box-shadow: 0 0 8px rgba(244, 67, 54, 0.6); /* Red glow */
+}/* ===== EMOJI SELECTION STATES ===== */
+.emoji-item.selected.excellent .emoji-face {
+  border: 3px solid #4CAF50; /* Green */
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.emoji-item.selected.excellent .emoji-label {
+  color: #4CAF50; /* Green */
+  font-weight: 700;
+}
+
+.emoji-item.selected.average .emoji-face {
+  border: 3px solid #FFC107; /* Yellow */
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
+}
+
+.emoji-item.selected.average .emoji-label {
+  color: #FFC107; /* Yellow */
+  font-weight: 700;
+}
+
+.emoji-item.selected.needs-improvement .emoji-face {
+  border: 3px solid #F44336; /* Red */
+  box-shadow: 0 0 10px rgba(244, 67, 54, 0.3);
+}
+
+.emoji-item.selected.needs-improvement .emoji-label {
+  color: #F44336; /* Red */
+  font-weight: 700;
 }

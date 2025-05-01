@@ -2,10 +2,10 @@ import { cilFrown, cilHappy, cilMeh, cilMoodVeryGood } from '@coreui/icons';
 import { CountersContainer } from '../../../models/counters/counters.container';
 
 export class countersContainerFiller {
-    private static icons = { cilMoodVeryGood, cilHappy, cilMeh, cilFrown };
+    private static icons = { cilHappy, cilMeh, cilFrown  };
     private static data = [
         {
-            icon: this.icons.cilMoodVeryGood,
+            icon: this.icons.cilHappy,
             color: 'success',
             values: [{ title: 'hospitality', value: '' }, { title: 'clinical', value: '' }],
             capBg: { '--cui-card-cap-bg': '#3b5998' },
@@ -13,14 +13,14 @@ export class countersContainerFiller {
 
         },
         {
-            icon: this.icons.cilHappy,
+            icon: this.icons.cilMeh,
             color: 'info',
             values: [{ title: 'hospitality', value: '' }, { title: 'clinical', value: '' }],
             capBg: { '--cui-card-cap-bg': '#00aced' },
 
         },
         {
-            icon: this.icons.cilMeh,
+            icon: this.icons.cilFrown,
             color: 'danger',
             values: [{ title: 'hospitality', value: '' }, { title: 'clinical', value: '' }],
             capBg: { '--cui-card-cap-bg': '#4875b4' },
