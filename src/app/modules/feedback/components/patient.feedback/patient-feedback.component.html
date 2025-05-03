@@ -1,6 +1,7 @@
 <ngx-spinner></ngx-spinner>
 <!-- Rating Page -->
 <div class="feedback-container" *ngIf="currentPage === 'rating'" @fadeIn>
+
   <div class="feedback-header">
     <h2 class="feedback-title">How Was Your Visit?</h2>
     <div class="title-underline"></div>
@@ -53,7 +54,35 @@
       </div>
     </div>
   </div>
-
+  <div id="feedbackForm" class="service-card personal-info-card form-scroll-target">
+    <div class="form-content">
+      <form class="feedback-form" [formGroup]="feedbackForm" (submit)="submitFeedback()">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" formControlName="firstName"
+              [ngClass]="{'is-invalid': feedbackForm.get('firstName')?.invalid && isClicked}">
+            <div *ngIf="feedbackForm.get('firstName')?.hasError('required') && isClicked" class="text-danger mx-1">
+              First Name is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" formControlName="lastName"
+              [ngClass]="{'is-invalid': feedbackForm.get('lastName')?.invalid && isClicked}">
+            <div *ngIf="feedbackForm.get('lastName')?.hasError('required') && isClicked" class="text-danger mx-1">
+               Last Name is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="comments">Your Feedback</label>
+          <textarea id="comments" name="comments" rows="3" formControlName="comments"></textarea>
+        </div>
+        <button type="submit" class="form-submit-btn">Send Feedback</button>
+      </form>
+    </div>
+  </div>
 </div>
 <!-- Thanks Page -->
 <div class="thanks-container" *ngIf="currentPage === 'thanks'" @slideIn>
@@ -62,39 +91,4 @@
     <p>Your feedback has been submitted successfully.</p>
     <button (click)="goBack()">Start New Survey</button>
   </div>
-</div>
-<!-- Form Page -->
-<div class="feedback-form-container" *ngIf="currentPage === 'form'" @slideIn>
-  <div class="form-header">
-    <button class="back-button" (click)="goBack()">
-      ← Back
-    </button>
-    <h2>Share More Feedback</h2>
-  </div>
-
-  <form class="feedback-form" [formGroup]="feedbackForm" (submit)="submitFeedback()">
-    <div class="form-group">
-      <label for="firstName">First Name</label>
-      <input type="text" id="firstName" name="firstName" formControlName="firstName"
-        [ngClass]="{'is-invalid': feedbackForm.get('firstName')?.invalid && isClicked}">
-    </div>
-    <div *ngIf="feedbackForm.get('firstName')?.hasError('required') && isClicked" class="text-danger mx-1">
-      Please provide us with your First Name
-    </div>
-
-    <div class="form-group">
-      <label for="lastName">Last Name</label>
-      <input type="text" id="lastName" name="lastName" formControlName="lastName"
-        [ngClass]="{'is-invalid': feedbackForm.get('lastName')?.invalid && isClicked}">
-    </div>
-    <div *ngIf="feedbackForm.get('lastName')?.hasError('required') && isClicked" class="text-danger mx-1">
-      Please provide us with your Last Name
-    </div>
-    <div class="form-group">
-      <label for="comments">Your Feedback</label>
-      <textarea id="comments" name="comments" rows="5" formControlName="comments"></textarea>
-    </div>
-
-    <button type="submit" class="form-submit-btn">Send Feedback</button>
-  </form>
 </div>

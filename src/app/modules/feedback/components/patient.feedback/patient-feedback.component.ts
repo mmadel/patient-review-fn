@@ -88,8 +88,11 @@ export class PatientFeedbackComponent implements OnInit {
 
     if (this.bothSelected()) {
       setTimeout(() => {
-        this.currentPage = 'form';
-      }, 800);
+        const formElement = document.getElementById('feedbackForm');
+        if (formElement) {
+          formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100); // Small delay to ensure UI updates
     }
   }
   goBack() {
@@ -105,7 +108,7 @@ export class PatientFeedbackComponent implements OnInit {
   submitFeedback() {
     this.fillModel()
     this.isClicked = true
-    if (this.feedbackForm?.valid) {
+    if (this.feedbackForm?.valid && this.bothSelected()) {
       this.spinner.show();
       this.feedbackService.submit(this.model).subscribe(rr => {
         this.feedbackForm.reset();
