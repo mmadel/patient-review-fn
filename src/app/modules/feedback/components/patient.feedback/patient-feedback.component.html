@@ -8,49 +8,51 @@
   </div>
 
   <!-- Hospitality Service -->
-  <div class="service-card hospitality-service" [class.completed]="selectedHospitalityEmoji">
-    <div class="service-header">
-      <h3 class="service-title">
-        Hospitality Service
-        <div class="service-underline"></div>
-      </h3>
-    </div>
-    <p class="service-description">
-      How was your experience with our front desk, waiting area, and overall hospitality?
-    </p>
+  <div class="services-container">
+    <div class="service-card hospitality-service" [class.completed]="selectedHospitalityEmoji">
+      <div class="service-header">
+        <h3 class="service-title">
+          Hospitality Service
+          <div class="service-underline"></div>
+        </h3>
+      </div>
+      <p class="service-description">
+        How was your experience with our front desk, waiting area, and overall hospitality?
+      </p>
 
-    <div class="emoji-rating">
-      <div class="emoji-item" *ngFor="let emoji of hospitalityEmojis" (click)="selectEmoji('hospitality', emoji)"
-        [class.selected]="selectedHospitalityEmoji === emoji" [class.excellent]="emoji.label === 'Excellent'"
-        [class.average]="emoji.label === 'Average'" [class.needs-improvement]="emoji.label === 'Needs Improvement'">
-        <div class="emoji-face">
-          <img [src]="emoji.image" [alt]="emoji.label" class="emoji-img">
+      <div class="emoji-rating">
+        <div class="emoji-item" *ngFor="let emoji of hospitalityEmojis" (click)="selectEmoji('hospitality', emoji)"
+          [class.selected]="selectedHospitalityEmoji === emoji" [class.excellent]="emoji.label === 'Excellent'"
+          [class.average]="emoji.label === 'Average'" [class.needs-improvement]="emoji.label === 'Needs Improvement'">
+          <div class="emoji-face">
+            <img [src]="emoji.image" [alt]="emoji.label" class="emoji-img">
+          </div>
+          <span class="emoji-label">{{ emoji.label }}</span>
         </div>
-        <span class="emoji-label">{{ emoji.label }}</span>
       </div>
     </div>
-  </div>
 
-  <!-- Clinical Service -->
-  <div class="service-card clinical-service" [class.completed]="selectedClinicalEmoji">
-    <div class="service-header">
-      <h3 class="service-title">
-        Clinical Service
-        <div class="service-underline"></div>
-      </h3>
-    </div>
-    <p class="service-description">
-      How was your experience with our medical staff, diagnosis, and treatment?
-    </p>
+    <!-- Clinical Service -->
+    <div class="service-card clinical-service" [class.completed]="selectedClinicalEmoji">
+      <div class="service-header">
+        <h3 class="service-title">
+          Clinical Service
+          <div class="service-underline"></div>
+        </h3>
+      </div>
+      <p class="service-description">
+        How was your experience with our medical staff, diagnosis, and treatment?
+      </p>
 
-    <div class="emoji-rating">
-      <div class="emoji-item" *ngFor="let emoji of clinicalEmojis" (click)="selectEmoji('clinical', emoji)"
-        [class.selected]="selectedClinicalEmoji === emoji" [class.excellent]="emoji.label === 'Excellent'"
-        [class.average]="emoji.label === 'Average'" [class.needs-improvement]="emoji.label === 'Needs Improvement'">
-        <div class="emoji-face">
-          <img [src]="emoji.image" [alt]="emoji.label" class="emoji-img">
+      <div class="emoji-rating">
+        <div class="emoji-item" *ngFor="let emoji of clinicalEmojis" (click)="selectEmoji('clinical', emoji)"
+          [class.selected]="selectedClinicalEmoji === emoji" [class.excellent]="emoji.label === 'Excellent'"
+          [class.average]="emoji.label === 'Average'" [class.needs-improvement]="emoji.label === 'Needs Improvement'">
+          <div class="emoji-face">
+            <img [src]="emoji.image" [alt]="emoji.label" class="emoji-img">
+          </div>
+          <span class="emoji-label">{{ emoji.label }}</span>
         </div>
-        <span class="emoji-label">{{ emoji.label }}</span>
       </div>
     </div>
   </div>
@@ -71,7 +73,7 @@
             <input type="text" id="lastName" name="lastName" formControlName="lastName"
               [ngClass]="{'is-invalid': feedbackForm.get('lastName')?.invalid && isClicked}">
             <div *ngIf="feedbackForm.get('lastName')?.hasError('required') && isClicked" class="text-danger mx-1">
-               Last Name is required
+              Last Name is required
             </div>
           </div>
         </div>

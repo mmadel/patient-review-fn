@@ -1,14 +1,16 @@
-body, html {
+body,
+html {
   height: 100%;
   overflow-x: hidden;
 }
+
 /* ===== CORE STYLES ===== */
 .feedback-container {
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
   font-family: 'Segoe UI', system-ui, sans-serif;
-  min-height: 100vh; 
+  min-height: 100vh;
   overflow-y: auto;
 }
 
@@ -17,6 +19,7 @@ body, html {
   text-align: center;
   margin-bottom: 0.5rem;
 }
+
 /* ===== PERSONAL INFORMATION CARD ===== */
 .personal-info-card {
   background: white;
@@ -51,6 +54,14 @@ body, html {
 }
 
 /* ===== SERVICE CARDS ===== */
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  /* Space between cards */
+  margin-bottom: 1.5rem;
+}
+
 .service-card {
   background: white;
   border-radius: 12px;
@@ -59,7 +70,13 @@ body, html {
   margin-bottom: 0.5rem;
   transition: all 0.3s ease;
   height: auto;
-  min-height: 300px; /* Optional */
+  min-height: 300px;
+  /* Optional */
+  flex: 1 1 calc(50% - 1.5rem);
+  /* Two cards with gap */
+  min-width: 300px;
+  /* Minimum card width */
+  box-sizing: border-box;
 }
 
 .service-header {
@@ -139,9 +156,12 @@ body, html {
   align-items: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  flex: 1 1 150px; /* Flexible width */
-  max-width: 160px; /* Max-width prevents overflow */
-  min-width: 120px; /* Ensures the emoji doesn't shrink too much */
+  flex: 1 1 150px;
+  /* Flexible width */
+  max-width: 160px;
+  /* Max-width prevents overflow */
+  min-width: 120px;
+  /* Ensures the emoji doesn't shrink too much */
   box-sizing: border-box;
 }
 
@@ -154,7 +174,7 @@ body, html {
   align-items: center;
   justify-content: center;
   margin-bottom: 0.8rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
@@ -177,7 +197,7 @@ body, html {
 /* ===== INTERACTIONS ===== */
 .emoji-item:hover .emoji-face {
   transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .emoji-item.selected .emoji-face {
@@ -191,7 +211,8 @@ body, html {
 
 /* ===== FORM STYLES ===== */
 .feedback-form-container {
-  overflow: hidden; /* No scrollbar */
+  overflow: hidden;
+  /* No scrollbar */
 }
 
 .feedback-form {
@@ -199,7 +220,8 @@ body, html {
   flex-direction: column;
   gap: 1.5rem;
   margin-top: 2rem;
-  overflow: hidden; /* No scrollbar */
+  overflow: hidden;
+  /* No scrollbar */
 }
 
 .form-header {
@@ -282,62 +304,83 @@ body, html {
 }
 
 @keyframes swipeMove {
-  from { transform: translateX(0); }
-  to { transform: translateX(10px); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(10px);
+  }
 }
 
 /* ===== ANIMATIONS ===== */
 @keyframes underlineGrowCenter {
-  from { transform: translateX(-50%) scaleX(0); }
-  to { transform: translateX(-50%) scaleX(1); }
+  from {
+    transform: translateX(-50%) scaleX(0);
+  }
+
+  to {
+    transform: translateX(-50%) scaleX(1);
+  }
 }
 
 @keyframes underlineGrow {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
 }
+
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
   .feedback-container {
     padding: 1.5rem;
   }
+
   .emoji-label {
     font-size: 0.5rem;
   }
+
   .feedback-title {
     font-size: 2rem;
   }
-  
+
   .emoji-rating {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.8rem; /* Reduce gap between emojis on smaller screens */
+    gap: 0.8rem;
+    /* Reduce gap between emojis on smaller screens */
   }
-  
+
   .emoji-item {
-    flex: 1 1 100px;  
+    flex: 1 1 100px;
     max-width: 130px;
-    flex: 1 1 120px; /* Smaller base width on mobile */
+    flex: 1 1 120px;
+    /* Smaller base width on mobile */
   }
-  
+
   .emoji-face {
     width: 110px;
     height: 110px;
   }
-  
+
   .emoji-img {
     width: 100px;
     height: 100px;
   }
-  
+
   .service-title {
     font-size: 1.6rem;
   }
-  
+
   .service-description {
     font-size: 1.1rem;
   }
 }
+
 /* ===== THANK YOU PAGE ===== */
 .thanks-container {
   max-width: 800px;
@@ -348,7 +391,7 @@ body, html {
   background: #ffffff;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   border-radius: 12px;
-  margin-top:10vh;
+  margin-top: 10vh;
 }
 
 .thanks-message {
@@ -408,13 +451,20 @@ body, html {
 
 /* ===== ANIMATIONS ===== */
 @keyframes underlineGrowCenter {
-  from { transform: translateX(-50%) scaleX(0); }
-  to { transform: translateX(-50%) scaleX(1); }
+  from {
+    transform: translateX(-50%) scaleX(0);
+  }
+
+  to {
+    transform: translateX(-50%) scaleX(1);
+  }
 }
+
 /* ===== FORM HEADER ===== */
 .form-header {
   display: flex;
-  justify-content: center; /* Center the title */
+  justify-content: center;
+  /* Center the title */
   align-items: center;
   margin-bottom: 2rem;
   position: relative;
@@ -472,8 +522,10 @@ body, html {
   border-radius: 5px;
   margin-top: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex; /* Use flexbox to align icon and text */
-  align-items: center; /* Vertically center the content */
+  display: flex;
+  /* Use flexbox to align icon and text */
+  align-items: center;
+  /* Vertically center the content */
   transition: transform 0.3s ease, opacity 0.5s ease;
   position: relative;
   opacity: 0;
@@ -486,6 +538,7 @@ body, html {
     opacity: 0;
     transform: translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -494,26 +547,44 @@ body, html {
 
 /* Shake animation */
 @keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 /* Style for invalid input fields */
 .is-invalid {
   border: 2px solid #f44336;
-  background-color: #ffe5e5; /* Light red background */
-  color: #f44336; /* Red text */
+  background-color: #ffe5e5;
+  /* Light red background */
+  color: #f44336;
+  /* Red text */
   animation: shake 0.5s ease-in-out;
 }
 
 /* Add an icon next to error messages for a more visual cue */
 .text-danger::before {
-  content: "❌"; /* Red cross icon */
+  content: "❌";
+  /* Red cross icon */
   font-size: 20px;
-  margin-right: 15px; /* Space between icon and text */
+  margin-right: 15px;
+  /* Space between icon and text */
 }
 
 /* Button styling for the submit button */
@@ -529,37 +600,47 @@ body, html {
 }
 
 /* On focus, make input fields stand out with a subtle glow */
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   outline: none;
-  box-shadow: 0 0 8px rgba(244, 67, 54, 0.6); /* Red glow */
-}/* ===== EMOJI SELECTION STATES ===== */
+  box-shadow: 0 0 8px rgba(244, 67, 54, 0.6);
+  /* Red glow */
+}
+
+/* ===== EMOJI SELECTION STATES ===== */
 .emoji-item.selected.excellent .emoji-face {
-  border: 3px solid #4CAF50; /* Green */
+  border: 3px solid #4CAF50;
+  /* Green */
   box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
 }
 
 .emoji-item.selected.excellent .emoji-label {
-  color: #4CAF50; /* Green */
+  color: #4CAF50;
+  /* Green */
   font-weight: 700;
 }
 
 .emoji-item.selected.average .emoji-face {
-  border: 3px solid #FFC107; /* Yellow */
+  border: 3px solid #FFC107;
+  /* Yellow */
   box-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
 }
 
 .emoji-item.selected.average .emoji-label {
-  color: #FFC107; /* Yellow */
+  color: #FFC107;
+  /* Yellow */
   font-weight: 700;
 }
 
 .emoji-item.selected.needs-improvement .emoji-face {
-  border: 3px solid #F44336; /* Red */
+  border: 3px solid #F44336;
+  /* Red */
   box-shadow: 0 0 10px rgba(244, 67, 54, 0.3);
 }
 
 .emoji-item.selected.needs-improvement .emoji-label {
-  color: #F44336; /* Red */
+  color: #F44336;
+  /* Red */
   font-weight: 700;
 }
 
@@ -618,11 +699,70 @@ input:focus, textarea:focus {
   text-align: center;
   margin: 0.5rem 0 1rem;
 }
+
 .feedback-container {
-  scroll-behavior: smooth; /* Enables smooth scrolling */
+  scroll-behavior: smooth;
+  /* Enables smooth scrolling */
 }
 
 /* Keep all your existing styles, just add this new class */
 .form-scroll-target {
-  scroll-margin-top: 20px; /* Creates spacing when scrolling to target */
+  scroll-margin-top: 20px;
+  /* Creates spacing when scrolling to target */
+}
+@media (max-width: 1024px) { /* Tablet breakpoint */
+  .service-card {
+    padding: 1.4rem; /* Slightly reduced padding */
+  }
+  
+  .service-title {
+    font-size: 1.5rem; /* Slightly smaller title */
+  }
+  
+  .emoji-face {
+    width: 90px; /* Smaller emoji containers */
+    height: 90px;
+  }
+  
+  .emoji-img {
+    width: 80px;
+    height: 80px;
+  }
+}
+@media (max-width: 600px) { /* Mobile breakpoint */
+  .services-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .service-card {
+    flex: 1 1 100%; /* Full width on mobile */
+    min-width: auto;
+    padding: 1.2rem; /* Adjusted padding */
+  }
+  
+  .service-title {
+    font-size: 1.3rem;
+  }
+  
+  .emoji-face {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .emoji-img {
+    width: 70px;
+    height: 70px;
+  }
+}
+@media (max-width: 599px) {
+  .services-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .service-card {
+    width: 100%;
+    min-width: auto;
+  }
 }
