@@ -87,7 +87,7 @@ export class PatientFeedbackComponent implements OnInit {
         if (formElement) {
           formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 100); // Small delay to ensure UI updates
+      }, 100); // Small delay to ensure U I updates
     } else {
       this.selectedClinicalEmoji = emoji;
     }
