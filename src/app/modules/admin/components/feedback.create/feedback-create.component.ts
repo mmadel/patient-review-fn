@@ -11,7 +11,7 @@ export class FeedbackCreateComponent implements OnInit {
   public createFeedbackURL: string
   public clinicId: number | null;
   public clinicName: string | null;
-  public baseURL: string = "http://192.168.195.121:4200";
+  public baseURL: string = "http://192.168.2.180:4200";
   constructor(private clinicService: ClinicService) { }
 
   ngOnInit(): void {

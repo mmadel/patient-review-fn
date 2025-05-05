@@ -82,6 +82,12 @@ export class PatientFeedbackComponent implements OnInit {
   selectEmoji(serviceType: string, emoji: any) {
     if (serviceType === 'hospitality') {
       this.selectedHospitalityEmoji = emoji;
+      setTimeout(() => {
+        const formElement = document.getElementById('clinicalService');
+        if (formElement) {
+          formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100); // Small delay to ensure UI updates
     } else {
       this.selectedClinicalEmoji = emoji;
     }
