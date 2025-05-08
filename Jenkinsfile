@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        // Customize Node.js path if needed, or use Node installed globally
-        NODE_ENV = 'production'
-    }
-
     tools {
         nodejs 'NodeJS_18' // Assumes a Node.js tool named 'NodeJS_18' is configured in Jenkins
     }
