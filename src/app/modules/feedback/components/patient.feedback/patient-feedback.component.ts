@@ -71,6 +71,12 @@ export class PatientFeedbackComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    window.addEventListener("keyup", disableF5);
+    window.addEventListener("keydown", disableF5);
+
+    function disableF5(e: any) {
+      if ((e.which || e.keyCode) == 116) e.preventDefault();
+    };
     this.getclinicId()
     this.feedbackForm = new FormGroup({
       'firstName': new FormControl(null, [Validators.required]),
