@@ -48,6 +48,7 @@ export class PatientFeedbackComponent implements OnInit {
   clinicalToggle: any
   feedbackForm: FormGroup
   isValidForm: boolean = false;
+  corrupttedData: boolean = false;
   constructor(private feedbackService: FeedbackService,
     private spinner: NgxSpinnerService,
     private router: Router,
@@ -157,22 +158,62 @@ export class PatientFeedbackComponent implements OnInit {
       clinicalFeedback: clinicalFeedback
     }
   }
-  private getclinicId() {
-    var cachedClinicId = localStorage.getItem('clinicId')
-    if (cachedClinicId === null) {
-      this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
-      var encryptClinicId = this.encryptionService.encrypt((this.clinicId).toString())
-      localStorage.setItem('clinicId', encryptClinicId)
-    } else {
-      this.clinicId = Number(this.encryptionService.decrypt(cachedClinicId));
-      console.log(this.clinicId)
-    }
+  private catchClinicParam() {
+    this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
+    var encryptClinicId = this.encryptionService.encrypt((this.clinicId).toString());
+    localStorage.setItem('clinicId', encryptClinicId);
     this.router.navigate([], {
       queryParams: {
         'clinicId': null,
       },
       queryParamsHandling: 'merge'
     })
-    console.log(this.clinicId + ' Clinic-ID')
   }
+  private getclinicId() {
+    var clinicqueryParam: number = Number(this.route.snapshot.queryParamMap.get('clinicId'));
+    var cachedClinicId = localStorage.getItem('clinicId')
+    if ((clinicqueryParam !== 0) && cachedClinicId === null) {
+      //scan QR Code
+      console.log('scan QR Code')
+      this.corrupttedData = false;
+      this.catchClinicParam();
+    } else if ((clinicqueryParam === 0 || isNaN(clinicqueryParam)) && cachedClinicId !== null) {
+      //Refresh page
+      console.log('Refresh page')
+      var cahcedClinic: string = this.encryptionService.decrypt(cachedClinicId);
+      if (cahcedClinic === '') {
+        this.corrupttedData = true;
+        console.log('corruptted cached clinic')
+      }
+      else {
+        this.clinicId = Number(cahcedClinic);
+        this.corrupttedData = false;
+      }
+    } else if ((clinicqueryParam !== 0) && cachedClinicId !== null) {
+      //Scan QR code with wrong cached data
+      console.log('Scan QR code with wrong cached data')
+      localStorage.removeItem('clinicId')
+      this.catchClinicParam();
+      this.corrupttedData = false;
+    } else {
+      //Refresh with no cache
+      console.log('Refresh with no cache')
+      this.corrupttedData = true;
+    }
+
+  }
+  // private getclinicId() {
+  //   this.dd();
+  //   var cachedClinicId = localStorage.getItem('clinicId')
+  //   if (cachedClinicId === null) {
+  //     this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
+  //     var encryptClinicId = this.encryptionService.encrypt((this.clinicId).toString())
+  //     localStorage.setItem('clinicId', encryptClinicId)
+  //   } else {
+  //     this.clinicId = Number(this.encryptionService.decrypt(cachedClinicId));
+  //     console.log(this.clinicId)
+  //   }
+
+  //   console.log(this.clinicId + ' Clinic-ID')
+  // }
 }

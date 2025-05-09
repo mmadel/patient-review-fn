@@ -21,7 +21,6 @@ export class FeedbackCreateComponent implements OnInit {
       this.clinicName = clinic!.name;
       this.clinicId = clinic!.id
       this.createFeedbackURL = this.baseURL + '/#/feedback/submit?clinicId=' + clinic?.id;
-      localStorage.removeItem('clinicId');
     })
   }
 }

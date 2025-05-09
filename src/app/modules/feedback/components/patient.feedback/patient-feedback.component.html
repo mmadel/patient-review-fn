@@ -1,6 +1,6 @@
 <ngx-spinner></ngx-spinner>
 <!-- Rating Page -->
-<div class="feedback-container" *ngIf="currentPage === 'rating'" @fadeIn>
+<div class="feedback-container" *ngIf="currentPage === 'rating' && !corrupttedData" @fadeIn>
 
   <div class="feedback-header">
     <h2 class="feedback-title">How Was Your Visit?</h2>
@@ -71,7 +71,7 @@
             <input type="text" id="lastName" name="lastName" formControlName="lastName"
               [ngClass]="{'is-invalid': feedbackForm.get('lastName')?.invalid && isClicked}">
             <div *ngIf="feedbackForm.get('lastName')?.hasError('required') && isClicked" class="text-danger mx-1">
-               Last Name is required
+              Last Name is required
             </div>
           </div>
         </div>
@@ -85,10 +85,24 @@
   </div>
 </div>
 <!-- Thanks Page -->
-<div class="thanks-container" *ngIf="currentPage === 'thanks'" @slideIn>
+<div class="thanks-container" *ngIf="currentPage === 'thanks' && !corrupttedData" @slideIn>
   <div class="thanks-message">
     <h2>Thank You!</h2>
     <p>Your feedback has been submitted successfully.</p>
     <button (click)="goBack()">Start New Survey</button>
   </div>
+</div>
+
+ <div class="koko" *ngIf="corrupttedData" @slideIn>
+  <div class="outer">
+    <div class="dot"></div>
+    <div class="card">
+      <div class="ray"></div>
+      <div class="text">Scan QR Code Again</div>
+      <div class="line topl"></div>
+      <div class="line leftl"></div>
+      <div class="line bottoml"></div>
+      <div class="line rightl"></div>
+    </div>
+  </div> 
 </div>
