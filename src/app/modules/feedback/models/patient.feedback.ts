@@ -5,5 +5,7 @@ export interface PatientFeedback {
     clinicId: number;
     feedbackQuestions: PateintFeedbackQuestion | null;
     patientName: string;
+    firstName: string,
+    lastName: string
     optionalFeedback?: string;
 }

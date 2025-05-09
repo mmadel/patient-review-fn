@@ -18,7 +18,7 @@ export class ClinicalChartPerformanceDataRetrieval {
         let datasets: any[] = [
             {
                 data: this.mainChart['Data1'],
-                label: 'HappUIndex',
+                label: 'HappyIndex',
                 ...ChartMetaData.chartColors()[0]
             },
             {

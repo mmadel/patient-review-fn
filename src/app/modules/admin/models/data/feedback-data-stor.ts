@@ -1,7 +1,6 @@
 const feedbackValues=[
-    { feedbackName: 'Very Positive', feedbackValue: 'VGood' },
-    { feedbackName: 'Positive', feedbackValue: 'Good' },
-    { feedbackName: 'Negative', feedbackValue: 'Sad' },
-    { feedbackName: 'Very Negative', feedbackValue: 'VSad' },
+    { feedbackName: 'Excellent', feedbackValue: 'VGood' },
+    { feedbackName: 'Average', feedbackValue: 'Good' },
+    { feedbackName: 'Needs Improvement', feedbackValue: 'Sad' },
 ]
 export default feedbackValues;

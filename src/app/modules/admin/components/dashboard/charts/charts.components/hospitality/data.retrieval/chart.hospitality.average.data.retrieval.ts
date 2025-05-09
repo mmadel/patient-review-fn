@@ -21,7 +21,7 @@ export class HospitalityChartAverageDataRetrieval {
             }
         ];
         this.mainChart.type = 'line';
-        this.mainChart.options = ChartMetaData.chartOptions(4);
+        this.mainChart.options = ChartMetaData.chartOptions(3);
         this.mainChart.data = {
             datasets,
             labels

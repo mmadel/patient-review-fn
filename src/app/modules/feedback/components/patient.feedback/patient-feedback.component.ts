@@ -1,156 +1,214 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import NoSleep from 'nosleep.js';
+import { EncryptionService } from 'src/app/util/encryption/encryption.service';
 import { PatientFeedback } from '../../models/patient.feedback';
+import { PateintFeedbackQuestion } from '../../models/patient.feedback.question';
 import { FeedbackService } from '../../services/feedback.service';
-
+import NoSleep from 'nosleep.js';
 @Component({
   selector: 'app-patient-feedback',
   templateUrl: './patient-feedback.component.html',
-  styleUrls: ['./patient-feedback.component.css']
+  styleUrls: ['./patient-feedback.component.css'],
+  animations: [
+    // Fade in animation
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-out', style({ opacity: 1 }))
+      ])
+    ]),
+    // Slide in animation
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)' }),
+        animate('400ms ease-out', style({ transform: 'translateX(0)' }))
+      ]),
+      transition(':leave', [
+        animate('400ms ease-in', style({ transform: 'translateX(-100%)' }))
+      ])
+    ])
+  ]
 })
 export class PatientFeedbackComponent implements OnInit {
   @ViewChild('search') search: ElementRef;
-  isSubmitted: boolean = false;
+  isClicked: boolean = false;
+  isSubmitted: boolean = false;;
   isClinicIdEmpty: boolean = false;
   clinicId: number;
-  model: PatientFeedback;
+  model: PatientFeedback = {
+    clinicId: 0,
+    feedbackQuestions: null,
+    patientName: '',
+    firstName: '',
+    lastName: ''
+  };
   hospitalityToggle: any
   clinicalToggle: any
-
+  feedbackForm: FormGroup
+  isValidForm: boolean = false;
+  corrupttedData: boolean = false;
   constructor(private feedbackService: FeedbackService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private encryptionService: EncryptionService) { }
+  currentPage: 'rating' | 'form' | 'thanks' = 'rating'; // Add 'thanks' page state
+  selectedHospitalityEmoji: any = null;
+  selectedClinicalEmoji: any = null;
+  hospitalityEmojis = [
+    { label: 'Excellent', image: 'assets/emojis/good.png' },
+    { label: 'Average', image: 'assets/emojis/bad.png' },
+    { label: 'Needs Improvement', image: 'assets/emojis/terrible.png' }
+  ];
+
+  clinicalEmojis = [
+    { label: 'Excellent', image: 'assets/emojis/good.png' },
+    { label: 'Average', image: 'assets/emojis/bad.png' },
+    { label: 'Needs Improvement', image: 'assets/emojis/terrible.png' }
+  ];
 
   ngOnInit(): void {
-    
     window.addEventListener("keyup", disableF5);
     window.addEventListener("keydown", disableF5);
 
     function disableF5(e: any) {
       if ((e.which || e.keyCode) == 116) e.preventDefault();
     };
-    this.isSubmitted = false;
-    this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
-    this.initModel()
-    if (this.clinicId === 0 || this.clinicId === undefined || this.clinicId === null) {
-      this.isClinicIdEmpty = true;
-    } else {
-      this.router.navigate([], {
-        queryParams: {
-          'clinicId': null,
-        },
-        queryParamsHandling: 'merge'
-      })
-    }
+    this.getclinicId()
+    this.feedbackForm = new FormGroup({
+      'firstName': new FormControl(null, [Validators.required]),
+      'lastName': new FormControl(null, [Validators.required]),
+      'comments': new FormControl(null),
+    })
     document.getElementById("no_sleep_input")?.click();
   }
-  checkFields(): boolean {
-    var hospitalityValue: string = '';
-    var clinicalValue: string = '';
-    Object.keys(this.hospitalityToggle).forEach((key, index) => {
-      if (this.hospitalityToggle[key]) {
-        hospitalityValue = this.hospitalityToggle[key];
-        return;
-      }
-    });
-    Object.keys(this.clinicalToggle).forEach((key, index) => {
-      if (this.clinicalToggle[key]) {
-        clinicalValue = this.clinicalToggle[key];
-        return;
-      }
-    });  
-    var result: boolean = this.model.patientName == "" || (!hospitalityValue || !clinicalValue);
-    return result;
+  bothSelected(): boolean {
+    return !!this.selectedHospitalityEmoji && !!this.selectedClinicalEmoji;
   }
-  submit() {
-    this.populateModel();
-    this.spinner.show();
-    this.feedbackService.submit(this.model).subscribe((response) => {
-      this.isSubmitted = true;
-      this.spinner.hide();
+  selectEmoji(serviceType: string, emoji: any) {
+    if (serviceType === 'hospitality') {
+      this.selectedHospitalityEmoji = emoji;
       setTimeout(() => {
-        //window.location.reload()
-        this.router.navigateByUrl('feedback/submit', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['feedback/submit'], { queryParams: { clinicId: this.clinicId } }).then(() => {
-            this.ngOnInit()
-          })
-        })
-      }, 5000);  //5s
+        const formElement = document.getElementById('clinicalService');
+        if (formElement) {
+          formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100); // Small delay to ensure U I updates
+    } else {
+      this.selectedClinicalEmoji = emoji;
+    }
+
+    if (this.bothSelected()) {
+      setTimeout(() => {
+        const formElement = document.getElementById('feedbackForm');
+        if (formElement) {
+          formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100); // Small delay to ensure UI updates
+    }
+  }
+  goBack() {
+    this.currentPage = 'rating';
+    // Reset the selected emojis
+    if (this.isSubmitted) {
+      this.selectedHospitalityEmoji = null;
+      this.selectedClinicalEmoji = null;
+      this.isSubmitted = false;
+    }
+  }
+
+  submitFeedback() {
+    this.fillModel()
+    this.isClicked = true
+    if (this.feedbackForm?.valid && this.bothSelected()) {
+      this.spinner.show();
+      this.feedbackService.submit(this.model).subscribe(rr => {
+        this.feedbackForm.reset();
+        this.isClicked = false
+        this.spinner.hide();
+        setTimeout(() => {
+          this.currentPage = 'thanks';
+          this.isSubmitted = true;
+        }, 800);
+      })
+    } else {
+      this.isValidForm = true;
+    }
+  }
+  private fillModel() {
+    this.model.feedbackQuestions = this.fillReaction();
+    this.model.optionalFeedback = this.feedbackForm.get('comments')?.value
+    this.model.clinicId = this.clinicId
+    this.model.firstName = this.feedbackForm.get('firstName')?.value;
+    this.model.lastName = this.feedbackForm.get('lastName')?.value
+  }
+  private fillReaction(): PateintFeedbackQuestion {
+    let hospitalityFeedback: string = '';
+    let clinicalFeedback: string = '';
+    if (this.selectedHospitalityEmoji.label === 'Excellent')
+      hospitalityFeedback = 'VGood'
+    if (this.selectedHospitalityEmoji.label === 'Average')
+      hospitalityFeedback = 'Good'
+    if (this.selectedHospitalityEmoji.label === 'Needs Improvement')
+      hospitalityFeedback = 'Sad'
+
+    if (this.selectedClinicalEmoji.label === 'Excellent')
+      clinicalFeedback = 'VGood'
+    if (this.selectedClinicalEmoji.label === 'Average')
+      clinicalFeedback = 'Good'
+    if (this.selectedClinicalEmoji.label === 'Needs Improvement')
+      clinicalFeedback = 'Sad'
+    return {
+      hospitalityFeedback: hospitalityFeedback,
+      clinicalFeedback: clinicalFeedback
+    }
+  }
+  private catchClinicParam() {
+    this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
+    var encryptClinicId = this.encryptionService.encrypt((this.clinicId).toString());
+    localStorage.setItem('clinicId', encryptClinicId);
+    this.router.navigate([], {
+      queryParams: {
+        'clinicId': null,
+      },
+      queryParamsHandling: 'merge'
     })
   }
-  public selectFeedback(event: any) {
-    var controlName: string[] = event.target.name.split("-", 2);
-    var feedbackFeeling = controlName[1];
-    var entityContainer: any = controlName[0] === 'hospitality' ? this.hospitalityToggle : this.clinicalToggle;
-    switch (feedbackFeeling) {
-      case "VeryGood":
-        entityContainer.VGood = true;
-        entityContainer.Good = false, entityContainer.VSad = false, entityContainer.Sad = false
-        break;
-      case "Happy":
-        entityContainer.Good = true;
-        entityContainer.VGood = false, entityContainer.VSad = false, entityContainer.Sad = false
-        break;
-      case "Meh":
-        entityContainer.Sad = true;
-        entityContainer.VGood = false, entityContainer.Good = false, entityContainer.VSad = false
-        break;
-      case "Frown":
-        entityContainer.VSad = true;
-        entityContainer.VGood = false, entityContainer.Good = false, entityContainer.Sad = false
-        break;
-    }
-  }
-
-  private populateModel() {
-    let hospitalityValue: string = '';
-    let clinicalValue: string = '';
-    this.model.clinicId = this.clinicId;
-    Object.keys(this.hospitalityToggle).forEach((key, index) => {
-      if (this.hospitalityToggle[key]) {
-        hospitalityValue = key;
-        return;
+  private getclinicId() {
+    var clinicqueryParam: number = Number(this.route.snapshot.queryParamMap.get('clinicId'));
+    var cachedClinicId = localStorage.getItem('clinicId')
+    if ((clinicqueryParam !== 0) && cachedClinicId === null) {
+      //scan QR Code
+      console.log('scan QR Code')
+      this.corrupttedData = false;
+      this.catchClinicParam();
+    } else if ((clinicqueryParam === 0 || isNaN(clinicqueryParam)) && cachedClinicId !== null) {
+      //Refresh page
+      console.log('Refresh page')
+      var cahcedClinic: string = this.encryptionService.decrypt(cachedClinicId);
+      if (cahcedClinic === '') {
+        this.corrupttedData = true;
+        console.log('corruptted cached clinic')
       }
-    });
-    Object.keys(this.clinicalToggle).forEach((key, index) => {
-      if (this.clinicalToggle[key]) {
-        clinicalValue = key;
-        return;
+      else {
+        this.clinicId = Number(cahcedClinic);
+        this.corrupttedData = false;
       }
-    });
-    this.model.feedbackQuestions = {
-      hospitalityFeedback: hospitalityValue,
-      clinicalFeedback: clinicalValue
+    } else if ((clinicqueryParam !== 0) && cachedClinicId !== null) {
+      //Scan QR code with wrong cached data
+      console.log('Scan QR code with wrong cached data')
+      localStorage.removeItem('clinicId')
+      this.catchClinicParam();
+      this.corrupttedData = false;
+    } else {
+      //Refresh with no cache
+      console.log('Refresh with no cache')
+      this.corrupttedData = true;
+    }
 
-    }
-  }
-  private initModel() {
-    var model: PatientFeedback = {
-      clinicId: 0,
-      feedbackQuestions: {
-        hospitalityFeedback: '',
-        clinicalFeedback: ''
-      },
-      patientName: '',
-    }
-    this.model = model;
-    var hospitalityToggle: any = {
-      VGood: false,
-      Good: false,
-      VSad: false,
-      Sad: false
-    }
-    this.hospitalityToggle = hospitalityToggle
-    var clinicalToggle: any = {
-      VGood: false,
-      Good: false,
-      VSad: false,
-      Sad: false
-    }
-    this.clinicalToggle = clinicalToggle;
   }
   handleNoSleep(){
     console.log('clickeed')

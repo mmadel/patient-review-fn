@@ -1,3 +1,746 @@
-input {
-    font-size: 25px;
+body, html {
+  height: 100%;
+  overflow-x: hidden;
+}
+/* ===== CORE STYLES ===== */
+.feedback-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh; 
+  overflow-y: auto;
+}
+
+/* ===== MAIN HEADER ===== */
+.feedback-header {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+/* ===== PERSONAL INFORMATION CARD ===== */
+.personal-info-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 1.8rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.feedback-title {
+  font-size: clamp(2.2rem, 5.5vw, 3rem);
+  font-weight: 800;
+  margin: 0;
+  position: relative;
+  padding-bottom: 0.5rem;
+  line-height: 1.25;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  letter-spacing: 1.5px;
+}
+
+.feedback-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, #42b983, #a5d6a7);
+  border-radius: 2px;
+  animation: underlineGrowCenter 0.6s ease-out forwards;
+}
+
+/* ===== SERVICE CARDS ===== */
+.service-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 1.8rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  height: auto;
+  min-height: 300px; /* Optional */
+}
+
+.service-header {
+  margin-bottom: 0.5rem;
+}
+
+.service-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.8rem;
+}
+
+.service-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 3px;
+  animation: underlineGrow 0.6s ease-out forwards;
+}
+
+.hospitality-service .service-title::after {
+  background: linear-gradient(90deg, #42a5f5, #64b5f6);
+}
+
+.clinical-service .service-title::after {
+  background: linear-gradient(90deg, #66bb6a, #81c784);
+}
+
+/* ===== SERVICE DESCRIPTIONS ===== */
+.service-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #3a3a3a;
+  margin: 0 0 2rem 0;
+  font-weight: 500;
+  padding-left: 1.5rem;
+  position: relative;
+  font-style: italic;
+}
+
+.service-description::before {
+  content: "“";
+  position: absolute;
+  left: 0;
+  top: -0.5rem;
+  font-size: 2rem;
+  color: #42b983;
+  font-family: Georgia, serif;
+}
+
+.clinical-service .service-description::before {
+  color: #66bb6a;
+}
+
+/* ===== EMOJI RATINGS ===== */
+.emoji-rating {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+.emoji-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1 1 150px; /* Flexible width */
+  max-width: 160px; /* Max-width prevents overflow */
+  min-width: 120px; /* Ensures the emoji doesn't shrink too much */
+  box-sizing: border-box;
+}
+
+.emoji-face {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.emoji-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.emoji-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+/* ===== INTERACTIONS ===== */
+.emoji-item:hover .emoji-face {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.emoji-item.selected .emoji-face {
+  border: 3px solid #42b983;
+}
+
+.emoji-item.selected .emoji-label {
+  color: #42b983;
+  font-weight: 700;
+}
+
+/* ===== FORM STYLES ===== */
+.feedback-form-container {
+  overflow: hidden; /* No scrollbar */
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  overflow: hidden; /* No scrollbar */
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #42b983;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  width: 100%;
+  resize: none;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.form-submit-btn {
+  background: #42b983;
+  color: white;
+  padding: 0.8rem 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-submit-btn:hover {
+  background: #369e6f;
+}
+
+/* ===== COMPLETION INDICATOR ===== */
+.completion-indicator {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.swipe-hint-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.swipe-hint p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.swipe-arrow {
+  font-size: 2rem;
+  color: #42b983;
+  animation: swipeMove 1s infinite alternate;
+}
+
+@keyframes swipeMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(10px); }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes underlineGrowCenter {
+  from { transform: translateX(-50%) scaleX(0); }
+  to { transform: translateX(-50%) scaleX(1); }
+}
+
+@keyframes underlineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .feedback-container {
+    padding: 1.5rem;
   }
+  .emoji-label {
+    font-size: 0.5rem;
+  }
+  .feedback-title {
+    font-size: 2.5rem;
+  }
+  
+  .emoji-rating {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem; /* Reduce gap between emojis on smaller screens */
+  }
+  
+  .emoji-item {
+    flex: 1 1 100px;  
+    max-width: 130px;
+    flex: 1 1 120px; /* Smaller base width on mobile */
+  }
+  
+  .emoji-face {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .emoji-img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .service-title {
+    font-size: 1.35rem;
+  }
+  
+  .service-description {
+    font-size: 1.1rem;
+  }
+}
+/* ===== THANK YOU PAGE ===== */
+.thanks-container {
+  max-width: 800px;
+  margin: 1.3 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  margin-top:10vh;
+}
+
+.thanks-message {
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.thanks-message h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1rem;
+}
+
+.thanks-message h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, #42b983, #a5d6a7);
+  border-radius: 2px;
+  animation: underlineGrowCenter 0.6s ease-out forwards;
+}
+
+.thanks-message p {
+  font-size: 1.5rem;
+  color: #555;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.thanks-message button {
+  background: #42b983;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.thanks-message button:hover {
+  background: #388e3c;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes underlineGrowCenter {
+  from { transform: translateX(-50%) scaleX(0); }
+  to { transform: translateX(-50%) scaleX(1); }
+}
+/* ===== FORM HEADER ===== */
+.form-header {
+  display: flex;
+  justify-content: center; /* Center the title */
+  align-items: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.form-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  position: relative;
+  padding-bottom: 0.5rem;
+  text-align: center;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Add gradient underline */
+.form-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #42b983, #a5d6a7);
+  border-radius: 2px;
+  animation: underlineGrowCenter 0.6s ease-out forwards;
+}
+
+/* ===== BACK BUTTON ===== */
+.form-header .back-button {
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+  color: #42b983;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0.5rem;
+}
+
+.form-header .back-button:hover {
+  color: #1e7e34;
+}
+
+/* Style for error messages */
+.text-danger {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex; /* Use flexbox to align icon and text */
+  align-items: center; /* Vertically center the content */
+  transition: transform 0.3s ease, opacity 0.5s ease;
+  position: relative;
+  opacity: 0;
+  animation: fadeInUp 0.5s forwards, shake 0.5s ease-in-out;
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* Style for invalid input fields */
+.is-invalid {
+  border: 2px solid #f44336;
+  background-color: #ffe5e5; /* Light red background */
+  color: #f44336; /* Red text */
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Add an icon next to error messages for a more visual cue */
+.text-danger::before {
+  content: "❌"; /* Red cross icon */
+  font-size: 20px;
+  margin-right: 15px; /* Space between icon and text */
+}
+
+/* Button styling for the submit button */
+.form-submit-btn {
+  color: white;
+  font-weight: bold;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* On focus, make input fields stand out with a subtle glow */
+input:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(244, 67, 54, 0.6); /* Red glow */
+}/* ===== EMOJI SELECTION STATES ===== */
+.emoji-item.selected.excellent .emoji-face {
+  border: 3px solid #4CAF50; /* Green */
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.emoji-item.selected.excellent .emoji-label {
+  color: #4CAF50; /* Green */
+  font-weight: 700;
+}
+
+.emoji-item.selected.average .emoji-face {
+  border: 3px solid #FFC107; /* Yellow */
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
+}
+
+.emoji-item.selected.average .emoji-label {
+  color: #FFC107; /* Yellow */
+  font-weight: 700;
+}
+
+.emoji-item.selected.needs-improvement .emoji-face {
+  border: 3px solid #F44336; /* Red */
+  box-shadow: 0 0 10px rgba(244, 67, 54, 0.3);
+}
+
+.emoji-item.selected.needs-improvement .emoji-label {
+  color: #F44336; /* Red */
+  font-weight: 700;
+}
+
+.personal-info-card {
+  margin-bottom: 1.5rem;
+}
+
+.personal-info-card .service-title::after {
+  background: linear-gradient(90deg, #9c27b0, #e91e63);
+}
+
+/* ===== COMPACT FORM STYLES ===== */
+.form-content {
+  padding: 0.5rem 0;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  flex: 1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.form-group textarea {
+  min-height: 80px;
+}
+
+/* ===== RATING SECTION ===== */
+.rating-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 0.5rem 0 1rem;
+}
+.feedback-container {
+  scroll-behavior: smooth; /* Enables smooth scrolling */
+}
+
+/* Keep all your existing styles, just add this new class */
+.form-scroll-target {
+  scroll-margin-top: 20px; /* Creates spacing when scrolling to target */
+}
+
+
+/* From Uiverse.io by Spacious74 */ 
+.outer {
+  width: 100%;
+  height: 350px;
+  border-radius: 10px;
+  padding: 1px;
+  background: radial-gradient(circle 230px at 0% 0%, #ffffff, #0c0d0d);
+  position: relative;
+}
+
+.dot {
+  width: 5px;
+  aspect-ratio: 1;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 0 10px #ffffff;
+  border-radius: 100px;
+  z-index: 2;
+  right: 10%;
+  top: 10%;
+  animation: moveDot 6s linear infinite;
+}
+
+@keyframes moveDot {
+  0%,
+  100% {
+    top: 10%;
+    right: 10%;
+  }
+  25% {
+    top: 10%;
+    right: calc(100% - 35px);
+  }
+  50% {
+    top: calc(100% - 30px);
+    right: calc(100% - 35px);
+  }
+  75% {
+    top: calc(100% - 30px);
+    right: 10%;
+  }
+}
+
+.card {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 9px;
+  border: solid 1px #202222;
+  background-size: 20px 20px;
+  background: radial-gradient(circle 280px at 0% 0%, #444444, #0c0d0d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+  color: #fff;
+}
+.ray {
+  width: 220px;
+  height: 45px;
+  border-radius: 100px;
+  position: absolute;
+  background-color: #c7c7c7;
+  opacity: 0.4;
+  box-shadow: 0 0 50px #fff;
+  filter: blur(10px);
+  transform-origin: 10%;
+  top: 0%;
+  left: 0;
+  transform: rotate(40deg);
+}
+
+.card .text {
+  font-weight: bolder;
+  font-size: 2.5rem;
+  background: linear-gradient(45deg, #000000 -13%, #fff, #000);
+  background-clip: text;
+  color: transparent;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  background-color: #2c2c2c;
+}
+.topl {
+  top: 10%;
+  background: linear-gradient(90deg, #888888 30%, #1d1f1f 70%);
+}
+.bottoml {
+  bottom: 10%;
+}
+.leftl {
+  left: 10%;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, #747474 30%, #222424 70%);
+}
+.rightl {
+  right: 10%;
+  width: 1px;
+  height: 100%;
+}
+.koko{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* This makes the container take at least the full viewport height */
+  margin: 0; /* Remove default margin */
+}

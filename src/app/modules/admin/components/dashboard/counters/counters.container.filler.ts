@@ -2,10 +2,10 @@ import { cilFrown, cilHappy, cilMeh, cilMoodVeryGood } from '@coreui/icons';
 import { CountersContainer } from '../../../models/counters/counters.container';
 
 export class countersContainerFiller {
-    private static icons = { cilMoodVeryGood, cilHappy, cilMeh, cilFrown };
+    private static icons = { cilHappy, cilMeh, cilFrown  };
     private static data = [
         {
-            icon: this.icons.cilMoodVeryGood,
+            icon: this.icons.cilHappy,
             color: 'success',
             values: [{ title: 'hospitality', value: '' }, { title: 'clinical', value: '' }],
             capBg: { '--cui-card-cap-bg': '#3b5998' },
@@ -13,17 +13,11 @@ export class countersContainerFiller {
 
         },
         {
-            icon: this.icons.cilHappy,
+            icon: this.icons.cilMeh,
             color: 'info',
             values: [{ title: 'hospitality', value: '' }, { title: 'clinical', value: '' }],
             capBg: { '--cui-card-cap-bg': '#00aced' },
 
-        },
-        {
-            icon: this.icons.cilMeh,
-            color: 'warning',
-            values: [{ title: 'hospitality', value: '' }, { title: 'clinical', value: '' }],
-            capBg: { '--cui-card-cap-bg': '#4875b4' },
         },
         {
             icon: this.icons.cilFrown,
@@ -51,13 +45,6 @@ export class countersContainerFiller {
 
         this.data[2].values[1].value = "(" + countersContainer.clinicalCountersContainer.negative.toString() + ")"
             + " " + countersContainer.clinicalCountersContainer.negativePercentage.toString() + "%";
-
-        this.data[3].values[0].value = "(" + countersContainer.hospitalityCounterContainer.veryNegative.toString() + ")"
-            + " " + countersContainer.hospitalityCounterContainer.veryNegativePercentage.toString() + "%";
-
-        this.data[3].values[1].value = "(" + countersContainer.clinicalCountersContainer.veryNegative.toString() + ")"
-            + " " + countersContainer.clinicalCountersContainer.veryNegativePercentage.toString() + "%";
-
         return this.data;
     }
 }
