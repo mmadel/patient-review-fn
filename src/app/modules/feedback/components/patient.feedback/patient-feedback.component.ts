@@ -83,6 +83,7 @@ export class PatientFeedbackComponent implements OnInit {
       'lastName': new FormControl(null, [Validators.required]),
       'comments': new FormControl(null),
     })
+    document.getElementById("no_sleep_input")?.click();
   }
   bothSelected(): boolean {
     return !!this.selectedHospitalityEmoji && !!this.selectedClinicalEmoji;
