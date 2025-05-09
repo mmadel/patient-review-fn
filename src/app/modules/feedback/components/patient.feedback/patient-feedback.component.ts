@@ -7,6 +7,7 @@ import { EncryptionService } from 'src/app/util/encryption/encryption.service';
 import { PatientFeedback } from '../../models/patient.feedback';
 import { PateintFeedbackQuestion } from '../../models/patient.feedback.question';
 import { FeedbackService } from '../../services/feedback.service';
+import NoSleep from 'nosleep.js';
 @Component({
   selector: 'app-patient-feedback',
   templateUrl: './patient-feedback.component.html',
@@ -202,18 +203,12 @@ export class PatientFeedbackComponent implements OnInit {
     }
 
   }
-  // private getclinicId() {
-  //   this.dd();
-  //   var cachedClinicId = localStorage.getItem('clinicId')
-  //   if (cachedClinicId === null) {
-  //     this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
-  //     var encryptClinicId = this.encryptionService.encrypt((this.clinicId).toString())
-  //     localStorage.setItem('clinicId', encryptClinicId)
-  //   } else {
-  //     this.clinicId = Number(this.encryptionService.decrypt(cachedClinicId));
-  //     console.log(this.clinicId)
-  //   }
-
-  //   console.log(this.clinicId + ' Clinic-ID')
-  // }
+  handleNoSleep(){
+    console.log('clickeed')
+    var noSleep = new NoSleep();
+    document.addEventListener('click', function enableNoSleep() {
+      document.removeEventListener('click', enableNoSleep, false);
+      noSleep.enable();
+    }, false);
+  }
 }
